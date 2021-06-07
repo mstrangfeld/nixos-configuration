@@ -12,7 +12,7 @@
   networking.networkmanager.enable = true;
 
   services.xserver.enable = true;
-  services.xserver.layout = "de-latin1";
+  services.xserver.layout = "de";
   services.xserver.xkbOptions = "eurosign:e";
 
   services.xserver.displayManager.gdm.enable = true;
