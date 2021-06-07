@@ -81,7 +81,7 @@
         profiles = [ ./users/profiles ];
         suites = { profiles, ... }: with profiles; rec {
           base = [ direnv git neovim starship zsh ];
-          workstation = base ++ [ alacritty firefox vscode ];
+          workstation = base ++ [ alacritty brave firefox vscode ];
         };
       };
 
