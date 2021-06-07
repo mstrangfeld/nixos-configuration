@@ -13,17 +13,18 @@
 
   # VIDEO AND X-SERVER
 
-  hardware.nvidia.modesetting.enable = true; # wayland can't work without modesetting
+  hardware.nvidia.modesetting.enable = true;
 
-  services.xserver.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver = {
+    enable = true;
+    videoDrivers = [ "nvidia" ];
 
-  services.xserver.layout = "de";
-  services.xserver.xkbOptions = "eurosign:e";
+    layout = "de";
+    xkbOptions = "eurosign:e";
 
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.displayManager.gdm.nvidiaWayland = true;
-  services.xserver.desktopManager.gnome3.enable = true;
+    displayManager.sddm.enable = true;
+    desktopManager.plasma5.enable = true;
+  };
 
   # AUDIO AND PIPEWIRE
 
