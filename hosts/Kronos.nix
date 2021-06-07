@@ -12,6 +12,9 @@
   networking.networkmanager.enable = true;
 
   services.xserver.enable = true;
+
+  services.xserver.videoDrivers = [ "nvidia" ];
+
   services.xserver.layout = "de";
   services.xserver.xkbOptions = "eurosign:e";
 
