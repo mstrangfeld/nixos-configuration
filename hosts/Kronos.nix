@@ -29,7 +29,7 @@
   };
 
   fileSystems."/" = { device = "/dev/disk/by-label/nixos"; };
-  fileSystems."/boot" = { device = "/dev/disk/by-label/boot"; };
+  fileSystems."/boot" = { device = "/dev/disk/by-label/EFIBOOT"; };
   swapDevices = [
     { device = "/dev/disk/by-label/swap"; }
   ];
