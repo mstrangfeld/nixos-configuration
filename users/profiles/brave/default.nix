@@ -1,8 +1,5 @@
 {
-  programs.chromium = {
+  programs.brave = {
     enable = true;
-    browserConfig = {
-      browser = "brave";
-    };
   };
 }
