@@ -1,6 +1,6 @@
 { suites, profiles, ... }:
 {
-  imports = [ suites.base suites.workstation ];
+  imports = suites.workstation;
 
   system.stateVersion = "21.05";
 
