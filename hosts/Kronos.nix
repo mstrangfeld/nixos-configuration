@@ -11,15 +11,21 @@
 
   networking.networkmanager.enable = true;
 
-  services.xserver.enable = true;
+  # VIDEO AND X-SERVER
 
+  hardware.nvidia.modesetting.enable = true; # wayland can't work without modesetting
+
+  services.xserver.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
 
   services.xserver.layout = "de";
   services.xserver.xkbOptions = "eurosign:e";
 
   services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.gdm.nvidiaWayland = true;
   services.xserver.desktopManager.gnome3.enable = true;
+
+  # AUDIO AND PIPEWIRE
 
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
