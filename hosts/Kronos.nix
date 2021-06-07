@@ -1,6 +1,6 @@
 { suites, profiles, ... }:
 {
-  imports = suites.workstation;
+  imports = suites.base;
 
   system.stateVersion = "21.05";
 
@@ -9,8 +9,14 @@
 
   time.timeZone = "Europe/Berlin";
 
-  networking.useDHCP = true;
   networking.networkmanager.enable = true;
+
+  services.xserver.enable = true;
+  services.xserver.layout = "de-latin1";
+  services.xserver.xkbOptions = "eurosign:e";
+
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome3.enable = true;
 
   fileSystems."/" = { device = "/dev/disk/by-label/nixos"; };
   fileSystems."/boot" = { device = "/dev/disk/by-label/boot"; };

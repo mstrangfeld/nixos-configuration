@@ -6,6 +6,14 @@ in
 
   nix.systemFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
 
+  nixpkgs.config.allowUnfree = true;
+
+  i18n.defaultLocale = "de_DE.UTF-8";
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "de-latin1";
+  };
+
   environment = {
 
     systemPackages = with pkgs; [

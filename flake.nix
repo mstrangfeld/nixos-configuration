@@ -72,7 +72,6 @@
         profiles = [ ./profiles ./users ];
         suites = { profiles, users, ... }: with profiles; rec {
           base = [ core users.marvin users.root ];
-          workstation = base ++ [ workstation ];
         };
       };
 
@@ -81,7 +80,8 @@
         externalModules = [ ];
         profiles = [ ./users/profiles ];
         suites = { profiles, ... }: with profiles; rec {
-          base = [ direnv git ];
+          base = [ direnv git zsh ];
+          workstation = base ++ [ alacritty vscode ];
         };
       };
 

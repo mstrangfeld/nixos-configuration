@@ -1,7 +1,7 @@
-{ ... }:
+{ config, pkgs, ... }:
 {
   home-manager.users.marvin = { suites, ... }: {
-    imports = suites.base;
+    imports = suites.workstation;
   };
 
   users.users.marvin = {
