@@ -71,7 +71,7 @@
         };
         profiles = [ ./profiles ./users ];
         suites = { profiles, users, ... }: with profiles; rec {
-          base = [ core users.nixos users.root ];
+          base = [ core users.marvin users.root ];
         };
       };
 
