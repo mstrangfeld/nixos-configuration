@@ -72,6 +72,7 @@
         profiles = [ ./profiles ./users ];
         suites = { profiles, users, ... }: with profiles; rec {
           base = [ core users.marvin users.root ];
+          workstation = [ workstation ];
         };
       };
 
