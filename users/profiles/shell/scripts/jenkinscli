@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -x
+PORT=$(curl -Lv https://jenkins.open-xchange.com/login 2>&1 | grep 'X-SSH-Endpoint' | cut -d : -f 3 | sed 's/\r$//')
+
+ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p ${PORT} marvin.strangfeld@jenkins.open-xchange.com $@

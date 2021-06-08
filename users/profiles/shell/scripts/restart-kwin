@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+killall kwin_x11
+DISPLAY=:0 setsid kwin_x11 --replace &

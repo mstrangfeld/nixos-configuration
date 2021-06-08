@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+project=$(watson status --project)
+
+if [[ $project != "No project started." ]]; then
+    elapsed=$(watson status --elapsed)
+    echo "$project ⌛$elapsed"
+else
+    echo $project
+fi

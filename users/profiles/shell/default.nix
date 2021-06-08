@@ -1,5 +1,10 @@
 { pkgs, ... }:
 {
+
+  imports = [
+    ./scripts.nix
+  ];
+
   home.packages = with pkgs; [
     cht-sh # CLI for cheat.sh
     fd # Simple, fast alternative to find
@@ -21,7 +26,28 @@
   # The Z shell
   programs.zsh = {
     enable = true;
+    defaultKeymap = "vicmd";
+    zplug = {
+      enable = true;
+      plugins = [
+        { name = "hcgraf/zsh-sudo"; }
+        { name = "bcho/Watson.zsh"; }
+      ];
+    };
+    initExtra = ''
+      zstyle ':completion:*' menu select
+    '';
+    shellAliases = {
+      lg = "lazygit";
+      tmp = "cd $(mktemp -d)";
+
+      ls = "exa --color=auto --group-directories-first --icons";
+      la = "exa -aF --color=auto --group-directories-first --icons";
+      ll = "exa -alF --color=auto --group-directories-first --icons";
+    };
   };
+
+  environment.pathsToLink = [ "/share/zsh" ];
 
   # A minimal, blazing fast, and extremely customizable prompt for any shell
   programs.starship = {
