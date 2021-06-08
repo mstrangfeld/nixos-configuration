@@ -9,6 +9,14 @@
 
   time.timeZone = "Europe/Berlin";
 
+  boot.kernel.sysctl = {
+    "kernel.dmesg_restrict" = 0;
+    "kernel.perf_event_paranoid" = 1;
+    "fs.inotify.max_user_watches" = 524288;
+    "kernel.unprivileged_userns_clone" = 1;
+    "vm.swappiness" = 10;
+  };
+
   networking.networkmanager.enable = true;
 
   # VIDEO AND X-SERVER
