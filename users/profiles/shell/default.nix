@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    cht.sh # CLI for cheat.sh
+    cht-sh # CLI for cheat.sh
     fd # Simple, fast alternative to find
     fselect # Find files with SQL-like queries
     glances # System monitoring
