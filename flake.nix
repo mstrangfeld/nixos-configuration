@@ -80,8 +80,8 @@
         externalModules = [ ];
         profiles = [ ./users/profiles ];
         suites = { profiles, ... }: with profiles; rec {
-          base = [ direnv git neovim starship zsh ];
-          workstation = base ++ [ alacritty brave firefox vscode ];
+          base = [ shell ];
+          workstation = base ++ [ alacritty browser development ];
         };
       };
 
