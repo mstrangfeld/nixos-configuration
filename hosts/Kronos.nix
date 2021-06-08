@@ -38,6 +38,16 @@
     jack.enable = true;
   };
 
+  virtualisation = {
+    podman = {
+      enable = true;
+    };
+    docker = {
+      enable = true;
+      enableNvidia = true;
+    };
+  };
+
   fileSystems."/" = { device = "/dev/disk/by-label/nixos"; };
   fileSystems."/boot" = { device = "/dev/disk/by-label/EFIBOOT"; };
   swapDevices = [

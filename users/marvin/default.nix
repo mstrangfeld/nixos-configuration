@@ -19,7 +19,7 @@
     password = "marvin";
     description = "Marvin Strangfeld";
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "audio" "power" ];
+    extraGroups = [ "wheel" "networkmanager" "audio" "power" "docker" ];
     shell = pkgs.zsh;
   };
 }
