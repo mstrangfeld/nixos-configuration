@@ -15,6 +15,12 @@
       tmux # Terminal multiplexer
       unzip # An extraction utility for archives compressed in .zip format
     ];
+
+    services.gpg.agent = {
+      enable = true;
+      defaultCacheTtl = 1800;
+      enableSshSupport = true;
+    };
   };
 
   users.users.marvin = {
@@ -24,11 +30,5 @@
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "audio" "power" "docker" ];
     shell = pkgs.zsh;
-  };
-
-  services.gpg.agent = {
-    enable = true;
-    defaultCacheTtl = 1800;
-    enableSshSupport = true;
   };
 }
