@@ -1,6 +1,6 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 {
   programs.vscode = {
-    enable = false;
+    enable = true;
   };
 }
