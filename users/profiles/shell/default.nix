@@ -47,8 +47,6 @@
     };
   };
 
-  environment.pathsToLink = [ "/share/zsh" ];
-
   # A minimal, blazing fast, and extremely customizable prompt for any shell
   programs.starship = {
     enable = true;
