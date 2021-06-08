@@ -67,7 +67,7 @@
         imports = [ (digga.lib.importers.hosts ./hosts) ];
         hosts = {
           /* set host specific properties here */
-          NixOS = { };
+          Kronos = { };
         };
         profiles = [ ./profiles ./users ];
         suites = { profiles, users, ... }: with profiles; rec {
@@ -81,7 +81,15 @@
         profiles = [ ./users/profiles ];
         suites = { profiles, ... }: with profiles; rec {
           base = [ shell ];
-          workstation = base ++ [ alacritty browser development ];
+          workstation = base ++ [
+            alacritty
+            browser
+            communication
+            development
+            entertainment
+            graphics
+            music
+          ];
         };
       };
 
