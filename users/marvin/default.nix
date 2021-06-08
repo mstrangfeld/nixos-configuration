@@ -16,7 +16,7 @@
       unzip # An extraction utility for archives compressed in .zip format
     ];
 
-    services.gpg.agent = {
+    services.gpg-agent = {
       enable = true;
       defaultCacheTtl = 1800;
       enableSshSupport = true;
