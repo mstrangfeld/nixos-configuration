@@ -26,12 +26,12 @@
 
   home.file = {
     lv2 = {
-      source = "${home.homeDirectory}/.nix-profile/lib/lv2";
-      target = "${home.homeDirectory}/.lv2";
+      source = "$HOME/.nix-profile/lib/lv2";
+      target = ".lv2";
     };
     vst = {
-      source = "${home.homeDirectory}/.nix-profile/lib/vst";
-      target = "${home.homeDirectory}/.vst";
+      source = "$HOME/.nix-profile/lib/vst";
+      target = ".vst";
     };
   };
 }
