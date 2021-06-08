@@ -6,7 +6,7 @@
       vscode-extensions.bbenoist.Nix
     ];
     haskell = {
-      enable = true;
+      enable = false;
     };
   };
 }

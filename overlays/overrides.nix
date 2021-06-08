@@ -25,6 +25,6 @@ channels: final: prev: {
       };
   };
 
-  hie-nix = import ~/src/hie-nix { };
+  # hie-nix = import ~/src/hie-nix { };
 
 }
