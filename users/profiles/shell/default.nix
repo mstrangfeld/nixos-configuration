@@ -76,7 +76,7 @@
   # Replacement for ls written in Rust
   programs.exa = {
     enable = true;
-    enableAliases = true;
+    enableAliases = false;
   };
 
   # Command-line fuzzy finder written in Go
@@ -129,6 +129,8 @@
   # Distributed version control system
   programs.git = {
     enable = true;
+    userName = "Marvin Strangfeld";
+    userEmail = "marvin@strangfeld.io";
     extraConfig = {
       pull.rebase = false;
     };
