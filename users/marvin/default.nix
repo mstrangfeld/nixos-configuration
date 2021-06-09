@@ -7,6 +7,7 @@
       bitwarden-cli # Bitwarden password manager cli
       borgbackup # Deduplicating archiver / backup tool
       demoit # Live coding demos
+      droidcam # Linux client for DroidCam app
       exercism # A Go based command line tool for exercism.io
       patchage # Modular patch bay for Jack and ALSA systems
       qjackctl # A Qt application to control the JACK sound server daemon
@@ -20,6 +21,11 @@
       enable = true;
       defaultCacheTtl = 1800;
       enableSshSupport = true;
+    };
+
+    services.kdeconnect = {
+      enable = true;
+      indicator = true;
     };
   };
 
