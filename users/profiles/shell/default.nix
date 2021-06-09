@@ -34,6 +34,7 @@
         { name = "bcho/Watson.zsh"; }
       ];
     };
+    autocd = true;
     initExtra = ''
       zstyle ':completion:*' menu select
     '';
