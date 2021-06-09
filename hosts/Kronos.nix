@@ -40,9 +40,14 @@
     desktopManager.plasma5.enable = true;
   };
 
-  # AUDIO AND PIPEWIRE
+  services.v4l2 =
+    {
+      enable = true;
+    }
 
-  hardware.pulseaudio.enable = false;
+      # AUDIO AND PIPEWIRE
+
+      hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
