@@ -1,13 +1,21 @@
 { lib, config, pkgs, ... }:
 
 with lib;
-
+let cfg = config.services.v4l2;
+in
 {
-  options.services.v4l2 = mkEnableOption "Enable the confguration to use the reflex as a webcam";
-  config = mkIf config.services.v4l2 {
-    # 20.03: v4l2loopback 0.12.5 is required for kernel >= 5.5
-    # https://github.com/umlaeute/v4l2loopback/issues/257
-
+  options = {
+    services.v4l2 = {
+      enable = mkOption {
+        type = types.bool;
+        default = false;
+        description = ''
+          Whether to enable the v4l2 loopback device
+        '';
+      };
+    };
+  };
+  config = mkIf cfg.enable {
     # Extra kernel modules
     boot.extraModulePackages = with unstable; [
       config.boot.kernelPackages.v4l2loopback
