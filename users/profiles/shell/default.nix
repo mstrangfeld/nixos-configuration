@@ -26,7 +26,7 @@
   # The Z shell
   programs.zsh = {
     enable = true;
-    defaultKeymap = "vicmd";
+    # defaultKeymap = "vicmd";
     zplug = {
       enable = true;
       plugins = [
