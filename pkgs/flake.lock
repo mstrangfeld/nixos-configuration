@@ -2,11 +2,11 @@
   "nodes": {
     "nixpkgs": {
       "locked": {
-        "lastModified": 1615926763,
-        "narHash": "sha256-yeq8A3EPNuQVlsxlEQrIRsklfJwJK0Us6jtcG/u8wNs=",
+        "lastModified": 1623321499,
+        "narHash": "sha256-dVFZWcSxIIM9CRmDxZgl8lT4w/NAdg7I4l2hQy+StG4=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "b702a56d417647de4090ac56c0f18bdc7e646610",
+        "rev": "1027d970dfb3cf14f20c79def65d1d45e1a8aa62",
         "type": "github"
       },
       "original": {
@@ -16,7 +16,25 @@
     },
     "root": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "ttyper": "ttyper"
+      }
+    },
+    "ttyper": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1622249502,
+        "narHash": "sha256-YHGTKp3XjXImMTkGjCyj5+p5KzC9dMkkLvA3FzUOatk=",
+        "owner": "max-niederman",
+        "repo": "ttyper",
+        "rev": "db1de2c2e4ff984e320f68323c7c9408ed16c639",
+        "type": "github"
+      },
+      "original": {
+        "owner": "max-niederman",
+        "ref": "v0.2.3",
+        "repo": "ttyper",
+        "type": "github"
       }
     }
   },
