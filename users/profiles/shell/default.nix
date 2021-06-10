@@ -9,6 +9,7 @@
     cht-sh # CLI for cheat.sh
     fd # Simple, fast alternative to find
     fselect # Find files with SQL-like queries
+    gh # GitHub CLI tool
     glances # System monitoring
     gopass # The slightly more awesome Standard Unix Password Manager for Teams
     gotop # A terminal based graphical activity monitor
@@ -84,13 +85,6 @@
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
-  };
-
-  # GitHub CLI tool
-  programs.gh = {
-    enable = true;
-    editor = "nvim";
-    gitProtocol = "ssh";
   };
 
   # An interactive process viewer for Linux
