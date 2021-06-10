@@ -1,7 +1,10 @@
 {
   description = "Package Sources";
 
-  inputs = { };
+  inputs = {
+    ttyper.url = "github:max-niederman/ttyper/v0.2.3";
+    ttyper.flake = false;
+  };
 
   outputs = { self, nixpkgs, ... }: {
     overlay = final: prev: {
