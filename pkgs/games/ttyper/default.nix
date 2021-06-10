@@ -14,6 +14,8 @@ rustPlatform.buildRustPackage rec {
     description = "Terminal-based typing test.";
     homepage = "https://github.com/max-niederman/ttyper";
     license = licenses.mit;
+    platforms = platforms.linux;
     maintainers = [ maintainers.mstrangfeld ];
+    inherit version;
   };
 }
