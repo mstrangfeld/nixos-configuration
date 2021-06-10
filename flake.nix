@@ -69,27 +69,33 @@
           /* set host specific properties here */
           Kronos = { };
         };
-        profiles = [ ./profiles ./users ];
-        suites = { profiles, users, ... }: with profiles; rec {
-          base = [ core users.marvin users.root ];
+        importables = rec {
+          profiles = digga.lib.importers.rakeLeaves ./profiles // {
+            users = digga.lib.importers.rakeLeaves ./users;
+          };
+          suites = with profiles; rec {
+            base = [ core users.marvin users.root ];
+          };
         };
       };
 
       home = {
         modules = ./users/modules/module-list.nix;
         externalModules = [ ];
-        profiles = [ ./users/profiles ];
-        suites = { profiles, ... }: with profiles; rec {
-          base = [ shell ];
-          workstation = base ++ [
-            alacritty
-            browser
-            communication
-            development
-            entertainment
-            graphics
-            music
-          ];
+        importables = rec {
+          profiles = digga.lib.importers.rakeLeaves ./profiles;
+          suites = with profiles; {
+            base = [ shell ];
+            workstation = base ++ [
+              alacritty
+              browser
+              communication
+              development
+              entertainment
+              # graphics
+              # music
+            ];
+          };
         };
       };
 
