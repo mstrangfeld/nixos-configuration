@@ -83,8 +83,8 @@
         modules = ./users/modules/module-list.nix;
         externalModules = [ ];
         importables = rec {
-          profiles = digga.lib.importers.rakeLeaves ./profiles;
-          suites = with profiles; {
+          profiles = digga.lib.importers.rakeLeaves ./users/profiles;
+          suites = with profiles; rec {
             base = [ shell ];
             workstation = base ++ [
               alacritty
