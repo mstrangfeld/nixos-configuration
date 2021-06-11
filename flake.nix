@@ -92,8 +92,8 @@
             base = [ shell ];
             head = [ alacritty browser ];
             dev = [ development ];
-            
-            workstation = base ++ head ++ dev ++ [ music ];
+
+            workstation = base ++ head ++ dev;
           };
         };
       };
