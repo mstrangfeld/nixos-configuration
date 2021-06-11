@@ -1,6 +1,6 @@
 { suites, profiles, ... }:
 {
-  imports = suites.base;
+  imports = suites.kronos;
 
   system.stateVersion = "21.05";
 
@@ -13,7 +13,6 @@
     "kernel.dmesg_restrict" = 0;
     "kernel.perf_event_paranoid" = 1;
     "fs.inotify.max_user_watches" = 524288;
-    "kernel.unprivileged_userns_clone" = 1;
     "vm.swappiness" = 10;
   };
 
@@ -42,28 +41,6 @@
 
   services.v4l2 = {
     enable = true;
-  };
-
-  # AUDIO AND PIPEWIRE
-
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    jack.enable = true;
-  };
-
-  virtualisation = {
-    podman = {
-      enable = true;
-    };
-    docker = {
-      enable = true;
-      enableNvidia = true;
-    };
   };
 
   fileSystems."/" = { device = "/dev/disk/by-label/nixos"; };
