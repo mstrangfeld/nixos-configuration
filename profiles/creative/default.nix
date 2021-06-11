@@ -1,0 +1,7 @@
+{ ... }:
+{
+  imports = [
+    ./graphics
+    ./music
+  ];
+}

@@ -10,7 +10,6 @@
     fd # Simple, fast alternative to find
     fselect # Find files with SQL-like queries
     gh # GitHub CLI tool
-    glances # System monitoring
     gopass # The slightly more awesome Standard Unix Password Manager for Teams
     gotop # A terminal based graphical activity monitor
     python39Packages.howdoi # Instant coding answers via the command line
@@ -21,6 +20,7 @@
     ripgrep # A utility that combines the usability of The Silver Searcher with the raw speed of grep
     thefuck # Magnificent app which corrects your previous console command
     tldr # Simplified and community-driven man pages
+    # tmux # Terminal multiplexer
     watson # A wonderful CLI to track your time!
   ];
 

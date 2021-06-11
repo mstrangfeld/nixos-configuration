@@ -75,6 +75,10 @@
           };
           suites = with profiles; rec {
             base = [ core users.marvin users.root ];
+            head = [ audio graphical ];
+            dev = [ development virtualisation ];
+
+            kronos = base ++ head ++ dev ++ [ creative entertainment ];
           };
         };
       };
@@ -86,15 +90,10 @@
           profiles = digga.lib.importers.rakeLeaves ./users/profiles;
           suites = with profiles; rec {
             base = [ shell ];
-            workstation = base ++ [
-              alacritty
-              browser
-              communication
-              development
-              entertainment
-              # graphics
-              # music
-            ];
+            head = [ alacritty browser ];
+            dev = [ development ];
+            
+            workstation = base ++ head ++ dev ++ [ music ];
           };
         };
       };

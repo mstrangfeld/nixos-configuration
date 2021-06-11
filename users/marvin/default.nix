@@ -9,11 +9,7 @@
       demoit # Live coding demos
       droidcam # Linux client for DroidCam app
       exercism # A Go based command line tool for exercism.io
-      patchage # Modular patch bay for Jack and ALSA systems
-      qjackctl # A Qt application to control the JACK sound server daemon
-      zita-njbridge # command line Jack clients to transmit full quality multichannel audio over a local IP network
       rr # Records nondeterministic executions and debugs them deterministically
-      tmux # Terminal multiplexer
       unzip # An extraction utility for archives compressed in .zip format
     ];
 
