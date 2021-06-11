@@ -21,7 +21,7 @@
       mixxx # Digital DJ mixing software
       mixxx-udev # Custom overlay for usb udev rules
       musescore # Music notation and composition software
-      ninja2 # sample slicer plugin for LV2, VST, and jack standalone
+      ninjas2 # sample slicer plugin for LV2, VST, and jack standalone
       noise-repellent # An lv2 plugin for broadband noise reduction
       orca-c # An esoteric programming language designed to quickly create procedural sequencers
       puredata # A real-time graphical programming environment for audio, video, and graphical processing
