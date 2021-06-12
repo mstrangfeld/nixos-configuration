@@ -11,59 +11,48 @@
     ];
   };
 
+  # See: https://nixos.wiki/wiki/PipeWire#Enabling_PipeWire
   hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
     jack.enable = true;
-    # See: https://nixos.wiki/wiki/PipeWire#Low-latency_setup
-    config.pipewire = {
-      "context.properties" = {
-        "link.max-buffers" = 16;
-        "log.level" = 2;
-        "default.clock.rate" = 48000;
-        "default.clock.quantum" = 32;
-        "default.clock.min-quantum" = 32;
-        "default.clock.max-quantum" = 32;
-        "core.daemon" = true;
-        "core.name" = "pipewire-0";
-      };
+    # Bump rt.prio to 88
+    config.jack = {
       "context.modules" = [
+        # Uses RTKit to boost the data thread priority.
         {
           name = "libpipewire-module-rtkit";
           args = {
-            "nice.level" = -15;
+            "nice.level" = -11;
             "rt.prio" = 88;
             "rt.time.soft" = 200000;
             "rt.time.hard" = 200000;
           };
           flags = [ "ifexists" "nofail" ];
         }
+        # The native communication protocol.
         { name = "libpipewire-module-protocol-native"; }
-        { name = "libpipewire-module-profiler"; }
-        { name = "libpipewire-module-metadata"; }
-        { name = "libpipewire-module-spa-device-factory"; }
-        { name = "libpipewire-module-spa-node-factory"; }
+        # Allows creating nodes that run in the context of the
+        # client. Is used by all clients that want to provide
+        # data to PipeWire.
         { name = "libpipewire-module-client-node"; }
-        { name = "libpipewire-module-client-device"; }
-        {
-          name = "libpipewire-module-portal";
-          flags = [ "ifexists" "nofail" ];
-        }
-        {
-          name = "libpipewire-module-access";
-          args = { };
-        }
-        { name = "libpipewire-module-adapter"; }
-        { name = "libpipewire-module-link-factory"; }
-        { name = "libpipewire-module-session-manager"; }
+        # Allows applications to create metadata objects. It creates
+        # a factory for Metadata objects.
+        { name = "libpipewire-module-metadata"; }
       ];
     };
   };
 
-  security.rtkit.enable = true;
+  # See: https://github.com/NixOS/nixpkgs/issues/63703
+  # See: https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/685
+  systemd.services."rtkit-daemon".serviceConfig.ExecStart = [
+    ""
+    "${pkgs.rtkit}/libexec/rtkit-daemon --our-realtime-priority=90 --max-realtime-priority=89"
+  ];
 
   users.groups = {
     audio = { };
@@ -77,18 +66,11 @@
       type = "-";
       value = "95";
     }
-    # See: https://wiki.archlinux.org/title/PipeWire#Increasing_RLIMIT_MEMLOCK
     {
       domain = "@audio";
       item = "memlock";
-      type = "soft";
-      value = "64";
-    }
-    {
-      domain = "@audio";
-      item = "memlock";
-      type = "hard";
-      value = "128";
+      type = "-";
+      value = "unlimited";
     }
   ];
 }
