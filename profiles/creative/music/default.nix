@@ -32,6 +32,7 @@
       sonic-visualiser # View and analyse contents of music audio files
       sooperlooper # A live looping sampler capable of immediate loop recording, overdubbing, multiplying, reversing and more
       supercollider # Programming language for real time audio synthesis
+      surge # LV2 & VST3 synthesizer plug-in (previously released as Vember Audio Surge)
       swh_lv2 # LV2 version of Steve Harris' SWH plugins
       tap-plugins # Tom's Audio Processing plugins
       vcv-rack # Open-source virtual modular synthesizer
