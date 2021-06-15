@@ -9,6 +9,7 @@
     ./go
     ./haskell
     ./java
+    ./javascript
     ./julia
     ./kubernetes
     ./markup
