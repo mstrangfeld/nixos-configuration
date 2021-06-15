@@ -1,6 +1,5 @@
 {
   imports = [
-    ./golang
     ./java
     ./vscode
   ];
