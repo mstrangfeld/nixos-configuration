@@ -1,5 +1,8 @@
 { pkgs, ... }:
 {
+
+  # TODO: Check https://wiki.archlinux.org/title/Professional_audio
+
   environment = {
     systemPackages = with pkgs; [
       alsaUtils # ALSA, the Advanced Linux Sound Architecture utils
