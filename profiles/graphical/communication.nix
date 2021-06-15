@@ -11,4 +11,5 @@
       zoom-us # zoom.us video conferencing application
     ];
   };
+  # If zoom is too big write: `autoScale=false` `scaleFactor=1` `useSystemTheme=true` in ~/.config/zoomus.conf
 }
