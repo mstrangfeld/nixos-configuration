@@ -9,8 +9,6 @@
       demoit # Live coding demos
       droidcam # Linux client for DroidCam app
       exercism # A Go based command line tool for exercism.io
-      rr # Records nondeterministic executions and debugs them deterministically
-      unzip # An extraction utility for archives compressed in .zip format
     ];
 
     services.gpg-agent = {
