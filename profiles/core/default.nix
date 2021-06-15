@@ -26,6 +26,7 @@ in
       dnsutils # Domain name server
       dosfstools # Utilities for creating and checking FAT and VFAT file systems
       fd # A simple, fast and user-friendly alternative to find
+      file # A program that shows the type of files
       git # Distributed version control system
       glances # System monitoring
       gptfdisk # Set of text-mode partitioning tools for Globally Unique Identifier (GUID) Partition Table (GPT) disks
