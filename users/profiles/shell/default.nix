@@ -1,4 +1,13 @@
 { pkgs, ... }:
+let
+  colorscheme = import ../color { format = "#"; };
+  tmux-status = pkgs.tmuxPlugins.mkTmuxPlugin {
+    pluginName = "status";
+    rtpFilePath = "status.tmux";
+    version = "dev";
+    src = ./tmux-status;
+  };
+in
 {
 
   imports = [
@@ -57,6 +66,10 @@
     enable = true;
     enableZshIntegration = true;
     settings = {
+      character = {
+        success_symbol = "[λ](bold green)";
+        error_symbol = "[✗](bold red)";
+      };
       directory = {
         truncation_length = 8;
         truncate_to_repo = false;
@@ -127,8 +140,24 @@
       tmuxPlugins.open # Tmux key bindings for quick opening of a highlighted file or url
       tmuxPlugins.fingers # copy pasting in terminal with vimium/vimperator like hints
       {
-        plugin = tmuxPlugins.onedark-theme; # A dark tmux color scheme inspired by Atom's One Dark syntax theme
+        plugin = tmux-status;
         extraConfig = ''
+          set -g @colorscheme_base00 "${colorscheme.base00}";
+          set -g @colorscheme_base01 "${colorscheme.base01}";
+          set -g @colorscheme_base02 "${colorscheme.base02}";
+          set -g @colorscheme_base03 "${colorscheme.base03}";
+          set -g @colorscheme_base04 "${colorscheme.base04}";
+          set -g @colorscheme_base05 "${colorscheme.base05}";
+          set -g @colorscheme_base06 "${colorscheme.base06}";
+          set -g @colorscheme_base07 "${colorscheme.base07}";
+          set -g @colorscheme_base08 "${colorscheme.base08}";
+          set -g @colorscheme_base09 "${colorscheme.base09}";
+          set -g @colorscheme_base0A "${colorscheme.base0A}";
+          set -g @colorscheme_base0B "${colorscheme.base0B}";
+          set -g @colorscheme_base0C "${colorscheme.base0C}";
+          set -g @colorscheme_base0D "${colorscheme.base0D}";
+          set -g @colorscheme_base0E "${colorscheme.base0E}";
+          set -g @colorscheme_base0F "${colorscheme.base0F}";
           set -g @onedark_date_format "%D | CW%V"
           set -g @onedark_widgets '#(fancywatsonstatus)'
         '';
