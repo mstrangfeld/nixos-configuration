@@ -52,6 +52,8 @@ in
       fira-code-symbols # FiraCode unicode ligature glyphs in private use area
       fira-mono # Monospace font for Firefox OS
       # hack-font # A typeface designed for source code
+      powerline-fonts
+      powerline-symbols
       # roboto # The Roboto family of fonts
       # roboto-mono # Google Roboto Mono fonts
       # source-code-pro # A set of monospaced OpenType fonts designed for coding environments
