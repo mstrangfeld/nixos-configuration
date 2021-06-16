@@ -46,6 +46,9 @@
       ls = "exa --color=auto --group-directories-first --icons";
       la = "exa -aF --color=auto --group-directories-first --icons";
       ll = "exa -alF --color=auto --group-directories-first --icons";
+
+      zz = "z -I -t .";
+      zb = "z -I -b .";
     };
   };
 
@@ -117,7 +120,7 @@
   # A new cd command that helps you navigate faster by learning your habits
   programs.z-lua = {
     enable = true;
-    enableAliases = true;
+    enableAliases = false;
     enableZshIntegration = true;
   };
 
