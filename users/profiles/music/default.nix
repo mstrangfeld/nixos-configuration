@@ -5,11 +5,11 @@ in
 {
   home.file = {
     lv2 = {
-      source = "${homeDirectory}/.nix-profile/lib/lv2";
+      source = "/run/current-system/sw/lib/lv2";
       target = ".lv2";
     };
     vst = {
-      source = "${homeDirectory}/.nix-profile/lib/vst";
+      source = "/run/current-system/sw/lib/vst";
       target = ".vst";
     };
   };
