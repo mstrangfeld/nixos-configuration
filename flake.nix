@@ -89,7 +89,7 @@
         importables = rec {
           profiles = digga.lib.importers.rakeLeaves ./users/profiles;
           suites = with profiles; rec {
-            base = [ shell ];
+            base = [ shell x ];
             head = [ alacritty browser ];
             dev = [ development ];
 
