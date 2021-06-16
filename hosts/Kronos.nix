@@ -42,6 +42,7 @@
   services.v4l2 = {
     enable = true;
   };
+  services.usbmuxd.enable = true;
 
   # Can't get Rocket.Chat to work as Nix derivation
   services.flatpak.enable = true;
