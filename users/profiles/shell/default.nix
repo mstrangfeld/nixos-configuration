@@ -115,6 +115,16 @@
     enable = true;
     clock24 = true;
     keyMode = "vi";
+    baseIndex = 1;
+    aggressiveResize = true;
+    historyLimit = 50000;
+    extraConfig = builtins.readFile ./tmux.conf;
+    plugins = with pkgs; [
+      tmuxPlugins.yank # Tmux plugin for copying to system clipboard
+      tmuxPlugins.open # Tmux key bindings for quick opening of a highlighted file or url
+      tmuxPlugins.fingers # copy pasting in terminal with vimium/vimperator like hints
+      tmuxPlugins.onedark-theme # A dark tmux color scheme inspired by Atom's One Dark syntax theme
+    ];
   };
 
   # A new cd command that helps you navigate faster by learning your habits
