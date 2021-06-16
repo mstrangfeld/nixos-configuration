@@ -75,6 +75,10 @@
   # A shell extension that manages your environment
   programs.direnv = {
     enable = true;
+    nix-direnv = {
+      enable = true;
+      enableFlakes = true;
+    };
     enableNixDirenvIntegration = true;
   };
 
