@@ -1,6 +1,6 @@
-{ ... }:
+{ pkgs, ... }:
 {
-  servicse.grobi = {
+  services.grobi = {
     enable = true;
     rules = [
       {

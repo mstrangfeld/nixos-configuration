@@ -92,7 +92,6 @@ in
       enable = true;
       enableFlakes = true;
     };
-    enableNixDirenvIntegration = true;
   };
 
   # Replacement for ls written in Rust

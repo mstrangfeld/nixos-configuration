@@ -43,6 +43,7 @@
 
   # Can't get Rocket.Chat to work as Nix derivation
   services.flatpak.enable = true;
+  xdg.portal.enable = true;
 
   fileSystems."/" = { device = "/dev/disk/by-label/nixos"; };
   fileSystems."/boot" = { device = "/dev/disk/by-label/EFIBOOT"; };
