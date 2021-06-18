@@ -4,6 +4,10 @@
   programs.rofi = {
     enable = true;
     terminal = "${pkgs.alacritty}/bin/alacritty";
-    theme = ./theme.rafi;
+    font = "Fira Code Nerd Font";
+    location = "center";
+    padding = 10;
+    lines = 10;
+    colors = { };
   };
 }
