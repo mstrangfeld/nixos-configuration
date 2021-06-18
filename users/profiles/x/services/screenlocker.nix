@@ -1,5 +1,10 @@
 { pkgs, ... }:
 {
+
+  home.packages = with pkgs; [
+    multilockscreen
+  ];
+
   services.screen-locker = {
     enable = true;
     inactiveInterval = 30;
