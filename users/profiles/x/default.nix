@@ -10,7 +10,7 @@ in
     ./services/networkmanager.nix
     ./services/picom.nix
     # ./services/polybar
-    ./services/rofi.nix
+    ./services/rofi
     ./services/screenlocker.nix
     ./services/udiskie.nix
 
