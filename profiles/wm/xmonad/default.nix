@@ -17,6 +17,8 @@
     xserver = {
       enable = true;
 
+      layout = "de";
+
       libinput = {
         enable = true;
       };
