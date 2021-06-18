@@ -3,6 +3,20 @@ let
   colorscheme = import ../color { format = "#"; };
 in
 {
+
+  imports = [
+    ./services/dunst.nix
+    ./services/grobi.nix
+    ./services/networkmanager.nix
+    ./services/picom.nix
+    ./services/polybar.nix
+    ./services/rofi.nix
+    ./services/screenlocker.nix
+    ./services/udiskie.nix
+
+    ./xmonad
+  ];
+
   xresources.properties = {
     "*foreground" = colorscheme.foreground;
     "*background" = colorscheme.background;
