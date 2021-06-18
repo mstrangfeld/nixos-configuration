@@ -75,7 +75,7 @@
           };
           suites = with profiles; rec {
             base = [ core users.marvin users.root ];
-            head = [ audio graphical ];
+            head = [ audio graphical wm.xmonad ];
             dev = [ development virtualisation ];
 
             kronos = base ++ head ++ dev ++ [ creative entertainment ];

@@ -34,9 +34,6 @@
 
     layout = "de";
     xkbOptions = "eurosign:e";
-
-    displayManager.sddm.enable = true;
-    desktopManager.plasma5.enable = true;
   };
 
   services.v4l2 = {
