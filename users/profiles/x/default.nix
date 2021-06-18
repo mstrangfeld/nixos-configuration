@@ -9,7 +9,7 @@ in
     ./services/grobi.nix
     ./services/networkmanager.nix
     ./services/picom.nix
-    # ./services/polybar
+    ./services/polybar
     ./services/rofi
     ./services/screenlocker.nix
     ./services/udiskie.nix
