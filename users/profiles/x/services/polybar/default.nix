@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   # A fast and easy-to-use tool for creating status bars
   services.polybar = {
