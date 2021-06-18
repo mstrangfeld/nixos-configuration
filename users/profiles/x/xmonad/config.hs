@@ -113,7 +113,7 @@ main = mkDbusClient >>= main'
 
 main' :: D.Client -> IO ()
 main' dbus =
-  xmonad . docks . ewmh . dynProjects . keybindings . urgencyHook $
+  xmonad . docks . ewmh . keybindings . urgencyHook $
     def
       { terminal = myTerminal,
         focusFollowsMouse = False,
@@ -132,7 +132,6 @@ main' dbus =
       }
   where
     myModMask = mod4Mask -- super as the mod key
-    dynProjects = dynamicProjects projects
     keybindings = addDescrKeys' ((myModMask, xK_F1), showKeybindings) myKeys
     urgencyHook = withUrgencyHook LibNotifyUrgencyHook
 
@@ -526,61 +525,6 @@ etcWs = "etc"
 
 myWS :: [WorkspaceId]
 myWS = [webWs, ossWs, devWs, comWs, wrkWs, sysWs, etcWs]
-
-------------------------------------------------------------------------
--- Dynamic Projects
---
-projects :: [Project]
-projects =
-  [ Project
-      { projectName = webWs,
-        projectDirectory = "~/",
-        projectStartHook = Just $ spawn "firefox -P 'default'"
-      },
-    Project
-      { projectName = ossWs,
-        projectDirectory = "~/",
-        projectStartHook = Just $ do
-          replicateM_ 2 (spawn myTerminal)
-          spawn $ myTerminal <> " -e home-manager edit"
-      },
-    Project
-      { projectName = devWs,
-        projectDirectory = "~/workspace/cr/app",
-        projectStartHook = Just . replicateM_ 2 $ spawn myTerminal
-      },
-    Project
-      { projectName = comWs,
-        projectDirectory = "~/",
-        projectStartHook = Just $ do
-          spawn "telegram-desktop"
-          spawn "signal-desktop --use-tray-icon"
-      },
-    Project
-      { projectName = wrkWs,
-        projectDirectory = "~/",
-        projectStartHook = Just $ spawn "firefox -P 'chatroulette'" -- -no-remote"
-      },
-    Project
-      { projectName = sysWs,
-        projectDirectory = "/etc/nixos/",
-        projectStartHook = Just . spawn $ myTerminal <> " -e sudo su"
-      },
-    Project
-      { projectName = etcWs,
-        projectDirectory = "~/",
-        projectStartHook = Nothing
-      }
-  ]
-
-projectsTheme :: XPConfig
-projectsTheme =
-  amberXPConfig
-    { bgHLight = "#002b36",
-      font = "xft:Bitstream Vera Sans Mono:size=8:antialias=true",
-      height = 50,
-      position = CenteredAt 0.5 0.5
-    }
 
 ------------------------------------------------------------------------
 -- Event handling
