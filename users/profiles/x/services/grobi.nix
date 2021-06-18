@@ -11,7 +11,7 @@
         atomic = true;
         execute_after = [
           "${pkgs.xorg.xrandr}/bin/xrandr --dpi 157"
-          "${pkgs.xmonad-with-packages}/bin/xmonad --restart";
+          "${pkgs.xmonad-with-packages}/bin/xmonad --restart"
         ];
       }
     ];
