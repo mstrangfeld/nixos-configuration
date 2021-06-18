@@ -17,6 +17,13 @@ in
     ./xmonad
   ];
 
+  home.keyboard = {
+    layout = "de";
+    options = [
+      "eurosign:e"
+    ];
+  };
+
   xresources.properties = {
     "*foreground" = colorscheme.foreground;
     "*background" = colorscheme.background;
