@@ -1,4 +1,7 @@
 { pkgs, config, ... }:
+let
+  colors = builtins.readFile ./colors.ini;
+in
 {
   # A fast and easy-to-use tool for creating status bars
   services.polybar = {
@@ -9,8 +12,10 @@
       mpdSupport = true;
     };
     config = ./config.ini;
+    extraConfig = colors;
     script = ''
-      polybar main 2>${config.xdg.configHome}/polybar/logs/top.log & disown
+      export MONITOR=DP-3
+      polybar nixos 2>${config.xdg.configHome}/polybar/logs/top.log & disown
     '';
   };
 }

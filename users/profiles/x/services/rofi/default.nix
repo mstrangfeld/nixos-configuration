@@ -8,6 +8,5 @@
     location = "center";
     padding = 10;
     lines = 10;
-    colors = { };
   };
 }
