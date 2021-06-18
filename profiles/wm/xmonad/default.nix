@@ -41,14 +41,4 @@
   };
 
   systemd.services.upower.enable = true;
-
-  environment.systemPackages = with pkgs; [
-    networkmanager_dmenu # networkmanager on dmenu
-    networkmanagerapplet # networkmanager applet
-    nitrogen # wallpaper manager
-    xcape # keymaps modifier
-    xorg.xkbcomp # keymaps modifier
-    xorg.xmodmap # keymaps modifier
-    xorg.xrandr # display manager (X Resize and Rotate protocol)
-  ];
 }
