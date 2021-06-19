@@ -45,6 +45,9 @@
   services.flatpak.enable = true;
   xdg.portal.enable = true;
 
+  # A toolkit for defining and handling the policy that allows unprivileged processes to speak to privileged processes
+  security.polkit.enable = true;
+
   fileSystems."/" = { device = "/dev/disk/by-label/nixos"; };
   fileSystems."/boot" = { device = "/dev/disk/by-label/EFIBOOT"; };
   swapDevices = [
