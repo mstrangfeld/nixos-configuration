@@ -1,6 +1,12 @@
 { pkgs, config, ... }:
 let
   colors = builtins.readFile ./colors.ini;
+  xmonad = ''
+    [module/xmonad]
+    type = custom/script
+    exec = ${pkgs.xmonad-log}/bin/xmonad-log
+    tail = true
+  '';
 in
 {
   # A fast and easy-to-use tool for creating status bars
@@ -12,10 +18,10 @@ in
       mpdSupport = true;
     };
     config = ./config.ini;
-    extraConfig = colors;
+    extraConfig = colors + xmonad;
     script = ''
       export MONITOR=DP-3
-      polybar nixos 2>${config.xdg.configHome}/polybar/logs/top.log & disown
+      polybar nixos & disown
     '';
   };
 }
