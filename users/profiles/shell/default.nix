@@ -11,6 +11,7 @@ in
 {
 
   imports = [
+    ./dotfiles
     ./scripts
   ];
 
@@ -30,6 +31,7 @@ in
     thefuck # Magnificent app which corrects your previous console command
     tldr # Simplified and community-driven man pages
     # tmux # Terminal multiplexer
+    ueberzug # An alternative for w3mimgdisplay
     watson # A wonderful CLI to track your time!
   ];
 
