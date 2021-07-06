@@ -211,10 +211,6 @@ showKeybindings x =
 
 myKeys conf@XConfig {XMonad.modMask = modm} =
   keySet
-    "Applications"
-    [ key "Slack" (modm, xK_F2) $ spawnOn comWs "slack"
-    ]
-    ^++^ keySet
       "Audio"
       [ key "Mute" (0, xF86XK_AudioMute) $ spawn "amixer -q set Master toggle",
         key "Lower volume" (0, xF86XK_AudioLowerVolume) $ spawn "amixer -q set Master 5%-",
@@ -241,10 +237,6 @@ myKeys conf@XConfig {XMonad.modMask = modm} =
       [ key "Toggle" (modm, xK_equal) togglePolybar
       ]
     ^++^ keySet
-      "Projects"
-      [ key "Switch prompt" (modm, xK_o) $ switchProjectPrompt projectsTheme
-      ]
-    ^++^ keySet
       "Scratchpads"
       [ key "Audacious" (modm .|. controlMask, xK_a) $ runScratchpadApp audacious,
         key "bottom" (modm .|. controlMask, xK_y) $ runScratchpadApp btm,
@@ -257,7 +249,7 @@ myKeys conf@XConfig {XMonad.modMask = modm} =
       "System"
       [ key "Toggle status bar gap" (modm, xK_b) toggleStruts,
         key "Logout (quit XMonad)" (modm .|. shiftMask, xK_q) $ io exitSuccess,
-        key "Restart XMonad" (modm, xK_q) $ spawn "xmonad --recompile; xmonad --restart",
+        key "Restart XMonad" (modm, xK_q) $ spawn "xmonad --restart",
         key "Capture entire screen" (modm, xK_Print) $ spawn "flameshot full -p ~/Pictures/flameshot/"
       ]
     ^++^ keySet
@@ -357,10 +349,9 @@ myLayout =
   avoidStruts
     . smartBorders
     . fullScreenToggle
-    . comLayout
     . devLayout
     . webLayout
-    . wrkLayout
+    . chatLayout
     $ (tiled ||| Mirror tiled ||| column3 ||| full)
   where
     -- default tiling algorithm partitions the screen into two panes
@@ -382,10 +373,9 @@ myLayout =
     gapSpaced g = spacing g . myGaps g
 
     -- Per workspace layout
-    comLayout = onWorkspace comWs (full ||| tiled)
     devLayout = onWorkspace devWs (Mirror tiled ||| full)
     webLayout = onWorkspace webWs (tiled ||| full)
-    wrkLayout = onWorkspace wrkWs (tiled ||| full)
+    chatLayout = onWorkspace chatWs (tiled ||| full)
 
     -- Fullscreen
     fullScreenToggle = mkToggle (single NBFULL)
@@ -509,22 +499,20 @@ scratchpads = scratchpadApp <$> [audacious, btm, nautilus, scr, spotify]
 ------------------------------------------------------------------------
 -- Workspaces
 --
-webWs = "web"
-
-ossWs = "oss"
-
 devWs = "dev"
 
-comWs = "com"
+webWs = "web"
 
-wrkWs = "wrk"
+chatWs = "chat"
+
+mediaWs = "media"
 
 sysWs = "sys"
 
 etcWs = "etc"
 
 myWS :: [WorkspaceId]
-myWS = [webWs, ossWs, devWs, comWs, wrkWs, sysWs, etcWs]
+myWS = [devWs, webWs, chatWs, mediaWs, sysWs, etcWs]
 
 ------------------------------------------------------------------------
 -- Event handling
