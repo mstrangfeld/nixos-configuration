@@ -1,6 +1,6 @@
 { suites, profiles, ... }:
 {
-  imports = suites.kronos;
+  imports = suites.kronos ++ [ ./zfs.nix ];
 
   system.stateVersion = "21.05";
 
@@ -17,6 +17,7 @@
   };
 
   networking.networkmanager.enable = true;
+  networking.hostId = "64ada341";
 
   # VIDEO AND X-SERVER
 
@@ -47,10 +48,4 @@
 
   # A toolkit for defining and handling the policy that allows unprivileged processes to speak to privileged processes
   security.polkit.enable = true;
-
-  fileSystems."/" = { device = "/dev/disk/by-label/nixos"; };
-  fileSystems."/boot" = { device = "/dev/disk/by-label/EFIBOOT"; };
-  swapDevices = [
-    { device = "/dev/disk/by-label/swap"; }
-  ];
 }
