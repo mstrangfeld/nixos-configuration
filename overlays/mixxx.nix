@@ -5,7 +5,7 @@ self: super:
     dontConfigure = true;
     installPhase = ''
       mkdir -p $out/lib/udev/rules.d
-      cp res/linux/mixxx.usb.rules $out/lib/udev/rules.d/mixxx.usb.rules
+      cp res/linux/mixxx-usb-uaccess.rules $out/lib/udev/rules.d/mixxx-usb-uaccess.rules
     '';
   });
 }
