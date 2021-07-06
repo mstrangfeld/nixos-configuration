@@ -21,6 +21,14 @@
       enable = true;
       indicator = true;
     };
+
+    xdg = {
+      enable = true;
+      userDirs = {
+        enable = true;
+        createDirectories = true;
+      };
+    };
   };
 
   users.users.marvin = {
