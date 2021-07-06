@@ -16,14 +16,19 @@ in
   ];
 
   home.packages = with pkgs; [
+    bat # A cat(1) clone with wings
     cht-sh # CLI for cheat.sh
+    exa # Replacement for ls written in Rust
     fd # Simple, fast alternative to find
     fselect # Find files with SQL-like queries
     gh # GitHub CLI tool
     gopass # The slightly more awesome Standard Unix Password Manager for Teams
     gotop # A terminal based graphical activity monitor
     python39Packages.howdoi # Instant coding answers via the command line
+    htop # An interactive process viewer for Linux
     httpie # A command line HTTP client
+    jq # A lightweight and flexible command-line JSON processor
+    lazygit # Simple terminal UI for git commands
     navi # An interactive cheatsheet tool for the command-line and application launchers
     ranger # File manager with minimalistic curses interface
     rclone # Command line program to sync files and directories to and from major cloud storage
@@ -82,10 +87,6 @@ in
     };
   };
 
-  # A cat(1) clone with wings
-  programs.bat = {
-    enable = true;
-  };
 
   # A shell extension that manages your environment
   programs.direnv = {
@@ -96,31 +97,10 @@ in
     };
   };
 
-  # Replacement for ls written in Rust
-  programs.exa = {
-    enable = true;
-    enableAliases = false;
-  };
-
   # Command-line fuzzy finder written in Go
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
-  };
-
-  # An interactive process viewer for Linux
-  programs.htop = {
-    enable = true;
-  };
-
-  # A lightweight and flexible command-line JSON processor
-  programs.jq = {
-    enable = true;
-  };
-
-  # Simple terminal UI for git commands
-  programs.lazygit = {
-    enable = true;
   };
 
   # Vim text editor fork focused on extensibility and agility
