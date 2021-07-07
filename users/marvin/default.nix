@@ -33,7 +33,6 @@
 
   users.users.marvin = {
     uid = 1000;
-    password = "marvin";
     description = "Marvin Strangfeld";
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "audio" "power" "docker" ];
