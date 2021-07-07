@@ -5,8 +5,8 @@ in
 {
 
   imports = [
+    ./services/autorandr.nix
     ./services/dunst.nix
-    ./services/grobi.nix
     ./services/networkmanager.nix
     ./services/picom.nix
     ./services/polybar
