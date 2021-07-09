@@ -78,7 +78,7 @@
             head = [ audio graphical wm.xmonad ];
             dev = [ development virtualisation ];
 
-            kronos = base ++ head ++ dev ++ [ creative entertainment ];
+            kronos = base ++ head ++ dev ++ [ creative entertainment yubikey ];
           };
         };
       };
