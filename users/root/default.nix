@@ -1,5 +1,6 @@
 { ... }:
-# recommend using `hashedPassword`
+
 {
-  users.users.root.password = "";
+  users.mutableUsers = true;
+  users.users.root.initialPassword = "toor";
 }

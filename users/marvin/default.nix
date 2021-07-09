@@ -31,10 +31,14 @@
     };
   };
 
+  environment.pathsToLink = [ "/share/zsh" ];
+
+  users.mutableUsers = true;
   users.users.marvin = {
     uid = 1000;
     description = "Marvin Strangfeld";
     isNormalUser = true;
+    initialPassword = "nivram";
     extraGroups = [ "wheel" "networkmanager" "audio" "power" "docker" ];
     shell = pkgs.zsh;
   };

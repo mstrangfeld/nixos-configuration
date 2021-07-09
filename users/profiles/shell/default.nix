@@ -43,6 +43,7 @@ in
   # The Z shell
   programs.zsh = {
     enable = true;
+    enableCompletion = true;
     # defaultKeymap = "vicmd";
     zplug = {
       enable = true;

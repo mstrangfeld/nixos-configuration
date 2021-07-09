@@ -43,6 +43,7 @@ in
       whois # Intelligent WHOIS client from Debian
     ];
 
+    pathsToLink = [ "/share/zsh" ]; # To enable zsh autocomplete
   };
 
   fonts = {
