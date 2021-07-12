@@ -3,6 +3,7 @@
   programs.vscode = {
     enable = true;
     extensions = with pkgs.vscode-extensions; [
+      # asciidoctor.asciidoctor-vscode # Not yet implemented
       formulahendry.auto-close-tag
       formulahendry.auto-rename-tag
       ms-vscode.cpptools
