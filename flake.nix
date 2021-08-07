@@ -6,6 +6,9 @@
       nixos.url = "nixpkgs/nixos-unstable";
       latest.url = "nixpkgs";
       digga.url = "github:divnix/digga";
+      digga.inputs.nixpkgs.follows = "nixos";
+      digga.inputs.nixlib.follows = "nixos";
+      digga.inputs.home-manager.follows = "home";
 
       ci-agent = {
         url = "github:hercules-ci/hercules-ci-agent";

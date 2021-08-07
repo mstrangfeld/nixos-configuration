@@ -88,8 +88,12 @@
       "inputs": {
         "deploy": "deploy",
         "devshell": "devshell",
-        "nixlib": "nixlib",
-        "nixpkgs": "nixpkgs_2",
+        "nixlib": [
+          "nixos"
+        ],
+        "nixpkgs": [
+          "nixos"
+        ],
         "utils": "utils_2"
       },
       "locked": {
@@ -228,21 +232,6 @@
         "type": "github"
       }
     },
-    "nixlib": {
-      "locked": {
-        "lastModified": 1620519687,
-        "narHash": "sha256-+6Dd72b2CASuXm2W7KRxZIE7AOy/dj4mU28vaF+zxcs=",
-        "owner": "divnix",
-        "repo": "nixpkgs.lib",
-        "rev": "c7b6169809c5f74dd0c34f3d69e9d12ba4d448de",
-        "type": "github"
-      },
-      "original": {
-        "owner": "divnix",
-        "repo": "nixpkgs.lib",
-        "type": "github"
-      }
-    },
     "nixos": {
       "locked": {
         "lastModified": 1625366435,
@@ -289,21 +278,6 @@
         "type": "github"
       }
     },
-    "nixpkgs_2": {
-      "locked": {
-        "lastModified": 1620962350,
-        "narHash": "sha256-9ASW4d4/Z8HmRvuJI8rxbEOTbXTBpQ8y+CmFYBwtXzE=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "5d4a430472cafada97888cc80672fab255231f57",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nur": {
       "locked": {
         "lastModified": 1623234780,
@@ -325,7 +299,7 @@
         "ttyper": "ttyper"
       },
       "locked": {
-        "narHash": "sha256-zFwiiRbLllKOUP+nrXNln4IGDg686r89rQQc65l/W2k=",
+        "narHash": "sha256-jrGcZ+/3f96DaRSle/MimxT8p+mydgknuVYNohuq/LM=",
         "path": "./pkgs",
         "type": "path"
       },
