@@ -16,7 +16,6 @@
     "vm.swappiness" = 10;
   };
 
-  networking.networkmanager.enable = true;
   networking.hostId = "64ada341";
 
   # VIDEO AND X-SERVER
