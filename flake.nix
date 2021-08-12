@@ -77,7 +77,7 @@
             users = digga.lib.importers.rakeLeaves ./users;
           };
           suites = with profiles; rec {
-            base = [ core users.marvin users.root ];
+            base = [ core network users.marvin users.root ];
             head = [ audio graphical wm.xmonad ];
             dev = [ development virtualisation ];
 
