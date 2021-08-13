@@ -9,9 +9,7 @@
       # Disable screen saver blanking
       ${pkgs.xorg.xset}/bin/xset s off
       # Detect monitor setup
-      ${pkgs.autorandr}/bin/autorandr -c}
-      # Restore the wallpaper
-      ${pkgs.nitrogen}/bin/nitrogen --restore &
+      ${pkgs.autorandr}/bin/autorandr -c
       # PulseAudio system tray
       ${pkgs.pasystray}/bin/pasystray &
       # NetworkManager Applet
