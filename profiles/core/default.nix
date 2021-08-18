@@ -46,6 +46,9 @@ in
     pathsToLink = [ "/share/zsh" ]; # To enable zsh autocomplete
   };
 
+  # Configure zsh as an interactive shell
+  programs.zsh.enable = true;
+
   fonts = {
     fonts = with pkgs; [
       fira # Mozilla's new typeface, used in Firefox OS
