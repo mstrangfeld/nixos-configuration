@@ -17,6 +17,17 @@
   };
 
   networking.hostId = "64ada341";
+  networking.firewall = {
+    trustedInterfaces = [
+      "enp0s20u6u3" # GoPro Hero 9 for Wecam mode
+    ];
+    allowedUDPPortRanges = [
+      { from = 1714; to = 1764; } # KDEConnect
+    ];
+    allowedTCPPortRanges = [
+      { from = 1714; to = 1764; } # KDEConnect
+    ];
+  };
 
   # VIDEO AND X-SERVER
 
