@@ -4,6 +4,7 @@
     systemPackages = with pkgs; [
       blender # 3D Creation/Animation/Publishing System
       # darktable # Virtual lighttable and darkroom for photographers
+      ffmpeg # A complete, cross-platform solution to record, convert and stream audio and video
       gimp # The GNU Image Manipulation Program
       # inkscape # Vector graphics editor
       # krita # A free and open source painting application
