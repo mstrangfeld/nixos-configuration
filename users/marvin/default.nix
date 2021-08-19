@@ -39,7 +39,7 @@
     description = "Marvin Strangfeld";
     isNormalUser = true;
     initialPassword = "nivram";
-    extraGroups = [ "wheel" "networkmanager" "audio" "power" "docker" ];
+    extraGroups = [ "wheel" "networkmanager" "audio" "video" "power" "docker" ];
     shell = pkgs.zsh;
   };
 }

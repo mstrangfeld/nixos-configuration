@@ -47,7 +47,7 @@
     xkbOptions = "eurosign:e";
   };
 
-  services.v4l2 = {
+  services.v4l2loopback = {
     enable = true;
   };
   # services.usbmuxd.enable = true;
