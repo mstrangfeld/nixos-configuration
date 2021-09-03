@@ -9,6 +9,7 @@
       alsaTools # ALSA, the Advanced Linux Sound Architecture tools
       cadence # Collection of tools useful for audio production
       patchage # Modular patch bay for Jack and ALSA systems
+      pavucontrol # PulseAudio Volume Control
       qjackctl # A Qt application to control the JACK sound server daemon
       zita-njbridge # command line Jack clients to transmit full quality multichannel audio over a local IP network
     ];
