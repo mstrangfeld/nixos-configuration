@@ -26,11 +26,11 @@ in
       "v4l2loopback"
     ];
 
-    # Create persitent devices 8 and 9 for OBS and GoPro
+    # Create persitent devices 8 and 9 for WebRTC and adhoc GoPro
     boot.extraModprobeConfig = ''
       options v4l2loopback video_nr=8,9
       options v4l2loopback card_label="OBS,GoPro"
-      options v4l2loopback exclusive_caps=1
+      options v4l2loopback exclusive_caps=1,0
     '';
 
     # Create the video group
