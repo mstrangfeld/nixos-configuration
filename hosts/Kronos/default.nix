@@ -45,7 +45,17 @@
 
     layout = "de";
     xkbOptions = "eurosign:e";
+
+    displayManager = {
+      # Since we are on an encrypted zfs...
+      autoLogin = {
+        enable = true;
+        user = "marvin";
+      };
+    };
   };
+
+  security.pam.services.lightdm.enableGnomeKeyring = true;
 
   services.v4l2loopback = {
     enable = true;
