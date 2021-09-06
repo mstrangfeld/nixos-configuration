@@ -1,6 +1,5 @@
 {
   imports = [
-    ./java
     ./vscode
   ];
 }
