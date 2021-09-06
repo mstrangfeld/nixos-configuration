@@ -2,13 +2,17 @@
 {
   services.picom = {
     enable = true;
-    activeOpacity = "1.0";
     inactiveOpacity = "0.9";
     backend = "glx";
-    fade = true;
-    fadeDelta = 5;
+    # https://github.com/yshui/picom/issues/375#issuecomment-635439374
+    experimentalBackends = true;
     opacityRule = [ "100:name *= 'i3lock'" ];
-    shadow = true;
-    shadowOpacity = "0.75";
+    # https://wiki.archlinux.org/title/Picom#Flicker
+    extraOptions = ''
+      xrender-sync-fence = true;
+      unredir-if-possible = false;
+    '';
+    # https://wiki.archlinux.org/title/Picom#Lag_with_Nvidia_proprietary_drivers_and_FullCompositionPipeline
+    vSync = true;
   };
 }
