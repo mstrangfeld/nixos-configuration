@@ -4,6 +4,7 @@
     systemPackages = with pkgs; [
       discord # All-in-one cross-platform voice and text chat for gamers
       # element-desktop # A feature-rich client for Matrix.org
+      gopro-webcam
       # TODO: Rocket.Chat
       signal-desktop # Private, simple, and secure messenger
       tdesktop # Telegram Desktop messaging app
