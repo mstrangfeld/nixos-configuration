@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 let
   colorscheme = import ../color { format = "#"; };
 in
@@ -22,6 +22,30 @@ in
     options = [
       "eurosign:e"
     ];
+  };
+
+  fonts.fontconfig.enable = true;
+
+  gtk = {
+    enable = true;
+    font = {
+      package = pkgs.fira;
+      name = "Fira Sans";
+    };
+    iconTheme = {
+      package = pkgs.papirus-icon-theme;
+      name = "Papirus";
+    };
+    theme = {
+      package = pkgs.materia-theme;
+      name = "Materia-dark";
+    };
+  };
+
+  xsession.pointerCursor = {
+    package = pkgs.quintom-cursor-theme;
+    defaultCursor = "left_ptr";
+    name = "Quintom_Ink";
   };
 
   xresources.properties = {
