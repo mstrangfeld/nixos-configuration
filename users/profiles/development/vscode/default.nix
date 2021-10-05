@@ -18,7 +18,7 @@
       pkief.material-icon-theme
       bbenoist.nix
       ms-python.vscode-pylance
-      ms-python.python
+      # ms-python.python # Broken
       # jprestidge.theme-material-theme # Not yet implemented
       vscodevim.vim
       dotjoshjohnson.xml
