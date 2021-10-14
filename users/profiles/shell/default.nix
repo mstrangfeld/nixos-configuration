@@ -45,13 +45,18 @@ in
     enable = true;
     enableCompletion = true;
     # defaultKeymap = "vicmd";
-    zplug = {
-      enable = true;
-      plugins = [
-        { name = "hcgraf/zsh-sudo"; }
-        { name = "bcho/Watson.zsh"; }
-      ];
-    };
+    plugins = [
+      {
+        name = "zsh-sudo";
+        file = "sudo.plugin.zsh";
+        src = pkgs.fetchFromGitHub {
+          owner = "hcgraf";
+          repo = "zsh-sudo";
+          rev = "d8084def6bb1bde2482e7aa636743f40c69d9b32";
+          sha256 = "sha256-I17u8qmYttsodD58PqtTxtVZauyYcNw1orFLPngo9bY=";
+        };
+      }
+    ];
     autocd = true;
     initExtra = ''
       zstyle ':completion:*' menu select

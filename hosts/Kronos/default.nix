@@ -53,6 +53,15 @@
         user = "marvin";
       };
     };
+
+    libinput = {
+      enable = true;
+      mouse = {
+        accelProfile = "adaptive";
+        accelSpeed = "1";
+      };
+    };
+
   };
 
   security.pam.services.lightdm.enableGnomeKeyring = true;
