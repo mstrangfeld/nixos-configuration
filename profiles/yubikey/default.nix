@@ -10,7 +10,7 @@
     ];
   };
 
-  services.yubikey-agent.enable = true;
+  services.yubikey-agent.enable = false;
 
   services.udev.packages = with pkgs; [
     yubikey-personalization
