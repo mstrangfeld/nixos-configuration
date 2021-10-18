@@ -9,6 +9,7 @@
       demoit # Live coding demos
       droidcam # Linux client for DroidCam app
       exercism # A Go based command line tool for exercism.io
+      pcloud # Secure and simple to use cloud storage for your files; pCloud Drive, Electron Edition
     ];
 
     services.gpg-agent = {
