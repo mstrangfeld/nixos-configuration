@@ -22,6 +22,8 @@
       enableSshSupport = true;
     };
 
+    services.keybase.enable = true;
+
     services.kdeconnect = {
       enable = true;
       indicator = true;
