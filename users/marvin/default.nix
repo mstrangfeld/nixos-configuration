@@ -12,6 +12,10 @@
       pcloud # Secure and simple to use cloud storage for your files; pCloud Drive, Electron Edition
     ];
 
+    programs.gpg = {
+      enable = true;
+    };
+
     services.gpg-agent = {
       enable = true;
       defaultCacheTtl = 1800;
@@ -28,6 +32,18 @@
       userDirs = {
         enable = true;
         createDirectories = true;
+      };
+    };
+
+    programs.ssh = {
+      enable = true;
+      matchBlocks = {
+        "*.cloud.oxoe.io" = {
+          checkHostIP = false;
+          extraOptions = {
+            StrictHostKeyChecking = "no";
+          };
+        };
       };
     };
   };
