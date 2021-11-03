@@ -164,6 +164,10 @@ in
     enable = true;
     userName = "Marvin Strangfeld";
     userEmail = "marvin@strangfeld.io";
+    signing = {
+      signByDefault = true;
+      key = null;
+    };
     extraConfig = {
       pull.rebase = false;
     };
