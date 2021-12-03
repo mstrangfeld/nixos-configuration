@@ -32,9 +32,11 @@
 + 8GiB LPDDR4-3200 SDRAM
 
 ## Credits
-+ Template: [DevOS](https://github.com/divnix/devos) by [divnix](https://github.com/divnix)
++ https://github.com/nrdxp/devos
++ https://github.com/gytis-ivaskevicius/flake-utils-plus
 + Inspiration:
-    + https://github.com/nrdxp/devos
+  + https://github.com/gytis-ivaskevicius/nixfiles
+  + https://github.com/fufexan/dotfiles
 
 ## License
 

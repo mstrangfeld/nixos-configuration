@@ -1,8 +1,6 @@
-{ suites, profiles, ... }:
+{ config, ... }:
 {
-  imports = suites.kronos ++ [ ./zfs.nix ];
-
-  system.stateVersion = "21.05";
+  imports = [ ./zfs.nix ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -32,6 +30,7 @@
   # VIDEO AND X-SERVER
 
   hardware.nvidia.modesetting.enable = true;
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
 
   hardware.opengl = {
     enable = true;

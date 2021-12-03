@@ -1,114 +1,126 @@
 {
-  description = "A highly structured configuration database.";
+  description = "My personal host configurations";
 
-  inputs =
-    {
-      nixos.url = "nixpkgs/nixos-unstable";
-      latest.url = "nixpkgs";
-      digga.url = "github:divnix/digga";
-      digga.inputs.nixpkgs.follows = "nixos";
-      digga.inputs.nixlib.follows = "nixos";
-      digga.inputs.home-manager.follows = "home";
-
-      ci-agent = {
-        url = "github:hercules-ci/hercules-ci-agent";
-        inputs = { nix-darwin.follows = "darwin"; nixos-20_09.follows = "nixos"; nixos-unstable.follows = "latest"; };
-      };
-      darwin.url = "github:LnL7/nix-darwin";
-      darwin.inputs.nixpkgs.follows = "latest";
-      home.url = "github:nix-community/home-manager";
-      home.inputs.nixpkgs.follows = "nixos";
-      naersk.url = "github:nmattia/naersk";
-      naersk.inputs.nixpkgs.follows = "latest";
-      nixos-hardware.url = "github:nixos/nixos-hardware";
-
-      pkgs.url = "path:./pkgs";
-      pkgs.inputs.nixpkgs.follows = "nixos";
+  inputs = {
+    nixpkgs.url = github:nixos/nixpkgs/nixos-unstable; # Nix Packages collection
+    unstable.url = github:nixos/nixpkgs;
+    nur.url = github:nix-community/NUR;# Nix User Repository: User contributed nix packages
+    utils.url = github:gytis-ivaskevicius/flake-utils-plus; # Use Nix flakes without any fluff
+    home-manager = { # Manage a user environment using Nix
+      url = github:nix-community/home-manager;
+      inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-hardware.url = github:NixOS/nixos-hardware; # A collection of NixOS modules covering hardware quirks.
+    emacs-overlay.url  = "github:nix-community/emacs-overlay"; # Bleeding edge emacs overlay
+    agenix = { # age-encrypted secrets for NixOS
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    deploy-rs.url = "github:serokell/deploy-rs"; # A simple multi-profile Nix-flake deploy tool.
+    deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
+  };
 
-  outputs = inputs@{ self, pkgs, digga, nixos, ci-agent, home, nixos-hardware, nur, ... }:
-    digga.lib.mkFlake {
+  outputs = inputs@{ self, nur, utils, home-manager, nixos-hardware, emacs-overlay, agenix, deploy-rs, ... }:
+    let
+      suites = import ./suites.nix { inherit utils; };
+    in
+    utils.lib.mkFlake {
       inherit self inputs;
+      inherit (suites) nixosModules homeManagerModules;
 
-      channelsConfig = { allowUnfree = true; };
+      supportedSystems = [ "x86_64-linux" ];
+      channelsConfig.allowUnfree = true;
 
-      channels = {
-        nixos = {
-          imports = [ (digga.lib.importers.overlays ./overlays) ];
-          overlays = [
-            ./pkgs/default.nix
-            pkgs.overlay # for `srcs`
-            nur.overlay
-          ];
-        };
-        latest = { };
-      };
-
-      lib = import ./lib { lib = digga.lib // nixos.lib; };
-
-      sharedOverlays = [
+      channels.nixpkgs.overlaysBuilder = channels: [
+        # Use packages from the unstable channel
         (final: prev: {
-          lib = prev.lib.extend (lfinal: lprev: {
-            our = self.lib;
-          });
+          inherit (channels.unstable) cachix discord starship;
         })
       ];
 
-      nixos = {
-        hostDefaults = {
+      sharedOverlays = [
+        self.overlay
+        nur.overlay
+        emacs-overlay.overlay
+        deploy-rs.overlay
+      ];
+
+      overlay = import ./overlays;
+
+      hostDefaults = {
+        modules = [
+          home-manager.nixosModules.home-manager
+          agenix.nixosModules.age
+          {
+            home-manager = {
+              extraSpecialArgs = {
+                inherit inputs self;
+              };
+              useUserPackages = true;
+              useGlobalPkgs = true;
+            };
+          }
+        ];
+      };
+
+      hosts.Kronos = {
+        modules = with suites.nixosModules; suites.desktopModules ++ [
+          ./hosts/Kronos
+          creative
+          development
+          entertainment
+          virtualisation
+          users
+          yubikey
+          v4l2loopback
+          { home-manager.users.marvin.imports = suites.hmKronos; }
+        ];
+      };
+
+      homeConfigurations =
+        let
+          configuration = { };
+          extraSpecialArgs = { inherit inputs self; };
+          generateHome = inputs.hm.lib.homeManagerConfiguration;
+          homeDirectory = "/home/${username}";
+          pkgs = self.pkgs.${system}.nixpkgs;
           system = "x86_64-linux";
-          channelName = "nixos";
-          modules = ./modules/module-list.nix;
-          externalModules = [
-            { _module.args.ourLib = self.lib; }
-            ci-agent.nixosModules.agent-profile
-            home.nixosModules.home-manager
-            ./modules/customBuilds.nix
+          username = "marvin";
+        in
+        {
+          "marvin@Kronos" = home-manager.lib.homeManagerConfiguration {
+            inherit system username homeDirectory extraSpecialArgs pkgs configuration;
+            extraModules = with suites.homeManagerModules; [ alacritty browser development music shell users x ];
+          };
+        };
+
+      deploy.nodes = {
+        Kronos = {
+          hostname = "localhost";
+          fastConnection = true;
+          profiles = {
+            system = {
+              path =
+                deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.Kronos;
+              user = "root";
+            };
+            marvin = {
+              path =
+                deploy-rs.lib.x86_64-linux.activate.home-manager self.homeConfigurations."marvin@Kronos";
+              user = "marvin";
+            };
+          };
+        };
+      };
+
+      outputsBuilder = channels: with channels.nixpkgs; {
+        devShell = mkShell {
+          packages = [
+            nixpkgs-fmt
+            ssh-to-age
+            channels.nixpkgs.deploy-rs.deploy-rs
           ];
         };
-
-        imports = [ (digga.lib.importers.hosts ./hosts) ];
-        hosts = {
-          /* set host specific properties here */
-          Kronos = { };
-        };
-        importables = rec {
-          profiles = digga.lib.importers.rakeLeaves ./profiles // {
-            users = digga.lib.importers.rakeLeaves ./users;
-          };
-          suites = with profiles; rec {
-            base = [ core network users.marvin users.root ];
-            head = [ audio graphical wm.xmonad ];
-            dev = [ development virtualisation ];
-
-            kronos = base ++ head ++ dev ++ [ creative entertainment yubikey ];
-          };
-        };
       };
-
-      home = {
-        modules = ./users/modules/module-list.nix;
-        externalModules = [ ];
-        importables = rec {
-          profiles = digga.lib.importers.rakeLeaves ./users/profiles;
-          suites = with profiles; rec {
-            base = [ shell x ];
-            head = [ alacritty browser ];
-            dev = [ development ];
-
-            workstation = base ++ head ++ dev;
-          };
-        };
-      };
-
-      homeConfigurations = digga.lib.mkHomeConfigurations self.nixosConfigurations;
-
-      deploy.nodes = digga.lib.mkDeployNodes self.nixosConfigurations { };
-
-      defaultTemplate = self.templates.flk;
-      templates.flk.path = ./.;
-      templates.flk.description = "flk template";
-
-    }
-  ;
+    };
 }
