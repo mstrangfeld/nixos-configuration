@@ -4,20 +4,27 @@
   inputs = {
     nixpkgs.url = github:nixos/nixpkgs/nixos-unstable; # Nix Packages collection
     unstable.url = github:nixos/nixpkgs;
-    nur.url = github:nix-community/NUR;# Nix User Repository: User contributed nix packages
+    nur.url = github:nix-community/NUR; # Nix User Repository: User contributed nix packages
     utils.url = github:gytis-ivaskevicius/flake-utils-plus; # Use Nix flakes without any fluff
-    home-manager = { # Manage a user environment using Nix
+    home-manager = {
+      # Manage a user environment using Nix
       url = github:nix-community/home-manager;
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = github:NixOS/nixos-hardware; # A collection of NixOS modules covering hardware quirks.
-    emacs-overlay.url  = "github:nix-community/emacs-overlay"; # Bleeding edge emacs overlay
-    agenix = { # age-encrypted secrets for NixOS
+    emacs-overlay.url = "github:nix-community/emacs-overlay"; # Bleeding edge emacs overlay
+    agenix = {
+      # age-encrypted secrets for NixOS
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     deploy-rs.url = "github:serokell/deploy-rs"; # A simple multi-profile Nix-flake deploy tool.
     deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
+    flake-compat = {
+      url = "github:edolstra/flake-compat";
+      flake = false;
+    };
+    devshell.url = github:numtide/devshell; # Per project developer environments
   };
 
   outputs = inputs@{ self, nur, utils, home-manager, nixos-hardware, emacs-overlay, agenix, deploy-rs, ... }:
@@ -43,6 +50,7 @@
         nur.overlay
         emacs-overlay.overlay
         deploy-rs.overlay
+        inputs.devshell.overlay
       ];
 
       overlay = import ./overlays;
@@ -113,14 +121,8 @@
         };
       };
 
-      outputsBuilder = channels: with channels.nixpkgs; {
-        devShell = mkShell {
-          packages = [
-            nixpkgs-fmt
-            ssh-to-age
-            channels.nixpkgs.deploy-rs.deploy-rs
-          ];
-        };
+      outputsBuilder = channels: {
+        devShell = import ./devshell.nix { pkgs = channels.nixpkgs; };
       };
     };
 }
