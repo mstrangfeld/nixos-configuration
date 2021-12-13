@@ -43,6 +43,13 @@
           StrictHostKeyChecking = "no";
         };
       };
+      "strangfeld.rm.cloud.oxoe.io" = {
+        user = "marvin";
+        checkHostIP = false;
+        extraOptions = {
+          StrictHostKeyChecking = "no";
+        };
+      };
     };
   };
 }

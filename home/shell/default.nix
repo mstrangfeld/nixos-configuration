@@ -170,5 +170,19 @@ in
     extraConfig = {
       pull.rebase = false;
     };
+    includes = [
+      {
+        condition = "gitdir:~/ox";
+        contents = {
+          user = {
+            name = "Marvin Strangfeld";
+            email = "marvin.strangfeld@open-xchange.com";
+          };
+          commit = {
+            gpgSign = false;
+          };
+        };
+      }
+    ];
   };
 }
