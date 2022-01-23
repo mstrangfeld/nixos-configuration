@@ -13,7 +13,7 @@
       # PulseAudio system tray
       ${pkgs.pasystray}/bin/pasystray &
       # NetworkManager Applet
-      ${pkgs.gnome3.networkmanagerapplet}/bin/nm-applet --sm-disable --indicator &
+      ${pkgs.networkmanagerapplet}/bin/nm-applet --sm-disable --indicator &
     '';
 
     windowManager.xmonad = {

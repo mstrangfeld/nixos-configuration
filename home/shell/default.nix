@@ -172,7 +172,7 @@ in
     };
     includes = [
       {
-        condition = "gitdir:~/ox";
+        condition = "gitdir:~/ox/";
         contents = {
           user = {
             name = "Marvin Strangfeld";
