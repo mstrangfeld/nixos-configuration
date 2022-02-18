@@ -24,7 +24,7 @@
       url = "github:edolstra/flake-compat";
       flake = false;
     };
-    devshell.url = github:numtide/devshell; # Per project developer environments
+    devshell.url = github:numtide/devshell?ref=fff3dc6e4538f6df85ee3027f13cc7730b23f61d; # Per project developer environments
   };
 
   outputs = inputs@{ self, nur, utils, home-manager, nixos-hardware, emacs-overlay, agenix, deploy-rs, ... }:
