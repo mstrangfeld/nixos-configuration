@@ -41,7 +41,11 @@
       channels.nixpkgs.overlaysBuilder = channels: [
         # Use packages from the unstable channel
         (final: prev: {
-          inherit (channels.unstable) cachix discord starship;
+          inherit (channels.unstable)
+            cachix
+            discord
+            starship
+            remarshal; # https://github.com/NixOS/nixpkgs/pull/159074
         })
       ];
 
