@@ -1,9 +1,9 @@
-{ self, config, lib, pkgs, ... }:
-let
-  inherit (lib) fileContents;
-in
+{ config, lib, pkgs, ... }:
 {
-  imports = [ ../cachix ];
+  imports = [
+    ./cache.nix
+    ./users.nix
+  ];
 
   nixpkgs.config.allowUnfree = true;
 
@@ -40,40 +40,8 @@ in
       utillinux # A set of system utilities for Linux
       whois # Intelligent WHOIS client from Debian
     ];
-
-    pathsToLink = [ "/share/zsh" ]; # To enable zsh autocomplete
   };
 
-  # Configure zsh as an interactive shell
-  programs.zsh.enable = true;
-
-  fonts = {
-    fonts = with pkgs; [
-      fira # Mozilla's new typeface, used in Firefox OS
-      fira-code # Monospace font with programming ligatures
-      fira-code-symbols # FiraCode unicode ligature glyphs in private use area
-      fira-mono # Monospace font for Firefox OS
-      # hack-font # A typeface designed for source code
-      powerline-fonts
-      powerline-symbols
-      # roboto # The Roboto family of fonts
-      # roboto-mono # Google Roboto Mono fonts
-      # source-code-pro # A set of monospaced OpenType fonts designed for coding environments
-      (nerdfonts.override {
-        fonts = [
-          "FiraCode"
-          # "FiraMono"
-          # "Hack"
-          # "RobotoMono"
-          # "SourceCodePro"
-        ];
-      }) # Iconic font aggregator, collection, & patcher. 3,600+ icons, 50+ patched fonts
-    ];
-    fontconfig.defaultFonts = {
-      monospace = [ "FiraCode Nerd Font" ];
-      sansSerif = [ "Fira Sans" ];
-    };
-  };
 
   nix = {
     gc.automatic = true;
@@ -89,8 +57,6 @@ in
       system-features = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
       sandbox = true;
       auto-optimise-store = true;
-      allowed-users = [ "@wheel" ];
-      trusted-users = [ "root" "@wheel" ];
     };
   };
 

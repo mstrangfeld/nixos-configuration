@@ -65,9 +65,6 @@
 
   security.pam.services.lightdm.enableGnomeKeyring = true;
 
-  services.v4l2loopback = {
-    enable = true;
-  };
   # services.usbmuxd.enable = true;
 
   # Can't get Rocket.Chat to work as Nix derivation
@@ -76,4 +73,45 @@
 
   # A toolkit for defining and handling the policy that allows unprivileged processes to speak to privileged processes
   security.polkit.enable = true;
+
+  modules = {
+    desktop = {
+      enable = true;
+      audio.enable = true;
+      browser = {
+        default = "brave";
+        brave.enable = true;
+        firefox.enable = true;
+      };
+      creative = {
+        graphics.enable = true;
+        music.enable = true;
+      };
+      entertainment.enable = true;
+      wm.xmonad.enable = true;
+      v4l2loopback.enable = true;
+      yubikey.enable = true;
+    };
+    development = {
+      enable = true;
+      arduino.enable = true;
+      go.enable = true;
+      haskell.enable = true;
+      java.enable = true;
+      javascript.enable = true;
+      julia.enable = true;
+      kubernetes.enable = true;
+      markup.enable = true;
+      python.enable = true;
+      rust.enable = true;
+      sql.enable = true;
+      virtualisation = {
+        enable = true;
+        enableNvidia = true;
+      };
+    };
+    network.enable = true;
+    shell.enable = true;
+    theme.enable = true;
+  };
 }

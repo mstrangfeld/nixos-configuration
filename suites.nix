@@ -6,6 +6,7 @@ let
     ./modules/core
     ./modules/creative
     ./modules/development
+    ./modules/desktop
     ./modules/entertainment
     ./modules/graphical
     ./modules/network

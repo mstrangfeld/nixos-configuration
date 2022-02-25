@@ -1,0 +1,30 @@
+{ config, lib, pkgs, ... }:
+
+with lib;
+let cfg = config.modules.development.virtualisation;
+in {
+  options.modules.development.virtualisation = {
+    enable = mkEnableOption "Virtualisation";
+    enableNvidia = mkEnableOption "Enable Nvidia Support";
+  };
+
+  config = mkIf cfg.enable {
+    environment = {
+      systemPackages = with pkgs; [
+        buildah # A tool which facilitates building OCI images
+        dive # A tool for exploring each layer in a docker image
+        lazydocker # A simple terminal UI for both docker and docker-compose
+      ];
+    };
+
+    virtualisation = {
+      podman = {
+        enable = true;
+      };
+      docker = {
+        enable = true;
+        enableNvidia = cfg.enableNvidia;
+      };
+    };
+  };
+}
