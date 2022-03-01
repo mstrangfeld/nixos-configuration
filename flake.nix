@@ -53,6 +53,7 @@
         nur.overlay
         emacs-overlay.overlay
         deploy-rs.overlay
+        agenix.overlay
         inputs.devshell.overlay
       ];
 
@@ -74,21 +75,29 @@
         ];
       };
 
-      hosts.Kronos = {
-        modules = [
-          ./hosts/Kronos
-          ./modules
-        ];
+      hosts = {
+        Kronos = {
+          modules = [
+            ./hosts/Kronos
+            ./modules
+          ];
+        };
+        Eos = {
+          modules = [
+            ./hosts/Eos
+            ./modules
+          ];
+        };
       };
 
       deploy.nodes = {
-        Kronos = {
-          hostname = "localhost";
-          fastConnection = true;
+        Eos = {
+          sshUser = "marvin";
+          hostname = "89.58.11.175";
           profiles = {
             system = {
               path =
-                deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.Kronos;
+                deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.Eos;
               user = "root";
             };
           };

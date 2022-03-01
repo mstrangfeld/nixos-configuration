@@ -6,6 +6,8 @@ pkgs.devshell.mkShell {
     nixpkgs-fmt
     ssh-to-age
     deploy-rs.deploy-rs
+    agenix
+    rage
   ];
   commands = [
     {

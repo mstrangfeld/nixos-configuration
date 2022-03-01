@@ -1,0 +1,119 @@
+#+TITLE: Eos Setup
+
+* Installing NixOS on ZFS
++ Based on this [[https://florianfranke.dev/posts/2020/03/installing-nixos-with-encrypted-zfs-on-a-netcup.de-root-server/][blog article]]
+** Upload NixOS ISO via FTP
++ Use ftp client to upload the minimal ISO to ~/cdrom~
+** Login as sudo
+#+begin_src shell
+sudo loadkeys de
+sudo -i
+#+end_src
+** Partioning
+*** Delete all existing partitions
+#+begin_src shell
+sgdisk --zap-all /dev/sda
+#+end_src
+*** List all devices
+#+begin_src shell
+ls -l /dev/disk/by-id/
+#+end_src
+*** Create variables for easier access
+#+begin_src shell
+SDA_ID="$(ls /dev/disk/by-id/ | grep '^[scsi]')"
+DISK=/dev/disk/by-id/$SDA_ID
+#+end_src
+*** Creating partition for GRUB bootloader
+#+begin_src shell
+sgdisk -n 0:0:+1MiB -t 0:ef02 -c 0:grub $DISK
+#+end_src
+*** Creating boot partition
+#+begin_src shell
+sgdisk -n 0:0:+1GiB -t 0:ea00 -c 0:boot $DISK
+#+end_src
+*** Creating swap partition
+#+begin_src shell
+sgdisk -n 0:0:+8GiB -t 0:8200 -c 0:swap $DISK
+#+end_src
+*** Partition for ZFS
+#+begin_src shell
+sgdisk -n 0:0:0 -t 0:BF01 -c 0:ZFS $DISK
+#+end_src
+*** Create some more variables
+#+begin_src shell
+BOOT=$DISK-part2
+SWAP=$DISK-part3
+ZFS=$DISK-part4
+#+end_src
+** Configure ZFS
+*** Create encrypted ZFS pool
+#+begin_src shell
+zpool create -o ashift=12 -o altroot="/mnt" -O mountpoint=none -O encryption=aes-256-gcm -O keyformat=passphrase rpool $ZFS
+#+end_src
+*** Create datasets
+**** Root dataset which will not be mounted
+#+begin_src shell
+zfs create -o mountpoint=none rpool/root
+#+end_src
+**** Dataset for NixOS. Set mountpoint to legacy because it will be mounted by NixOS
+#+begin_src shell
+zfs create -o mountpoint=legacy rpool/root/nixos
+#+end_src
+**** Dataset for data. This will also be mounted by NixOS
++ Note that automatic snapshots are activated
+#+begin_src shell
+zfs create -o mountpoint=legacy -o com.sun:auto-snapshot=true rpool/home
+#+end_src
+**** Activate compression for our data
+#+begin_src shell
+zfs set compression=lz4 rpool/home
+#+end_src
+*** Create and mount filesystems
+#+begin_src shell
+mount -t zfs rpool/root/nixos /mnt
+mkdir /mnt/home
+
+mount -t zfs rpool/home /mnt/home
+mkfs.vfat $BOOT
+
+mkdir /mnt/boot
+mount $BOOT /mnt/boot
+
+mkswap -L swap $SWAP
+swapon $SWAP
+#+end_src
+** Generate NixOS configuration
+#+begin_src shell
+nixos-generate-config --root /mnt
+#+end_src
+*** Determine host ID
+#+begin_src shell
+head -c 8 /etc/machine-id
+#+end_src
+c1a3072c
+*** Update config
+#+begin_src nix
+# Update the following lines
+
+boot.loader.grub.device = "/dev/sda";
+boot.supportedFilesystems = ["zfs"];
+boot.zfs.requestEncryptionCredentials = true;
+
+networking.hostId = "<whatever you noted down>";
+networking.hostName ="<your choice>"
+networking.useDHCP = true;
+
+# ZFS services
+
+services.zfs.autoSnapshot.enable = true;
+services.zfs.autoScrub.enable = true;
+#+end_src
+*** Run the install
+#+begin_src shell
+nixos-install
+#+end_src
+*** Reboot
+#+begin_src shell
+poweroff
+#+end_src
++ Don't forget to reset the boot order
