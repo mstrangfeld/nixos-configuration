@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 with lib;
-let cfg = config.modules.development.kuernetes;
+let cfg = config.modules.development.kubernetes;
 in {
   options.modules.development.kubernetes.enable = mkEnableOption "Kubernetes";
 

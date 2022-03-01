@@ -10,6 +10,7 @@ in {
     ./browser
     ./creative
     ./games
+    ./v4l2loopback
     ./wm
     ./yubikey
   ];
@@ -31,14 +32,122 @@ in {
         # Media Applications
         vlc # Cross-platform media player and streaming server
         spotify-4k # Play music from the Spotify music service
+
+        # Files
+        borgbackup # Deduplicating archiver / backup tool
+        pcloud # Secure and simple to use cloud storage for your files; pCloud Drive, Electron Edition
+
+        # Emacs
+        sqlite
+        (aspellWithDicts (ds: with ds; [
+          de
+          en
+          en-computers
+          en-science
+        ]))
       ];
     };
+
     home-manager.users.marvin = { pkgs, ... }: {
+
+      imports = [
+        ./services/autorandr.nix
+        ./services/dunst.nix
+        ./services/networkmanager.nix
+        ./services/picom.nix
+        ./services/polybar
+        ./services/rofi
+        ./services/screenlocker.nix
+        ./services/udiskie.nix
+      ];
+
+      home.keyboard = {
+        layout = "de";
+        options = [
+          "eurosign:e"
+        ];
+      };
+
       programs.alacritty = {
         enable = true;
         settings = {
           window.startup_mode = "Maximized";
         };
+      };
+
+      services.kdeconnect = {
+        enable = true;
+        indicator = true;
+      };
+
+      xdg = {
+        enable = true;
+        userDirs = {
+          enable = true;
+          createDirectories = true;
+        };
+        mime.enable = true;
+        mimeApps = {
+          enable = true;
+          defaultApplications = {
+            "text/html" = [ "brave-browser.desktop" ];
+            "text/xml" = [ "brave-browser.desktop" ];
+            "application/xhtml_xml" = [ "brave-browser.desktop" ];
+            "image/webp" = [ "brave-browser.desktop" ];
+            "x-scheme-handler/http" = [ "brave-browser.desktop" ];
+            "x-scheme-handler/https" = [ "brave-browser.desktop" ];
+            "x-scheme-handler/ftp" = [ "brave-browser.desktop" ];
+          };
+          associations.added = {
+            "text/html" = [ "brave-browser.desktop" ];
+            "text/xml" = [ "brave-browser.desktop" ];
+            "application/xhtml_xml" = [ "brave-browser.desktop" ];
+            "image/webp" = [ "brave-browser.desktop" ];
+            "x-scheme-handler/https" = [ "brave-browser.desktop" ];
+            "x-scheme-handler/ftp" = [ "brave-browser.desktop" ];
+          };
+        };
+      };
+
+      programs.gpg = {
+        enable = true;
+      };
+
+      services.gpg-agent = {
+        enable = true;
+        defaultCacheTtl = 1800;
+        enableSshSupport = true;
+      };
+
+      programs.vscode = {
+        enable = true;
+        extensions = with pkgs.vscode-extensions; [
+          # asciidoctor.asciidoctor-vscode # Not yet implemented
+          formulahendry.auto-close-tag
+          formulahendry.auto-rename-tag
+          ms-vscode.cpptools
+          ms-azuretools.vscode-docker
+          editorconfig.editorconfig
+          pkief.material-icon-theme
+          bbenoist.nix
+          # jprestidge.theme-material-theme # Not yet implemented
+          vscodevim.vim
+          dotjoshjohnson.xml
+          redhat.vscode-yaml
+        ];
+      };
+
+      programs.emacs = {
+        enable = true;
+        extraPackages = epkgs: with epkgs; [
+          vterm
+          pdf-tools
+        ];
+      };
+
+      services.emacs = {
+        enable = true;
+        client.enable = true;
       };
     };
   };

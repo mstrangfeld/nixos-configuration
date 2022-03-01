@@ -3,11 +3,12 @@
 with lib;
 let
   cfg = config.modules.theme;
-  hexColor = code: "0x" + code;
+  hexColor = code: "#" + code;
 in {
   options.modules.theme = {
     enable = mkEnableOption "Theme";
     colors = {
+      hex = mkOption { default = hexColor; };
       base00 = mkOption { default = "212121"; };
       base01 = mkOption { default = "303030"; };
       base02 = mkOption { default = "353535"; };
@@ -62,6 +63,58 @@ in {
     };
 
     home-manager.users.marvin = { pkgs, ... }: {
+      gtk = {
+        enable = true;
+        font = {
+          package = pkgs.fira;
+          name = "Fira Sans";
+        };
+        iconTheme = {
+          package = pkgs.papirus-icon-theme;
+          name = "Papirus";
+        };
+        theme = {
+          package = pkgs.materia-theme;
+          name = "Materia-dark";
+        };
+      };
+
+      xsession.pointerCursor = {
+        package = pkgs.quintom-cursor-theme;
+        defaultCursor = "left_ptr";
+        name = "Quintom_Ink";
+      };
+
+      xresources.properties = with cfg.colors; {
+        "*foreground" = hex foreground;
+        "*background" = hex background;
+        "*cursorColor" = hex cursorColor;
+
+        "*color0" = hex base00;
+        "*color1" = hex base08;
+        "*color2" = hex base0B;
+        "*color3" = hex base0A;
+        "*color4" = hex base0D;
+        "*color5" = hex base0E;
+        "*color6" = hex base0C;
+        "*color7" = hex base05;
+
+        "*color8" = hex base03;
+        "*color9" = hex base08;
+        "*color10" = hex base0B;
+        "*color11" = hex base0A;
+        "*color12" = hex base0D;
+        "*color13" = hex base0E;
+        "*color14" = hex base0C;
+        "*color15" = hex base07;
+
+        "*color16" = hex base09;
+        "*color17" = hex base0F;
+        "*color18" = hex base01;
+        "*color19" = hex base02;
+        "*color20" = hex base04;
+        "*color21" = hex base06;
+      };
       programs.alacritty.settings = {
         font = {
           normal = {
@@ -80,44 +133,86 @@ in {
         colors = with cfg.colors; {
           # Default colors
           primary = {
-            background = hexColor background;
-            foreground = hexColor foreground;
+            background = hex background;
+            foreground = hex foreground;
           };
           # Colors the cursor will use if `custom_cursor_colors` is true
           cursor = {
-            text = hexColor background;
-            cursor = hexColor foreground;
+            text = hex background;
+            cursor = hex foreground;
           };
           # Normal colors
           normal = {
-            black = hexColor base00;
-            red = hexColor base08;
-            green = hexColor base0B;
-            yellow = hexColor base0A;
-            blue = hexColor base0D;
-            magenta = hexColor base0E;
-            cyan = hexColor base0C;
-            white = hexColor base05;
+            black = hex base00;
+            red = hex base08;
+            green = hex base0B;
+            yellow = hex base0A;
+            blue = hex base0D;
+            magenta = hex base0E;
+            cyan = hex base0C;
+            white = hex base05;
           };
           # Bright colors
           bright = {
-            black = hexColor base03;
-            red = hexColor base08;
-            green = hexColor base0B;
-            yellow = hexColor base0A;
-            blue = hexColor base0D;
-            magenta = hexColor base0E;
-            cyan = hexColor base0C;
-            white = hexColor base07;
+            black = hex base03;
+            red = hex base08;
+            green = hex base0B;
+            yellow = hex base0A;
+            blue = hex base0D;
+            magenta = hex base0E;
+            cyan = hex base0C;
+            white = hex base07;
           };
           indexed_colors = [
-            { index = 16; color = hexColor base09; }
-            { index = 17; color = hexColor base0F; }
-            { index = 18; color = hexColor base01; }
-            { index = 19; color = hexColor base02; }
-            { index = 20; color = hexColor base04; }
-            { index = 21; color = hexColor base05; }
+            { index = 16; color = hex base09; }
+            { index = 17; color = hex base0F; }
+            { index = 18; color = hex base01; }
+            { index = 19; color = hex base02; }
+            { index = 20; color = hex base04; }
+            { index = 21; color = hex base05; }
           ];
+        };
+      };
+      services.dunst = with cfg.colors; {
+        iconTheme = {
+          name = "Tela";
+          package = pkgs.tela-icon-theme;
+          size = "16x16";
+        };
+        settings = {
+          global = {
+            transparency = 10;
+            padding = 16;
+            horizontal_padding = 16;
+            frame_width = 3;
+            frame_color = hex base00;
+            separator_color = "frame";
+            font = "FiraCode Nerd Font 10";
+            line_height = 4;
+            alignment = "left";
+            vertical_alignment = "center";
+            icon_position = "left";
+            word_wrap = "yes";
+            ignore_newline = "no";
+            show_indicators = "yes";
+            sort = true;
+            stack_duplicates = true;
+            startup_notification = false;
+            hide_duplicate_count = true;
+          };
+          urgency_low = {
+            background = hex base00;
+            forefround = hex base05;
+          };
+          urgency_normal = {
+            background = hex base00;
+            forefround = hex base05;
+          };
+          urgency_critical = {
+            background = hex base0A;
+            forefrond = hex base0D;
+            frame_color = hex base08;
+          };
         };
       };
     };

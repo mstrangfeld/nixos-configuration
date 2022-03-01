@@ -87,7 +87,7 @@
         graphics.enable = true;
         music.enable = true;
       };
-      entertainment.enable = true;
+      games.enable = true;
       wm.xmonad.enable = true;
       v4l2loopback.enable = true;
       yubikey.enable = true;
@@ -113,5 +113,8 @@
     network.enable = true;
     shell.enable = true;
     theme.enable = true;
+    work = {
+      open-xchange = true;
+    };
   };
 }

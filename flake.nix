@@ -29,11 +29,10 @@
 
   outputs = inputs@{ self, nur, utils, home-manager, nixos-hardware, emacs-overlay, agenix, deploy-rs, ... }:
     let
-      suites = import ./suites.nix { inherit utils; };
+      userModules = utils.lib.exportModules [ ./modules ];
     in
     utils.lib.mkFlake {
       inherit self inputs;
-      inherit (suites) nixosModules homeManagerModules;
 
       supportedSystems = [ "x86_64-linux" ];
       channelsConfig.allowUnfree = true;
@@ -76,35 +75,11 @@
       };
 
       hosts.Kronos = {
-        modules = with suites.nixosModules; suites.desktopModules ++ [
+        modules = [
           ./hosts/Kronos
-          creative
-          development
-          entertainment
-          virtualisation
-          users
-          yubikey
-          v4l2loopback
-          { home-manager.users.marvin.imports = suites.hmKronos; }
+          ./modules
         ];
       };
-
-      homeConfigurations =
-        let
-          configuration = { };
-          extraSpecialArgs = { inherit inputs self; };
-          generateHome = inputs.hm.lib.homeManagerConfiguration;
-          homeDirectory = "/home/${username}";
-          pkgs = self.pkgs.${system}.nixpkgs;
-          system = "x86_64-linux";
-          username = "marvin";
-        in
-        {
-          "marvin@Kronos" = home-manager.lib.homeManagerConfiguration {
-            inherit system username homeDirectory extraSpecialArgs pkgs configuration;
-            extraModules = with suites.homeManagerModules; [ alacritty browser development music shell users x ];
-          };
-        };
 
       deploy.nodes = {
         Kronos = {
@@ -115,11 +90,6 @@
               path =
                 deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.Kronos;
               user = "root";
-            };
-            marvin = {
-              path =
-                deploy-rs.lib.x86_64-linux.activate.home-manager self.homeConfigurations."marvin@Kronos";
-              user = "marvin";
             };
           };
         };

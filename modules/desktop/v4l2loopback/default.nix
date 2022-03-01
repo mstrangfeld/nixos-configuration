@@ -1,11 +1,11 @@
 { lib, config, pkgs, ... }:
 
 with lib;
-let cfg = config.desktop.v4l2loopback;
+let cfg = config.modules.desktop.v4l2loopback;
 in
 {
   options = {
-    desktop.v4l2loopback = {
+    modules.desktop.v4l2loopback = {
       enable = mkOption {
         type = types.bool;
         default = false;

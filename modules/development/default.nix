@@ -26,6 +26,7 @@ in {
         bash # GNU Bourne-Again Shell, the de facto standard shell on Linux
         clang # A C language family frontend for LLVM (wrapper script)
         clang-tools # Standalone command line tools for C++ development
+        exercism # A Go based command line tool for exercism.io
         gdb # The GNU Project debugger
         gnumake # A tool to control the generation of non-source files from sources
         gcc # GNU Compiler Collection, version 10.3.0 (wrapper script)
