@@ -92,7 +92,7 @@
 
       deploy.nodes = {
         Eos = {
-          sshUser = "marvin";
+          sshUser = "root";
           hostname = "89.58.11.175";
           profiles = {
             system = {

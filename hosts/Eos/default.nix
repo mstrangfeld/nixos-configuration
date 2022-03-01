@@ -58,10 +58,8 @@ with lib;
     ];
   };
 
-  environment.systemPackages = with pkgs; [
-    vim
-    wget
-    git
+  users.users.root.openssh.authorizedKeys.keys = [
+    (builtins.readFile ../../secrets/keys/Kronos.pub)
   ];
 
   # Enable the OpenSSH daemon.
@@ -69,4 +67,8 @@ with lib;
   services.openssh.permitRootLogin = "yes";
 
   system.stateVersion = "21.11"; # Did you read the comment?
+
+  modules = {
+    shell.enable = true;
+  };
 }
