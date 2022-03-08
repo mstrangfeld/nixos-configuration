@@ -70,5 +70,9 @@ with lib;
 
   modules = {
     shell.enable = true;
+    server = {
+      enable = true;
+      ankisyncd.enable = true;
+    };
   };
 }

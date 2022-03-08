@@ -117,3 +117,9 @@ nixos-install
 poweroff
 #+end_src
 + Don't forget to reset the boot order
+** Setup initrd ssh
+*** Generate new ssh keys
+#+begin_src shell
+ssh-keygen -t rsa -N "" -f /etc/secrets/initrd/ssh_host_rsa_key
+ssh-keygen -t ed25519 -N "" -f /etc/secrets/initrd/ssh_host_ed25519_key
+#+end_src

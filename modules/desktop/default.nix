@@ -30,6 +30,7 @@ in {
         zoom-us # zoom.us video conferencing application
 
         # Media Applications
+        anki # Spaced repetition flashcard program
         vlc # Cross-platform media player and streaming server
         spotify-4k # Play music from the Spotify music service
 
@@ -108,6 +109,8 @@ in {
           };
         };
       };
+
+      services.gnome.gnome-keyring.enable = true;
 
       programs.gpg = {
         enable = true;

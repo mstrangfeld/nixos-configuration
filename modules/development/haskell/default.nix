@@ -8,8 +8,10 @@ in {
   config = mkIf cfg.enable (mkMerge [
     {
       environment.systemPackages = with pkgs; [
+        cabal-install # The command-line interface for Cabal and Hackage
         ghc # The Glasgow Haskell Compiler
         haskell-language-server # LSP server for GHC
+        hlint # Source code suggestions
         stack # The Haskell Tool Stack
       ];
     }

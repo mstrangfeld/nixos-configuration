@@ -8,7 +8,7 @@ in {
     ./desktop
     ./development
     ./network
-    # ./server
+    ./server
     ./shell
     ./theme
     ./work
