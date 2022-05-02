@@ -18,6 +18,16 @@ in {
     };
 
     virtualisation = {
+      containers = {
+        enable = true;
+        storage.settings = {
+          storage = {
+            driver = "zfs";
+            graphroot = "/var/lib/containers/storage";
+            runroot = "/run/containers/storage";
+          };
+        };
+      };
       podman = {
         enable = true;
       };

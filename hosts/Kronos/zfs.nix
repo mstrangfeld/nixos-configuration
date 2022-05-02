@@ -31,6 +31,12 @@
       device = "tank/local/nix";
       fsType = "zfs";
     };
+  fileSystems."/var/lib/docker" =
+    {
+      device = "/dev/zvol/tank/local/docker";
+      fsType = "ext4";
+      options = [ "noatime" "data=writeback" "barrier=0" "nobh" "errors=remount-ro" ];
+    };
   fileSystems."/boot" =
     {
       device = "/dev/disk/by-id/ata-Samsung_SSD_870_EVO_2TB_S621NF0R417814B-part3";
