@@ -48,7 +48,7 @@
     displayManager = {
       # Since we are on an encrypted zfs...
       autoLogin = {
-        enable = true;
+        enable = false;
         user = "marvin";
       };
     };

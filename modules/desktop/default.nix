@@ -38,6 +38,9 @@ in {
         borgbackup # Deduplicating archiver / backup tool
         pcloud # Secure and simple to use cloud storage for your files; pCloud Drive, Electron Edition
 
+        # Video
+        vulkan-tools
+
         # Emacs
         sqlite
         (aspellWithDicts (ds: with ds; [
@@ -109,8 +112,6 @@ in {
           };
         };
       };
-
-      services.gnome.gnome-keyring.enable = true;
 
       programs.gpg = {
         enable = true;
