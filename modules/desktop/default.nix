@@ -4,6 +4,7 @@ with lib;
 let
   cfg = config.modules.desktop;
   spotify-4k = pkgs.spotify.override { deviceScaleFactor = 1.5; };
+  myAspell = (pkgs.aspellWithDicts (ds: with ds; [ de en en-computers en-science ]));
 in {
   imports = [
     ./audio
@@ -43,12 +44,7 @@ in {
 
         # Emacs
         sqlite
-        (aspellWithDicts (ds: with ds; [
-          de
-          en
-          en-computers
-          en-science
-        ]))
+        myAspell
       ];
     };
 
@@ -64,6 +60,8 @@ in {
         ./services/screenlocker.nix
         ./services/udiskie.nix
       ];
+
+      home.file.".aspell.conf".text = "data-dir ${myAspell}/lib/aspell";
 
       home.keyboard = {
         layout = "de";
