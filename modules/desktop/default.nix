@@ -48,6 +48,8 @@ in {
       ];
     };
 
+    programs.adb.enable = true;
+
     home-manager.users.marvin = { pkgs, ... }: {
 
       imports = [

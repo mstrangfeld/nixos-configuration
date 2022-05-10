@@ -1,6 +1,9 @@
 { config, ... }:
 {
-  imports = [ ./zfs.nix ];
+  imports = [
+    ./syncthing.nix
+    ./zfs.nix
+  ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
