@@ -21,6 +21,12 @@
       fsType = "zfs";
     };
 
+  fileSystems."/data" =
+    {
+      device = "rpool/data";
+      fsType = "zfs";
+    };
+
   fileSystems."/boot" =
     {
       device = "/dev/disk/by-uuid/9090-2210";

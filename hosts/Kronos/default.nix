@@ -1,7 +1,6 @@
 { config, ... }:
 {
   imports = [
-    ./syncthing.nix
     ./zfs.nix
   ];
 
@@ -113,7 +112,18 @@
         enableNvidia = true;
       };
     };
-    network.enable = true;
+    network = {
+      enable = true;
+      syncthing = {
+        enable = true;
+        additionalConfig = {
+          user = "marvin";
+          dataDir = "/home/marvin";
+          configDir = "/home/marvin/.config/syncthing";
+        };
+      };
+      tailscale.enable = true;
+    };
     shell.enable = true;
     theme.enable = true;
     work = {

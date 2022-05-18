@@ -53,14 +53,10 @@ with lib;
   users.users.marvin = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-    openssh.authorizedKeys.keys = [
-      (builtins.readFile ../../secrets/keys/Kronos.pub)
-    ];
+    openssh.authorizedKeys.keys = config.secrets.userKeys;
   };
 
-  users.users.root.openssh.authorizedKeys.keys = [
-    (builtins.readFile ../../secrets/keys/Kronos.pub)
-  ];
+  users.users.root.openssh.authorizedKeys.keys = config.secrets.userKeys;
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
@@ -72,7 +68,20 @@ with lib;
     shell.enable = true;
     server = {
       enable = true;
-      ankisyncd.enable = true;
+      ankisyncd.enable = false;
+      nextcloud.enable = true;
     };
+    network.syncthing = {
+      enable = true;
+      additionalConfig = {
+        guiAddress = "100.114.143.32:8384"; # Tailscale network
+        overrideFolders = false;
+      };
+    };
+    network.tailscale.enable = true;
+  };
+
+  networking.firewall.interfaces."tailscale0" = {
+    allowedTCPPorts = [ 8384 ];
   };
 }

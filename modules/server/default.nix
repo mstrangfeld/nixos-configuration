@@ -5,7 +5,7 @@ let cfg = config.modules.server;
 in {
   imports = [
     ./ankisyncd
-    ./syncthing
+    ./nextcloud
   ];
 
   options.modules.server.enable = mkEnableOption "Server";
@@ -19,11 +19,17 @@ in {
 
     security.acme = {
       acceptTerms = true;
-      email = "marvin@strangfeld.io";
+      defaults.email = "marvin@strangfeld.io";
     };
 
     services.nginx = {
       enable = true;
+
+      virtualHosts."cloud.strangfeld.io" = {
+        forceSSL = true;
+        enableACME = true;
+        root = "/var/www/example";
+      };
 
       # Use recommended settings
       recommendedGzipSettings = true;

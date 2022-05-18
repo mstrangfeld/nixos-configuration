@@ -3,6 +3,12 @@
 with lib;
 let cfg = config.modules.network;
 in {
+
+  imports = [
+    ./syncthing.nix
+    ./tailscale.nix
+  ];
+
   options.modules.network.enable = mkEnableOption "Network";
 
   config = mkIf cfg.enable {

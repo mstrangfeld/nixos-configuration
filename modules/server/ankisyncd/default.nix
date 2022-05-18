@@ -8,17 +8,14 @@ in {
   config = mkIf cfg.enable {
     services.ankisyncd = {
       enable = true;
+      port = 27702;
     };
 
-    services.nginx.virtualHosts =
-      let
-        ankiSyncPort = config.services.ankisyncd.port;
-      in {
-      "anki.cloud.strangfeld.io" = {
-        forceSSL = true;
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:${toString ankiSyncPort}/";
-        };
+    services.nginx.virtualHosts."anki.cloud.strangfeld.io" = {
+      forceSSL = true;
+      enableACME = true;
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:27702/";
       };
     };
   };

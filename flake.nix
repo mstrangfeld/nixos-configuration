@@ -86,6 +86,7 @@
           modules = [
             ./hosts/Eos
             ./modules
+            ./secrets/keys
           ];
         };
       };
