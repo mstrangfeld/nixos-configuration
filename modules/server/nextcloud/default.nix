@@ -121,11 +121,15 @@ in {
       file = ../../../secrets/passwords/nextcloud-db-pass.age;
       owner = "nextcloud";
       group = "nextcloud";
+      path = "/var/lib/nextcloud/nextcloud-db-pass";
+      symlink = false;
     };
     age.secrets.adminPass = {
       file = ../../../secrets/passwords/nextcloud-admin-pass.age;
       owner = "nextcloud";
       group = "nextcloud";
+      path = "/var/lib/nextcloud/nextcloud-admin-pass";
+      symlink = false;
     };
 
     services.postgresql = {
