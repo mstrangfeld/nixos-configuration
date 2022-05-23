@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
   imports = [
     ./zfs.nix
@@ -71,7 +71,11 @@
 
   # Can't get Rocket.Chat to work as Nix derivation
   services.flatpak.enable = true;
-  xdg.portal.enable = true;
+  xdg.portal = {
+    enable = true;
+    gtkUsePortal = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
 
   # A toolkit for defining and handling the policy that allows unprivileged processes to speak to privileged processes
   security.polkit.enable = true;

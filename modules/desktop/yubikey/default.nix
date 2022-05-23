@@ -28,5 +28,29 @@ in {
       debug = false;
       cue = true;
     };
+
+    programs.gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+      pinentryFlavor = "gnome3";
+    };
+
+    systemd.user.services.yubikey-touch-detector = {
+      description = "Detects when your YubiKey is waiting for a touch";
+      requires = [ "yubikey-touch-detector.socket" ];
+      path = with pkgs; [ gnupg ];
+      serviceConfig = {
+        ExecStart = "${pkgs.yubikey-touch-detector}/bin/yubikey-touch-detector -v --libnotify";
+      };
+    };
+
+    systemd.user.sockets.yubikey-touch-detector = {
+      description = "Unix socket activation for YubiKey touch detector service";
+      socketConfig = {
+        ListenStream = "%t/yubikey-touch-detector.socket";
+        RemoveOnStop = "yes";
+      };
+      wantedBy = [ "sockets.target" ];
+    };
   };
 }
