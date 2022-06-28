@@ -4,8 +4,8 @@ with lib;
 let cfg = config.modules.server;
 in {
   imports = [
-    ./ankisyncd
     ./nextcloud
+    ./pdns
   ];
 
   options.modules.server.enable = mkEnableOption "Server";

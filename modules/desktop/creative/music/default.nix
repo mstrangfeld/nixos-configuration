@@ -12,6 +12,7 @@ in {
       calf # A set of high quality open source audio plugins for musicians
       caps # A selection of LADSPA plugins implementing classic effects
       carla # An audio plugin host
+      distrho # Linux audio plugins and LV2 ports
       dragonfly-reverb # A hall-style reverb based on freeverb3 algorithms
       drumgizmo # An LV2 sample based drum plugin
       ebumeter # Level metering according to the EBU R-128 recommendation
@@ -41,7 +42,7 @@ in {
       # surge # LV2 & VST3 synthesizer plug-in (previously released as Vember Audio Surge)
       swh_lv2 # LV2 version of Steve Harris' SWH plugins
       tap-plugins # Tom's Audio Processing plugins
-      vcv-rack # Open-source virtual modular synthesizer
+      # vcv-rack # Open-source virtual modular synthesizer
       wolf-shaper # Waveshaper plugin with spline-based graph editor
       x42-plugins # Collection of LV2 plugins by Robin Gareus
       zam-plugins # A collection of LV2/LADSPA/VST/JACK audio plugins by ZamAudio

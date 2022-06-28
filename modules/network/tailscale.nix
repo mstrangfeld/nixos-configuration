@@ -8,6 +8,7 @@ in {
   };
 
   config = mkIf cfg.enable {
+    networking.firewall.checkReversePath = "loose";
     services.tailscale = {
       enable = true;
     };

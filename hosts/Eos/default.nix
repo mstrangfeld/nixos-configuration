@@ -68,8 +68,8 @@ with lib;
     shell.enable = true;
     server = {
       enable = true;
-      ankisyncd.enable = false;
       nextcloud.enable = true;
+      pdns.enable = true;
     };
     network.syncthing = {
       enable = true;

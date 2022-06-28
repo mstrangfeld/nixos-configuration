@@ -11,6 +11,7 @@ in {
     ./browser
     ./creative
     ./games
+    ./gnome
     ./v4l2loopback
     ./wm
     ./yubikey
@@ -51,17 +52,6 @@ in {
     programs.adb.enable = true;
 
     home-manager.users.marvin = { pkgs, ... }: {
-
-      imports = [
-        ./services/autorandr.nix
-        ./services/dunst.nix
-        ./services/networkmanager.nix
-        ./services/picom.nix
-        ./services/polybar
-        ./services/rofi
-        ./services/screenlocker.nix
-        ./services/udiskie.nix
-      ];
 
       home.file.".aspell.conf".text = "data-dir ${myAspell}/lib/aspell";
 

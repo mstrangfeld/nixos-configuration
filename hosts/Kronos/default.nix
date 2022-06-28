@@ -1,5 +1,8 @@
 { config, pkgs, ... }:
 {
+  system.stateVersion = "21.05";
+  home-manager.users.marvin.home.stateVersion = "21.05";
+
   imports = [
     ./zfs.nix
   ];
@@ -94,6 +97,7 @@
         music.enable = true;
       };
       games.enable = true;
+      gnome.enable = false;
       wm.xmonad.enable = true;
       v4l2loopback.enable = true;
       yubikey.enable = true;

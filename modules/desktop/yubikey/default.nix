@@ -45,7 +45,7 @@ in {
         ListenStream = "%t/yubikey-touch-detector.socket";
         RemoveOnStop = "yes";
       };
-      wantedBy = [ "sockets.target" ];
+      wantedBy = [ "multi-user.target" ];
     };
   };
 }
