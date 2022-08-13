@@ -14,8 +14,14 @@ in {
         buildah # A tool which facilitates building OCI images
         dive # A tool for exploring each layer in a docker image
         lazydocker # A simple terminal UI for both docker and docker-compose
+        virt-manager # Desktop user interface for managing virtual machines
+        qemu
+        qemu-utils
+        win-qemu
       ];
     };
+
+    programs.dconf.enable = true;
 
     virtualisation = {
       containers = {
@@ -34,6 +40,17 @@ in {
       docker = {
         enable = true;
         enableNvidia = cfg.enableNvidia;
+      };
+
+      libvirtd = {
+        enable = true;
+        qemu = {
+          swtpm.enable = true;
+          ovmf = {
+            enable = true;
+            packages = [ pkgs.OVMFFull.fd pkgs.pkgsCross.aarch64-multiplatform.OVMF.fd ];
+          };
+        };
       };
     };
   };

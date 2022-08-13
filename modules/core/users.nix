@@ -10,7 +10,7 @@
     description = "Marvin Strangfeld";
     isNormalUser = true;
     initialPassword = "nivram";
-    extraGroups = [ "wheel" "networkmanager" "audio" "rtkit" "video" "power" "docker" "dialout" "adbusers" ];
+    extraGroups = [ "wheel" "networkmanager" "audio" "rtkit" "video" "power" "docker" "dialout" "adbusers" "libvirtd" ];
     shell = pkgs.zsh;
   };
 

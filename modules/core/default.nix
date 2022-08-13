@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 {
   imports = [
     ./cache.nix
@@ -41,12 +41,15 @@
       vim # The most popular clone of the VI editor
       wget # Tool for retrieving files using HTTP, HTTPS, and FTP
       whois # Intelligent WHOIS client from Debian
+      wormhole-william # End-to-end encrypted file transfers
     ];
   };
 
 
   nix = {
     package = pkgs.nixUnstable;
+    registry.nixpkgs.flake = inputs.nixpkgs;
+
     gc.automatic = true;
     optimise.automatic = true;
     extraOptions = ''
@@ -61,6 +64,7 @@
       system-features = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
       sandbox = true;
       auto-optimise-store = true;
+      trusted-users = [ "@wheel" ];
     };
   };
 
