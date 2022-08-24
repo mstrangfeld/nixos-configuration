@@ -24,6 +24,8 @@ in {
   config = mkIf cfg.enable {
     environment = {
       systemPackages = with pkgs; [
+        bitwarden # A secure and free password manager for all of your devices
+
         # Communication
         discord # All-in-one cross-platform voice and text chat for gamers
         gopro-webcam

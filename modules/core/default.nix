@@ -18,6 +18,7 @@
     # Bare minimum of tools that should be available on every host
     systemPackages = with pkgs; [
       binutils # Tools for manipulating binaries (linker, assembler, etc.)
+      bitwarden-cli # A secure and free password manager for all of your devices.
       coreutils # The basic file, shell and text manipulation utilities of the GNU operating system
       curl # A command line tool for transferring files with URL syntax
       direnv # A shell extension that manages your environment
