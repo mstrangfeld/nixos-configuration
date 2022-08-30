@@ -12,6 +12,10 @@
 
 (setq ispell-dictionary "en")
 
+(use-package! forge
+  :config
+  (add-to-list 'forge-alist '("gitlab.open-xchange.com" "gitlab.open-xchange.com/api/v4" "gitlab.open-xchange.com" forge-gitlab-repository)))
+
 (use-package! go-translate
   :config
   (setq gts-translate-list '(("de" "en")))
@@ -51,15 +55,6 @@
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                  ("\\paragraph{%s}" . "\\paragraph*{%s}")
                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-  (add-to-list 'org-latex-classes
-               '("swcthesis"
-                 "\\documentclass{swcthesis}"
-                 ("\\chapter{%s}" . "\\chapter*{%s}")
-                 ("\\section{%s}" . "\\section*{%s}")
-                 ("\\subsection{%s}" . "\\subsection*{%s}")
-                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
   )
 
 (after! org-ref
@@ -85,17 +80,17 @@
     ":END:\n\n"
     )
    )
-)
+  )
 
 (use-package! org-ref
-    :config
-    (setq
-         org-ref-completion-library 'org-ref-ivy-cite
-         org-ref-get-pdf-filename-function 'org-ref-get-pdf-filename-helm-bibtex
-         bibtex-completion-bibliography (list (concat (getenv "HOME") "/Zotero/bibtex/library.bib"))
-         bibtex-completion-notes-path (concat (getenv "HOME") "/Documents/Notes/bibnotes.org")
-         org-ref-note-title-format "* TODO %y - %t\n :PROPERTIES:\n  :Custom_ID: %k\n  :NOTER_DOCUMENT: %F\n :ROAM_KEY: cite:%k\n  :AUTHOR: %9a\n  :JOURNAL: %j\n  :YEAR: %y\n  :VOLUME: %v\n  :PAGES: %p\n  :DOI: %D\n  :URL: %U\n :END:\n\n"
-         org-ref-notes-directory (concat (getenv "HOME") "/Documents/Notes/")
-         org-ref-notes-function 'orb-edit-notes
-    )
-    (add-hook 'org-export-before-parsing-hook #'org-ref-glossary-before-parsing))
+  :config
+  (setq
+   org-ref-completion-library 'org-ref-ivy-cite
+   org-ref-get-pdf-filename-function 'org-ref-get-pdf-filename-helm-bibtex
+   bibtex-completion-bibliography (list (concat (getenv "HOME") "/Zotero/bibtex/library.bib"))
+   bibtex-completion-notes-path (concat (getenv "HOME") "/Documents/Notes/bibnotes.org")
+   org-ref-note-title-format "* TODO %y - %t\n :PROPERTIES:\n  :Custom_ID: %k\n  :NOTER_DOCUMENT: %F\n :ROAM_KEY: cite:%k\n  :AUTHOR: %9a\n  :JOURNAL: %j\n  :YEAR: %y\n  :VOLUME: %v\n  :PAGES: %p\n  :DOI: %D\n  :URL: %U\n :END:\n\n"
+   org-ref-notes-directory (concat (getenv "HOME") "/Documents/Notes/")
+   org-ref-notes-function 'orb-edit-notes
+   )
+  (add-hook 'org-export-before-parsing-hook #'org-ref-glossary-before-parsing))

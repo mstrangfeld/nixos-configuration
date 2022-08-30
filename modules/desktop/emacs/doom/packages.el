@@ -52,5 +52,6 @@
 (package! org-fancy-priorities)
 (package! org-chef)
 (package! org-ref)
+(package! ox-jira)
 (package! go-translate)
 (package! powerthesaurus)
