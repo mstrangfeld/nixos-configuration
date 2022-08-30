@@ -89,6 +89,12 @@
             ./secrets/keys
           ];
         };
+        Nyx = {
+          modules = [
+            ./hosts/Nyx
+            ./modules
+          ];
+        };
       };
 
       deploy.nodes = {
