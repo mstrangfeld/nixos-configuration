@@ -123,3 +123,17 @@ poweroff
 ssh-keygen -t rsa -N "" -f /etc/secrets/initrd/ssh_host_rsa_key
 ssh-keygen -t ed25519 -N "" -f /etc/secrets/initrd/ssh_host_ed25519_key
 #+end_src
+
+* Further Config
+** Create data set
+#+begin_src shell
+zfs create -o mountpoint=legacy -o com.sun:auto-snapshot=true rpool/data
+zfs set compression=lz4 rpool/home
+#+end_src
+** Access right for data
+#+begin_src
+mkdir /data/postgres
+mkdir /data/nextcloud
+chmod postgres /data/postgres
+chmod nextcloud:nextcloud /data/nextcloud
+#+end_src

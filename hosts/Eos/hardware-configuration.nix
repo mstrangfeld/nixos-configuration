@@ -29,12 +29,12 @@
 
   fileSystems."/boot" =
     {
-      device = "/dev/disk/by-uuid/9090-2210";
+      device = "/dev/disk/by-uuid/4684-84D8";
       fsType = "vfat";
     };
 
   swapDevices =
-    [{ device = "/dev/disk/by-uuid/e34f7bf4-b88f-462f-8cb2-e010a9d1d43f"; }];
+    [{ device = "/dev/disk/by-uuid/2ffae6a5-dd5e-46a6-b2cd-057c33b0d3d5"; }];
 
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

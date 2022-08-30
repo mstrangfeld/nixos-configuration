@@ -17,7 +17,7 @@ in {
 
     services.nextcloud = {
       enable = true;
-      package = pkgs.nextcloud23;
+      package = pkgs.nextcloud24;
       hostName = "next.cloud.strangfeld.io";
 
       datadir = "/data/nextcloud";
@@ -48,65 +48,23 @@ in {
       phpOptions = {};
 
       extraApps = {
-        calendar = pkgs.fetchNextcloudApp {
+        calendar = pkgs.fetchNextcloudApp rec {
           name = "Calendar";
-          url = "https://github.com/nextcloud-releases/calendar/releases/download/v3.3.0/calendar-v3.3.0.tar.gz";
-          version = "3.3.0";
-          sha256 = "sha256-nyJ8VUvftzHbSGpR12P3tl3QRR3FioiEYMlJ7DZxPJg=";
+          url = "https://github.com/nextcloud-releases/calendar/releases/download/v${version}/calendar-v${version}.tar.gz";
+          version = "3.4.3";
+          sha256 = "sha256-UN4ultm0tgpt4uG8DaD5tLXDIfSAR2Ye6EHFp0+m6zs=";
         };
-        contacts = pkgs.fetchNextcloudApp {
+        contacts = pkgs.fetchNextcloudApp rec {
           name = "Contacts";
-          url = "https://github.com/nextcloud-releases/contacts/releases/download/v4.1.0/contacts-v4.1.0.tar.gz";
-          version = "4.1.0";
-          sha256 = "sha256-jGmmDpt7joyBpL4G0eL5UYDnVW6QdLet0H7khhjqbSA=";
+          url = "https://github.com/nextcloud-releases/contacts/releases/download/v${version}/contacts-v${version}.tar.gz";
+          version = "4.2.0";
+          sha256 = "sha256-Oo7EFKlXxAAFFPQZzrpOx+6dpBb78r/yPxpDs6Cgw04=";
         };
-        cookbook = pkgs.fetchNextcloudApp {
-          name = "Cookbook";
-          url = "https://github.com/nextcloud/cookbook/releases/download/v0.9.12/Cookbook-0.9.12.tar.gz";
-          version = "0.9.12";
-          sha256 = "sha256-3+BqcXnY9tdz9sQ0GsRQQr8skBLV35L8drc/l1bxK60=";
-        };
-        cospend = pkgs.fetchNextcloudApp {
-          name = "Cospend";
-          url = "https://github.com/eneiluj/cospend-nc/releases/download/v1.4.6/cospend-1.4.6.tar.gz";
-          version = "1.4.6";
-          sha256 = "sha256-Kjgd5m2fZIExvZ09kq4aVM32CzL6U2PM/wvB6+Dn/e8=";
-        };
-        deck = pkgs.fetchNextcloudApp {
-          name = "Deck";
-          url = "https://github.com/nextcloud-releases/deck/releases/download/v1.6.1/deck-v1.6.1.tar.gz";
-          version = "1.6.1";
-          sha256 = "sha256-Ze20arex7AZhHnSWIPN8DlAtalp+/Rl7qwTA+IBv3vo=";
-        };
-        forms = pkgs.fetchNextcloudApp {
-          name = "Forms";
-          url = "https://github.com/nextcloud-releases/forms/releases/download/v2.5.0/forms-v2.5.0.tar.gz";
-          version = "2.5.0";
-          sha256 = "sha256-qhffuIrL5GYNal5FRbvNplchoc1HRcLjRZUbirppc+w=";
-        };
-        gpoddersync = pkgs.fetchNextcloudApp {
+        gpoddersync = pkgs.fetchNextcloudApp rec {
           name = "GPodder Sync";
-          url = "https://github.com/thrillfall/nextcloud-gpodder/releases/download/3.3.0/gpoddersync.tar.gz";
-          version = "3.3.0";
-          sha256 = "sha256-UhQ1ByyWsy4xdynLOmFQyN4CyEiKh6I2HAP+1Cr1XxY=";
-        };
-        groupfolders = pkgs.fetchNextcloudApp {
-          name = "Group folders";
-          url = "https://github.com/nextcloud-releases/groupfolders/releases/download/v11.1.4/groupfolders-v11.1.4.tar.gz";
-          version = "11.1.4";
-          sha256 = "sha256-OWgVhPEPc/m7N2cUAfJKGMKYYk8yDTdAvCfvO9XjtxA=";
-        };
-        polls = pkgs.fetchNextcloudApp {
-          name = "Polls";
-          url = "https://github.com/nextcloud/polls/releases/download/v3.6.1/polls.tar.gz";
-          version = "3.6.1";
-          sha256 = "sha256-32w8kx2eS+TpsH4kjGym5JWDjG2h9kX3kEVpfOfUDjQ=";
-        };
-        spreed = pkgs.fetchNextcloudApp {
-          name = "Talk";
-          url = "https://github.com/nextcloud-releases/spreed/releases/download/v13.0.5/spreed-v13.0.5.tar.gz";
-          version = "13.0.5";
-          sha256 = "sha256-566oKMVRBjaZ69Ntg4zC7rjW01u0GF4RT4vJnzIl2Zk=";
+          url = "https://github.com/thrillfall/nextcloud-gpodder/releases/download/${version}/gpoddersync.tar.gz";
+          version = "3.4.0";
+          sha256 = "sha256-G/9eLZsNpfIs59c/eiDV9/ybkwO11p3jzxWdLd7Q9AE=";
         };
       };
     };

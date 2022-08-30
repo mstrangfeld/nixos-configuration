@@ -63,25 +63,26 @@ with lib;
   services.openssh.permitRootLogin = "yes";
 
   system.stateVersion = "21.11"; # Did you read the comment?
+  home-manager.users.marvin.home.stateVersion = "21.11";
 
   modules = {
     shell.enable = true;
     server = {
       enable = true;
       nextcloud.enable = true;
-      pdns.enable = true;
+      pdns.enable = false;
     };
     network.syncthing = {
-      enable = true;
+      enable = false;
       additionalConfig = {
         guiAddress = "100.114.143.32:8384"; # Tailscale network
         overrideFolders = false;
       };
     };
-    network.tailscale.enable = true;
+    network.tailscale.enable = false;
   };
 
-  networking.firewall.interfaces."tailscale0" = {
-    allowedTCPPorts = [ 8384 ];
-  };
+  # networking.firewall.interfaces."tailscale0" = {
+  #   allowedTCPPorts = [ 8384 ];
+  # };
 }
