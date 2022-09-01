@@ -7,7 +7,7 @@ stdenv.mkDerivation {
     owner = "jschmid1";
     repo = "gopro_as_webcam_on_linux";
     rev = "master";
-    sha256 = "sha256-/Z0usE+c9RFa/QjCA9+GE8xsGynKo5d9uaSkClWXHw8=";
+    sha256 = "sha256-n4dlPeGCSDILQKJi8vl+cjzZP3Vk6ylzj7Iam/955D0=";
   };
 
   buildInputs = [ makeWrapper ];

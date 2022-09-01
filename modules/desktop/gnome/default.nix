@@ -37,7 +37,7 @@ in {
       gedit # text editor
       epiphany # web browser
       geary # email reader
-      evince # document viewer
+      # evince # document viewer
       gnome-characters
       totem # video player
       tali # poker game

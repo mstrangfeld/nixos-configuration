@@ -20,6 +20,10 @@
 ### Nyx
     The goddess of night.
 + Lenovo ThinkPad 50
++ Intel i7-6700HQ (8) @ 3.500GHz 
++ Intel HD Graphics 530
++ NVIDIA Quadro M1000M
++ 8GiB DDR4 RAM
 
 ### Apollo
     God of music, arts, knowledge, healing, plague, prophecy, poetry, manly beauty, and archery.
