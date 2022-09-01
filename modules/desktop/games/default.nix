@@ -12,6 +12,7 @@ in {
     environment = {
       systemPackages = with pkgs; [
         minecraft # Official launcher for Minecraft, a sandbox-building game
+        minetest # Infinite-world block sandbox game
         ttyper # Terminal-based typing test
         xboxdrv # Xbox/Xbox360 (and more) gamepad driver for Linux that works in userspace
       ];

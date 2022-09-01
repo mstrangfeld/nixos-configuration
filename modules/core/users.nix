@@ -9,18 +9,11 @@
     uid = 1000;
     description = "Marvin Strangfeld";
     isNormalUser = true;
-    initialPassword = "nivram";
     extraGroups = [ "wheel" "networkmanager" "audio" "rtkit" "video" "power" "docker" "dialout" "adbusers" "libvirtd" ];
     shell = pkgs.zsh;
   };
 
   users.users.root = {
-    initialPassword = "toor";
     shell = pkgs.zsh;
-  };
-
-  nix.settings = {
-    allowed-users = [ "@wheel" ];
-    trusted-users = [ "root" "@wheel" ];
   };
 }

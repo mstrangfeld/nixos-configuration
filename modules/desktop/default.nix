@@ -39,8 +39,8 @@ in {
         spotify-4k # Play music from the Spotify music service
 
         # Files
-        borgbackup # Deduplicating archiver / backup tool
         pcloud # Secure and simple to use cloud storage for your files; pCloud Drive, Electron Edition
+        nextcloud-client # Nextcloud themed desktop client
 
         # Video
         vulkan-tools
@@ -83,26 +83,6 @@ in {
           createDirectories = true;
         };
         mime.enable = true;
-        mimeApps = {
-          enable = true;
-          defaultApplications = {
-            "text/html" = [ "brave-browser.desktop" ];
-            "text/xml" = [ "brave-browser.desktop" ];
-            "application/xhtml_xml" = [ "brave-browser.desktop" ];
-            "image/webp" = [ "brave-browser.desktop" ];
-            "x-scheme-handler/http" = [ "brave-browser.desktop" ];
-            "x-scheme-handler/https" = [ "brave-browser.desktop" ];
-            "x-scheme-handler/ftp" = [ "brave-browser.desktop" ];
-          };
-          associations.added = {
-            "text/html" = [ "brave-browser.desktop" ];
-            "text/xml" = [ "brave-browser.desktop" ];
-            "application/xhtml_xml" = [ "brave-browser.desktop" ];
-            "image/webp" = [ "brave-browser.desktop" ];
-            "x-scheme-handler/https" = [ "brave-browser.desktop" ];
-            "x-scheme-handler/ftp" = [ "brave-browser.desktop" ];
-          };
-        };
       };
 
       programs.gpg = {

@@ -30,6 +30,8 @@ in {
         gdb # The GNU Project debugger
         gnumake # A tool to control the generation of non-source files from sources
         gcc # GNU Compiler Collection, version 10.3.0 (wrapper script)
+        nixfmt # An opinionated formatter for Nix
+        nixpkgs-fmt # Nix code formatter for nixpkgs
         perl # The standard implementation of the Perl 5 programmming language
         rr # Records nondeterministic executions and debugs them deterministically
       ];
