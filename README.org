@@ -1,48 +1,37 @@
-# My NixOS Configuration
-
-## Hosts
-
-### Kronos
-    God of harvests and personification of destructive time. The leader of the Titans.
+* My NixOS Configuration
+** Hosts
+*** Kronos
+~God of harvests and personification of destructive time. The leader of the Titans.~
 + Fujitsu CELSIUS W530
 + Intel Xeon E3-1270 v3 (8) @ 3.900GHz
 + NVIDIA Quadro K2000
 + 16GiB DDR3 RAM
-
-### Hermes
-    God of boundaries, travel, trade, communication, language, writing, cunning and thieves.
+*** Hermes
+~God of boundaries, travel, trade, communication, language, writing, cunning and thieves.~
 + Lenovo ThinkPad T480
 + Intel i7-8550U (8) @ 4.000GHz
 + Intel UHD Graphics 620
 + NVIDIA GeForce MX150
 + 16GiB DDR4 RAM
-
-### Nyx
-    The goddess of night.
-+ Lenovo ThinkPad 50
+*** Nyx
+~The goddess of night.~
++ Lenovo ThinkPad P50
 + Intel i7-6700HQ (8) @ 3.500GHz 
 + Intel HD Graphics 530
 + NVIDIA Quadro M1000M
 + 8GiB DDR4 RAM
-
-### Apollo
-    God of music, arts, knowledge, healing, plague, prophecy, poetry, manly beauty, and archery.
+*** Apollo
+~God of music, arts, knowledge, healing, plague, prophecy, poetry, manly beauty, and archery.~
 + Lenovo ThinkPad T420
 
-### Pontus
-    The god of the sea, father of the fish and other sea creatures.
-+ Raspberry Pi 4 Model B
-+ Broadcom BCM2711, Quad core Cortex-A72 (ARM v8) 64-bit SoC @ 1.5GHz
-+ 8GiB LPDDR4-3200 SDRAM
-
-## Credits
+** Credits
 + https://github.com/nrdxp/devos
 + https://github.com/gytis-ivaskevicius/flake-utils-plus
 + Inspiration:
   + https://github.com/gytis-ivaskevicius/nixfiles
   + https://github.com/fufexan/dotfiles
 
-## License
+** License
 
 The MIT License (MIT)
 

@@ -6,7 +6,7 @@
     backend = "glx";
     # https://github.com/yshui/picom/issues/375#issuecomment-635439374
     experimentalBackends = true;
-    opacityRule = [ "100:name *= 'i3lock'" ];
+    opacityRules = [ "100:name *= 'i3lock'" ];
     # https://wiki.archlinux.org/title/Picom#Flicker
     settings = {
       xrender-sync-fence = true;

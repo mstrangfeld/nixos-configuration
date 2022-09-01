@@ -79,10 +79,11 @@ in {
         };
       };
 
-      xsession.pointerCursor = {
+      home.pointerCursor = {
         package = pkgs.quintom-cursor-theme;
-        defaultCursor = "left_ptr";
         name = "Quintom_Ink";
+        x11.enable = true;
+        x11.defaultCursor = "left_ptr";
       };
 
       xresources.properties = with cfg.colors; {
