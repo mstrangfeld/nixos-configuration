@@ -12,7 +12,7 @@ in {
       home-manager.users.marvin = { pkgs, ... }: {
         programs.git.includes = [
           {
-            condition = "gitdir:~/ox/";
+            condition = "gitdir:~/work/ox/";
             contents = {
               user = {
                 name = "Marvin Strangfeld";
@@ -28,13 +28,6 @@ in {
           enable = true;
           matchBlocks = {
             "*.cloud.oxoe.io" = {
-              checkHostIP = false;
-              extraOptions = {
-                StrictHostKeyChecking = "no";
-              };
-            };
-            "strangfeld.rm.cloud.oxoe.io" = {
-              user = "marvin";
               checkHostIP = false;
               extraOptions = {
                 StrictHostKeyChecking = "no";
