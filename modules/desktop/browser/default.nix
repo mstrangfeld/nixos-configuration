@@ -3,12 +3,12 @@
 with lib;
 let
   cfg = config.modules.desktop.browser;
-  desktop-entries = { "brave" = "brave-browser.desktop"; "firefox" = "firefox.desktop"; };
+  desktop-entries = {
+    "brave" = "brave-browser.desktop";
+    "firefox" = "firefox.desktop";
+  };
 in {
-  imports = [
-    ./brave.nix
-    ./firefox.nix
-  ];
+  imports = [ ./brave.nix ./firefox.nix ];
 
   options.modules.desktop.browser = {
     default = mkOption {
@@ -21,11 +21,8 @@ in {
     environment.variables.BROWSER = cfg.default;
 
     home-manager.users.marvin = { pkgs, ... }: {
-      xdg.mimeApps =
-        let
-          app = desktop-entries.${cfg.default};
-        in
-        {
+      xdg.mimeApps = let app = desktop-entries.${cfg.default};
+      in {
         enable = true;
         defaultApplications = {
           "text/html" = [ app ];

@@ -12,7 +12,8 @@ in {
     programs.dconf.enable = true;
 
     services = {
-      gnome.gnome-keyring.enable = true; # GNOME Keyring daemon, a service designed to take care of the user's security credentials, such as user names and passwords.
+      gnome.gnome-keyring.enable =
+        true; # GNOME Keyring daemon, a service designed to take care of the user's security credentials, such as user names and passwords.
       upower.enable = true; # A D-Bus service for power management
 
       dbus = {
@@ -25,9 +26,7 @@ in {
 
         layout = "de";
 
-        libinput = {
-          enable = true;
-        };
+        libinput = { enable = true; };
 
         serverLayoutSection = ''
           Option "StandbyTime" "0"
@@ -35,9 +34,7 @@ in {
           Option "OffTime"     "0"
         '';
 
-        displayManager = {
-          defaultSession = "none+xmonad";
-        };
+        displayManager = { defaultSession = "none+xmonad"; };
 
         windowManager.xmonad = {
           enable = true;
@@ -80,11 +77,7 @@ in {
         windowManager.xmonad = {
           enable = true;
           enableContribAndExtras = true;
-          extraPackages = hp: [
-            hp.dbus
-            hp.monad-logger
-            hp.xmonad-contrib
-          ];
+          extraPackages = hp: [ hp.dbus hp.monad-logger hp.xmonad-contrib ];
           config = ./config.hs;
         };
       };

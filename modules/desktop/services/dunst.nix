@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   services.dunst = {
     enable = true;
     settings = {
@@ -8,17 +7,11 @@
         shrink = "yes";
         idle_threshold = 120;
         markup = "full";
-        format = ''<b>%s</b>\n%b'';
+        format = "<b>%s</b>\\n%b";
       };
-      urgency_low = {
-        timeout = 4;
-      };
-      urgency_normal = {
-        timeout = 4;
-      };
-      urgency_critical = {
-        timeout = 10;
-      };
+      urgency_low = { timeout = 4; };
+      urgency_normal = { timeout = 4; };
+      urgency_critical = { timeout = 10; };
     };
   };
 }

@@ -1,11 +1,8 @@
-{ config, pkgs, ... }:
-{
+{ config, pkgs, ... }: {
   system.stateVersion = "21.05";
   home-manager.users.marvin.home.stateVersion = "21.05";
 
-  imports = [
-    ./zfs.nix
-  ];
+  imports = [ ./zfs.nix ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 50;
@@ -25,18 +22,23 @@
     trustedInterfaces = [
       "enp0s20u6u3" # GoPro Hero 9 for Wecam mode
     ];
-    allowedUDPPortRanges = [
-      { from = 1714; to = 1764; } # KDEConnect
-    ];
-    allowedTCPPortRanges = [
-      { from = 1714; to = 1764; } # KDEConnect
-    ];
+    allowedUDPPortRanges = [{
+      from = 1714;
+      to = 1764;
+    } # KDEConnect
+      ];
+    allowedTCPPortRanges = [{
+      from = 1714;
+      to = 1764;
+    } # KDEConnect
+      ];
   };
 
   # VIDEO AND X-SERVER
 
   hardware.nvidia.modesetting.enable = true;
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
+  hardware.nvidia.package =
+    config.boot.kernelPackages.nvidiaPackages.legacy_470;
 
   hardware.opengl = {
     enable = true;
@@ -134,8 +136,6 @@
     };
     shell.enable = true;
     theme.enable = true;
-    work = {
-      open-xchange = true;
-    };
+    work = { open-xchange = true; };
   };
 }

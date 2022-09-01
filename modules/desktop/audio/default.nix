@@ -77,7 +77,7 @@ in {
           }
           {
             name = "libpipewire-module-access";
-            args = {};
+            args = { };
           }
           { name = "libpipewire-module-adapter"; }
           { name = "libpipewire-module-link-factory"; }
@@ -93,16 +93,34 @@ in {
       "${pkgs.rtkit}/libexec/rtkit-daemon --our-realtime-priority=90 --max-realtime-priority=89"
     ];
 
-    users.groups = {
-      audio = { };
-    };
+    users.groups = { audio = { }; };
 
     security.pam.loginLimits = [
       # See: https://jackaudio.org/faq/linux_rt_config.html
-      { domain = "@audio"; item = "memlock"; type = "-"; value = "unlimited"; }
-      { domain = "@audio"; item = "rtprio"; type = "-"; value = "99"; }
-      { domain = "@audio"; item = "nofile"; type = "soft"; value = "99999"; }
-      { domain = "@audio"; item = "nofile"; type = "hard"; value = "99999"; }
+      {
+        domain = "@audio";
+        item = "memlock";
+        type = "-";
+        value = "unlimited";
+      }
+      {
+        domain = "@audio";
+        item = "rtprio";
+        type = "-";
+        value = "99";
+      }
+      {
+        domain = "@audio";
+        item = "nofile";
+        type = "soft";
+        value = "99999";
+      }
+      {
+        domain = "@audio";
+        item = "nofile";
+        type = "hard";
+        value = "99999";
+      }
     ];
   };
 }

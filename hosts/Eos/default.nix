@@ -1,11 +1,7 @@
 { config, lib, pkgs, ... }:
 
-with lib;
-{
-  imports =
-    [
-      ./hardware-configuration.nix
-    ];
+with lib; {
+  imports = [ ./hardware-configuration.nix ];
 
   boot = {
     loader.grub = {
@@ -26,7 +22,11 @@ with lib;
           "/etc/secrets/initrd/ssh_host_rsa_key"
           "/etc/secrets/initrd/ssh_host_ed25519_key"
         ];
-        authorizedKeys = concatLists (mapAttrsToList (name: user: if elem "wheel" user.extraGroups then user.openssh.authorizedKeys.keys else [ ]) config.users.users);
+        authorizedKeys = concatLists (mapAttrsToList (name: user:
+          if elem "wheel" user.extraGroups then
+            user.openssh.authorizedKeys.keys
+          else
+            [ ]) config.users.users);
       };
       postCommands = ''
         echo "zfs load-key -a; killall zfs" >> /root/.profile

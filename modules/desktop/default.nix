@@ -4,7 +4,8 @@ with lib;
 let
   cfg = config.modules.desktop;
   spotify-4k = pkgs.spotify.override { deviceScaleFactor = 1.5; };
-  myAspell = (pkgs.aspellWithDicts (ds: with ds; [ de en en-computers en-science ]));
+  myAspell =
+    (pkgs.aspellWithDicts (ds: with ds; [ de en en-computers en-science ]));
 in {
   imports = [
     ./audio
@@ -17,9 +18,7 @@ in {
     ./yubikey
   ];
 
-  options.modules.desktop = {
-    enable = mkEnableOption "Desktop";
-  };
+  options.modules.desktop = { enable = mkEnableOption "Desktop"; };
 
   config = mkIf cfg.enable {
     environment = {
@@ -29,7 +28,8 @@ in {
         # Communication
         discord # All-in-one cross-platform voice and text chat for gamers
         gopro-webcam
-        # TODO: Rocket.Chat
+
+        rocketchat-desktop
         signal-desktop # Private, simple, and secure messenger
         zoom-us # zoom.us video conferencing application
 
@@ -59,16 +59,12 @@ in {
 
       home.keyboard = {
         layout = "de";
-        options = [
-          "eurosign:e"
-        ];
+        options = [ "eurosign:e" ];
       };
 
       programs.alacritty = {
         enable = true;
-        settings = {
-          window.startup_mode = "Maximized";
-        };
+        settings = { window.startup_mode = "Maximized"; };
       };
 
       services.kdeconnect = {
@@ -85,9 +81,7 @@ in {
         mime.enable = true;
       };
 
-      programs.gpg = {
-        enable = true;
-      };
+      programs.gpg = { enable = true; };
 
       services.gpg-agent = {
         enable = true;
@@ -116,10 +110,7 @@ in {
 
       programs.emacs = {
         enable = true;
-        extraPackages = epkgs: with epkgs; [
-          vterm
-          pdf-tools
-        ];
+        extraPackages = epkgs: with epkgs; [ vterm pdf-tools ];
       };
 
       services.emacs = {

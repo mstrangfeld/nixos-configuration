@@ -25,9 +25,10 @@ in {
         jetbrains.idea-community # IDE by Jetbrains
       ];
       home-manager.users.marvin = { pkgs, ... }: {
-        programs.vscode.extensions = with pkgs.vscode-extensions; [
-          # TODO: Add Java extensions
-        ];
+        programs.vscode.extensions = with pkgs.vscode-extensions;
+          [
+            # TODO: Add Java extensions
+          ];
       };
     })
   ]);

@@ -1,7 +1,1 @@
-{ ... }:
-{
-  imports = [
-    ./graphics
-    ./music
-  ];
-}
+{ ... }: { imports = [ ./graphics ./music ]; }

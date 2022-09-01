@@ -34,9 +34,7 @@ in {
           };
         };
       };
-      podman = {
-        enable = true;
-      };
+      podman = { enable = true; };
       docker = {
         enable = true;
         enableNvidia = cfg.enableNvidia;
@@ -48,7 +46,8 @@ in {
           swtpm.enable = true;
           ovmf = {
             enable = true;
-            packages = [ pkgs.OVMFFull.fd pkgs.pkgsCross.aarch64-multiplatform.OVMF.fd ];
+            packages =
+              [ pkgs.OVMFFull.fd pkgs.pkgsCross.aarch64-multiplatform.OVMF.fd ];
           };
         };
       };

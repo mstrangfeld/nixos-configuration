@@ -1,5 +1,4 @@
-final: prev:
-{
+final: prev: {
   mixxx-udev = prev.mixxx.overrideAttrs (old: {
     dontBuild = true;
     dontConfigure = true;

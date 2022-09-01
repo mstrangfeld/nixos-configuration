@@ -3,19 +3,14 @@
 with lib;
 let cfg = config.modules.server;
 in {
-  imports = [
-    ./nextcloud
-    ./pdns
-  ];
+  imports = [ ./nextcloud ./pdns ];
 
   options.modules.server.enable = mkEnableOption "Server";
 
   config = mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = [ 80 443 ];
 
-    services.fail2ban = {
-      enable = true;
-    };
+    services.fail2ban = { enable = true; };
 
     security.acme = {
       acceptTerms = true;

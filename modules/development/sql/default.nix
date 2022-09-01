@@ -7,9 +7,10 @@ in {
 
   config = mkIf cfg.enable {
     environment = {
-      systemPackages = with pkgs; [
-        pgcli # Command-line interface for PostgreSQL
-      ];
+      systemPackages = with pkgs;
+        [
+          pgcli # Command-line interface for PostgreSQL
+        ];
     };
   };
 }

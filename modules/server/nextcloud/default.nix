@@ -3,9 +3,7 @@
 with lib;
 let cfg = config.modules.server.nextcloud;
 in {
-  options.modules.server.nextcloud = {
-    enable = mkEnableOption "NextCloud";
-  };
+  options.modules.server.nextcloud = { enable = mkEnableOption "NextCloud"; };
 
   config = mkIf cfg.enable {
     services.nginx.virtualHosts = {
@@ -37,7 +35,8 @@ in {
         # Nextcloud PostegreSQL database configuration, recommended over using SQLite
         dbtype = "pgsql";
         dbuser = "nextcloud";
-        dbhost = "/run/postgresql"; # nextcloud will add /.s.PGSQL.5432 by itself
+        dbhost =
+          "/run/postgresql"; # nextcloud will add /.s.PGSQL.5432 by itself
         dbname = "nextcloud";
         dbpassFile = config.age.secrets.dbPass.path;
 
@@ -45,31 +44,34 @@ in {
         adminuser = "admin";
       };
 
-      phpOptions = {};
+      phpOptions = { };
 
       extraApps = {
         calendar = pkgs.fetchNextcloudApp rec {
           name = "Calendar";
-          url = "https://github.com/nextcloud-releases/calendar/releases/download/v${version}/calendar-v${version}.tar.gz";
+          url =
+            "https://github.com/nextcloud-releases/calendar/releases/download/v${version}/calendar-v${version}.tar.gz";
           version = "3.4.3";
           sha256 = "sha256-UN4ultm0tgpt4uG8DaD5tLXDIfSAR2Ye6EHFp0+m6zs=";
         };
         contacts = pkgs.fetchNextcloudApp rec {
           name = "Contacts";
-          url = "https://github.com/nextcloud-releases/contacts/releases/download/v${version}/contacts-v${version}.tar.gz";
+          url =
+            "https://github.com/nextcloud-releases/contacts/releases/download/v${version}/contacts-v${version}.tar.gz";
           version = "4.2.0";
           sha256 = "sha256-Oo7EFKlXxAAFFPQZzrpOx+6dpBb78r/yPxpDs6Cgw04=";
         };
         gpoddersync = pkgs.fetchNextcloudApp rec {
           name = "GPodder Sync";
-          url = "https://github.com/thrillfall/nextcloud-gpodder/releases/download/${version}/gpoddersync.tar.gz";
+          url =
+            "https://github.com/thrillfall/nextcloud-gpodder/releases/download/${version}/gpoddersync.tar.gz";
           version = "3.4.0";
           sha256 = "sha256-G/9eLZsNpfIs59c/eiDV9/ybkwO11p3jzxWdLd7Q9AE=";
         };
       };
     };
 
-    environment.systemPackages = with pkgs;[
+    environment.systemPackages = with pkgs; [
       graphicsmagick
       ffmpeg
       ghostscript
@@ -96,17 +98,15 @@ in {
 
       # Ensure the database, user, and permissions always exist
       ensureDatabases = [ "nextcloud" ];
-      ensureUsers = [
-        {
-          name = "nextcloud";
-          ensurePermissions."DATABASE nextcloud" = "ALL PRIVILEGES";
-        }
-      ];
+      ensureUsers = [{
+        name = "nextcloud";
+        ensurePermissions."DATABASE nextcloud" = "ALL PRIVILEGES";
+      }];
     };
 
     systemd.services."nextcloud-setup" = {
-      requires = ["postgresql.service"];
-      after = ["postgresql.service"];
+      requires = [ "postgresql.service" ];
+      after = [ "postgresql.service" ];
     };
   };
 }

@@ -1,4 +1,1 @@
-{ pkgs, ... }:
-{
-  xdg.configFile."ranger/rc.conf".source = ./ranger.conf;
-}
+{ pkgs, ... }: { xdg.configFile."ranger/rc.conf".source = ./ranger.conf; }

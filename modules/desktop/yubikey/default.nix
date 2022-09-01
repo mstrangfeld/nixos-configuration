@@ -17,9 +17,7 @@ in {
       ];
     };
 
-    services.udev.packages = with pkgs; [
-      yubikey-personalization
-    ];
+    services.udev.packages = with pkgs; [ yubikey-personalization ];
 
     services.pcscd.enable = true; # Whether to enable PCSC-Lite daemon
 
@@ -34,7 +32,8 @@ in {
       requires = [ "yubikey-touch-detector.socket" ];
       path = with pkgs; [ gnupg ];
       serviceConfig = {
-        ExecStart = "${pkgs.yubikey-touch-detector}/bin/yubikey-touch-detector -v --libnotify";
+        ExecStart =
+          "${pkgs.yubikey-touch-detector}/bin/yubikey-touch-detector -v --libnotify";
       };
       wantedBy = [ "multi-user.target" ];
     };

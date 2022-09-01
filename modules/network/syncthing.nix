@@ -17,8 +17,12 @@ let
         "documents" = { path = "/home/marvin/documents"; };
       };
     };
-    "OnePlusA5020" = { id = "MJX5Z2N-BLIQPSY-ZEL6MYN-DGLFYSD-TT6WV54-PO77GLO-HHCCXAV-35AVVQV"; };
-    "OX-MacBookAir" = { id = "CEK3QHR-LPJ5VRW-YF67OXN-5R5GIBZ-KJDHVJV-M6L5HSO-EPYBZFK-5VNT4QR"; };
+    "OnePlusA5020" = {
+      id = "MJX5Z2N-BLIQPSY-ZEL6MYN-DGLFYSD-TT6WV54-PO77GLO-HHCCXAV-35AVVQV";
+    };
+    "OX-MacBookAir" = {
+      id = "CEK3QHR-LPJ5VRW-YF67OXN-5R5GIBZ-KJDHVJV-M6L5HSO-EPYBZFK-5VNT4QR";
+    };
   };
 
   folders = {
@@ -35,19 +39,22 @@ let
 in {
   options.modules.network.syncthing = {
     enable = mkEnableOption "Syncthing";
-    additionalConfig = mkOption { default = {}; };
+    additionalConfig = mkOption { default = { }; };
   };
 
   config = mkIf cfg.enable {
-    services.syncthing = let
-      hostName = config.networking.hostName;
+    services.syncthing = let hostName = config.networking.hostName;
     in {
       enable = true;
       openDefaultPorts = true;
       overrideDevices = true;
       overrideFolders = true;
-      devices = builtins.mapAttrs (name: value: (attrsets.filterAttrs (n: v: n != "folders") value)) devices;
-      folders = builtins.mapAttrs (name: value: folders.${name} // devices.${hostName}.folders.${name}) devices.${hostName}.folders;
+      devices = builtins.mapAttrs
+        (name: value: (attrsets.filterAttrs (n: v: n != "folders") value))
+        devices;
+      folders = builtins.mapAttrs
+        (name: value: folders.${name} // devices.${hostName}.folders.${name})
+        devices.${hostName}.folders;
     } // cfg.additionalConfig;
   };
 }

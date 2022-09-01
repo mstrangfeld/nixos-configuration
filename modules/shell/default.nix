@@ -48,27 +48,22 @@ in {
 
     home-manager.users.marvin = { pkgs, ... }: {
 
-      imports = [
-        ./dotfiles
-        ./scripts
-      ];
+      imports = [ ./dotfiles ./scripts ];
 
       programs.zsh = {
         enable = true;
         enableCompletion = true;
         # defaultKeymap = "vicmd";
-        plugins = [
-          {
-            name = "zsh-sudo";
-            file = "sudo.plugin.zsh";
-            src = pkgs.fetchFromGitHub {
-              owner = "hcgraf";
-              repo = "zsh-sudo";
-              rev = "d8084def6bb1bde2482e7aa636743f40c69d9b32";
-              sha256 = "sha256-I17u8qmYttsodD58PqtTxtVZauyYcNw1orFLPngo9bY=";
-            };
-          }
-        ];
+        plugins = [{
+          name = "zsh-sudo";
+          file = "sudo.plugin.zsh";
+          src = pkgs.fetchFromGitHub {
+            owner = "hcgraf";
+            repo = "zsh-sudo";
+            rev = "d8084def6bb1bde2482e7aa636743f40c69d9b32";
+            sha256 = "sha256-I17u8qmYttsodD58PqtTxtVZauyYcNw1orFLPngo9bY=";
+          };
+        }];
         autocd = true;
         initExtra = ''
           zstyle ':completion:*' menu select
@@ -99,19 +94,14 @@ in {
             truncation_length = 8;
             truncate_to_repo = false;
           };
-          git_branch = {
-            style = "bold green";
-          };
+          git_branch = { style = "bold green"; };
         };
       };
-
 
       # A shell extension that manages your environment
       programs.direnv = {
         enable = true;
-        nix-direnv = {
-          enable = true;
-        };
+        nix-direnv = { enable = true; };
       };
 
       # Command-line fuzzy finder written in Go
@@ -133,26 +123,27 @@ in {
           tmuxPlugins.fingers # copy pasting in terminal with vimium/vimperator like hints
           (mkIf cfg.tmux.tmux-status {
             plugin = tmux-status;
-            extraConfig = with config.modules.theme.colors; (mkIf config.modules.theme.enable ''
-              set -g @colorscheme_base00 "${hex base00}";
-              set -g @colorscheme_base01 "${hex base01}";
-              set -g @colorscheme_base02 "${hex base02}";
-              set -g @colorscheme_base03 "${hex base03}";
-              set -g @colorscheme_base04 "${hex base04}";
-              set -g @colorscheme_base05 "${hex base05}";
-              set -g @colorscheme_base06 "${hex base06}";
-              set -g @colorscheme_base07 "${hex base07}";
-              set -g @colorscheme_base08 "${hex base08}";
-              set -g @colorscheme_base09 "${hex base09}";
-              set -g @colorscheme_base0A "${hex base0A}";
-              set -g @colorscheme_base0B "${hex base0B}";
-              set -g @colorscheme_base0C "${hex base0C}";
-              set -g @colorscheme_base0D "${hex base0D}";
-              set -g @colorscheme_base0E "${hex base0E}";
-              set -g @colorscheme_base0F "${hex base0F}";
-              set -g @onedark_date_format "%D | CW%V"
-              set -g @onedark_widgets '#(fancywatsonstatus)'
-            '' );
+            extraConfig = with config.modules.theme.colors;
+              (mkIf config.modules.theme.enable ''
+                set -g @colorscheme_base00 "${hex base00}";
+                set -g @colorscheme_base01 "${hex base01}";
+                set -g @colorscheme_base02 "${hex base02}";
+                set -g @colorscheme_base03 "${hex base03}";
+                set -g @colorscheme_base04 "${hex base04}";
+                set -g @colorscheme_base05 "${hex base05}";
+                set -g @colorscheme_base06 "${hex base06}";
+                set -g @colorscheme_base07 "${hex base07}";
+                set -g @colorscheme_base08 "${hex base08}";
+                set -g @colorscheme_base09 "${hex base09}";
+                set -g @colorscheme_base0A "${hex base0A}";
+                set -g @colorscheme_base0B "${hex base0B}";
+                set -g @colorscheme_base0C "${hex base0C}";
+                set -g @colorscheme_base0D "${hex base0D}";
+                set -g @colorscheme_base0E "${hex base0E}";
+                set -g @colorscheme_base0F "${hex base0F}";
+                set -g @onedark_date_format "%D | CW%V"
+                set -g @onedark_widgets '#(fancywatsonstatus)'
+              '');
           })
         ];
       };
@@ -169,9 +160,7 @@ in {
         enable = true;
         userName = "Marvin Strangfeld";
         userEmail = "marvin@strangfeld.io";
-        extraConfig = {
-          pull.rebase = false;
-        };
+        extraConfig = { pull.rebase = false; };
       };
     };
   };

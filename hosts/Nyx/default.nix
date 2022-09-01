@@ -7,25 +7,21 @@ let
     export __VK_LAYER_NV_optimus=NVIDIA_only
     exec "$@"
   '';
-in
-{
+in {
   system.stateVersion = "22.05";
   home-manager.users.marvin.home.stateVersion = "22.05";
 
-  imports =
-    [
-      ./hardware-configuration.nix
-    ];
+  imports = [ ./hardware-configuration.nix ];
 
   boot = {
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
     zfs = { enableUnstable = true; };
-    initrd.supportedFilesystems = ["zfs"];
-    supportedFilesystems = ["zfs"];
+    initrd.supportedFilesystems = [ "zfs" ];
+    supportedFilesystems = [ "zfs" ];
     loader.grub.copyKernels = true;
   };
-  
+
   time.timeZone = "Europe/Berlin";
 
   networking.hostId = "bc995e69";
@@ -59,16 +55,12 @@ in
     layout = "de";
     xkbOptions = "eurosign:e";
 
-    libinput = {
-      enable = true;
-    };
+    libinput = { enable = true; };
   };
 
   programs.xwayland.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    nvidia-offload
-  ];
+  environment.systemPackages = with pkgs; [ nvidia-offload ];
 
   services.fprintd = {
     enable = true;
@@ -107,9 +99,7 @@ in
         enableNvidia = true;
       };
     };
-    network = {
-      enable = true;
-    };
+    network = { enable = true; };
     shell.enable = true;
     theme.enable = true;
   };

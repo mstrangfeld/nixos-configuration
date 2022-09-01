@@ -1,4 +1,4 @@
-{ options, config, lib, pkgs, ...}:
+{ options, config, lib, pkgs, ... }:
 
 with lib;
 let cfg = config.modules.development.go;
@@ -18,9 +18,7 @@ in {
 
     (mkIf config.modules.desktop.enable {
       home-manager.users.marvin = { pkgs, ... }: {
-        programs.vscode.extensions = with pkgs.vscode-extensions; [
-          golang.go
-        ];
+        programs.vscode.extensions = with pkgs.vscode-extensions; [ golang.go ];
       };
     })
   ]);

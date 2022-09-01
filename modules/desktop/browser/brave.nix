@@ -13,7 +13,9 @@ in {
       programs.brave = {
         enable = true;
         extensions = [
-          { id = "nngceckbapebfimnlniiiahkandclblb"; } # Bitwarden Password Manager
+          {
+            id = "nngceckbapebfimnlniiiahkandclblb";
+          } # Bitwarden Password Manager
           { id = "occjjkgifpmdgodlplnacmkejpdionan"; } # AutoScroll
         ];
       };

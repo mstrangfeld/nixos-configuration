@@ -17,9 +17,8 @@ in {
 
     (mkIf config.modules.desktop.enable {
       home-manager.users.marvin = { pkgs, ... }: {
-        programs.vscode.extensions = with pkgs.vscode-extensions; [
-          james-yu.latex-workshop
-        ];
+        programs.vscode.extensions = with pkgs.vscode-extensions;
+          [ james-yu.latex-workshop ];
       };
     })
   ]);

@@ -2,8 +2,7 @@
 
 with lib;
 let cfg = config.modules.desktop.v4l2loopback;
-in
-{
+in {
   options = {
     modules.desktop.v4l2loopback = {
       enable = mkOption {
@@ -17,14 +16,11 @@ in
   };
   config = mkIf cfg.enable {
     # Extra kernel modules
-    boot.extraModulePackages = with unstable; [
-      config.boot.kernelPackages.v4l2loopback
-    ];
+    boot.extraModulePackages = with unstable;
+      [ config.boot.kernelPackages.v4l2loopback ];
 
     # Register a v4l2loopback device at boot
-    boot.kernelModules = [
-      "v4l2loopback"
-    ];
+    boot.kernelModules = [ "v4l2loopback" ];
 
     # Create persitent devices 8 and 9 for WebRTC and adhoc GoPro
     boot.extraModprobeConfig = ''
@@ -34,9 +30,7 @@ in
     '';
 
     # Create the video group
-    users.groups = {
-      video = { };
-    };
+    users.groups = { video = { }; };
 
     services.udev.extraRules = ''
       # make sure that the /dev/v4l2loopback module can be used by the 'video' group

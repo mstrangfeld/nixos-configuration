@@ -1,9 +1,5 @@
-{ config, lib, pkgs, inputs, ... }:
-{
-  imports = [
-    ./cache.nix
-    ./users.nix
-  ];
+{ config, lib, pkgs, inputs, ... }: {
+  imports = [ ./cache.nix ./users.nix ];
 
   nixpkgs.config.allowUnfree = true;
 
@@ -46,7 +42,6 @@
       wormhole-william # End-to-end encrypted file transfers
     ];
   };
-
 
   nix = {
     package = pkgs.nixUnstable;

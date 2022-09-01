@@ -18,7 +18,9 @@ stdenv.mkDerivation {
   installPhase = ''
     mkdir -p $out/bin
     install -m755 gopro $out/bin/gopro
-    wrapProgram $out/bin/gopro --prefix PATH : ${lib.makeBinPath [ vlc ffmpeg curl iproute2 ]}
+    wrapProgram $out/bin/gopro --prefix PATH : ${
+      lib.makeBinPath [ vlc ffmpeg curl iproute2 ]
+    }
   '';
 
   meta = {

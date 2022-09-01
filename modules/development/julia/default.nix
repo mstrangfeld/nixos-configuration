@@ -7,16 +7,18 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
-      environment.systemPackages = with pkgs; [
-        julia-stable-bin # High-level performance-oriented dynamical language for technical computing
-      ];
+      environment.systemPackages = with pkgs;
+        [
+          julia-stable-bin # High-level performance-oriented dynamical language for technical computing
+        ];
     }
 
     (mkIf config.modules.desktop.enable {
       home-manager.users.marvin = { pkgs, ... }: {
-        programs.vscode.extensions = with pkgs.vscode-extensions; [
-          # TODO: Julia extensions
-        ];
+        programs.vscode.extensions = with pkgs.vscode-extensions;
+          [
+            # TODO: Julia extensions
+          ];
       };
     })
   ]);

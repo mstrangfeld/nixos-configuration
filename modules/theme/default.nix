@@ -165,12 +165,30 @@ in {
             white = hex base07;
           };
           indexed_colors = [
-            { index = 16; color = hex base09; }
-            { index = 17; color = hex base0F; }
-            { index = 18; color = hex base01; }
-            { index = 19; color = hex base02; }
-            { index = 20; color = hex base04; }
-            { index = 21; color = hex base05; }
+            {
+              index = 16;
+              color = hex base09;
+            }
+            {
+              index = 17;
+              color = hex base0F;
+            }
+            {
+              index = 18;
+              color = hex base01;
+            }
+            {
+              index = 19;
+              color = hex base02;
+            }
+            {
+              index = 20;
+              color = hex base04;
+            }
+            {
+              index = 21;
+              color = hex base05;
+            }
           ];
         };
       };
