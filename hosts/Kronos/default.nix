@@ -98,6 +98,7 @@
         graphics.enable = true;
         music.enable = true;
       };
+      email.enable = true;
       games.enable = true;
       gnome.enable = false;
       wm.xmonad.enable = true;

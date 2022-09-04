@@ -11,6 +11,7 @@ in {
     ./audio
     ./browser
     ./creative
+    ./email
     ./games
     ./gnome
     ./v4l2loopback
@@ -110,7 +111,7 @@ in {
 
       programs.emacs = {
         enable = true;
-        extraPackages = epkgs: with epkgs; [ vterm pdf-tools ];
+        extraPackages = epkgs: with epkgs; [ vterm pdf-tools pkgs.mu ];
       };
 
       services.emacs = {

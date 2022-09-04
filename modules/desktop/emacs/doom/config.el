@@ -94,3 +94,38 @@
    org-ref-notes-function 'orb-edit-notes
    )
   (add-hook 'org-export-before-parsing-hook #'org-ref-glossary-before-parsing))
+
+;; E-Mail settings
+
+(use-package! mu4e
+  :config
+  ;; Avoid deleting the message and move to the trash folder instead
+  (setf (plist-get (alist-get 'trash mu4e-marks) :action)
+        (lambda (docid msg target)
+          (mu4e--server-move docid (mu4e--mark-check-target target) "+S-u-N"))) ; Instead of "+T-N"
+  )
+
+(set-email-account! "strangfeld-io"
+                    '( (mu4e-sent-folder       . "/strangfeld-io/Sent")
+                       (mu4e-drafts-folder     . "/strangfeld-io/Drafts")
+                       (mu4e-trash-folder      . "/strangfeld-io/Trash")
+                       ;; Dynamic archiving under the year of the message (What Open-Xchange does)
+                       (mu4e-refile-folder     . (lambda (msg)
+                                                   (let* ((time (mu4e-message-field-raw msg :date)))
+                                                     (format-time-string "/strangfeld-io/Archive/%Y" time))
+                                                   ))
+                       (smtpmail-smtp-user     . "marvin@strangfeld.io")
+                       (mu4e-maildir-shortcuts
+                        ("/strangfeld-io/Inbox" . ?i)
+                        ("/strangfeld-io/Drafts" . ?d)
+                        ("/strangfeld-io/Sent" . ?s)
+                        ("/strangfeld-io/Trash" . ?t)
+                        )
+                       )
+                    t)
+
+(setq sendmail-program "/etc/profiles/per-user/marvin/bin/msmtp"
+      send-mail-function #'smtpmail-send-it
+      message-sendmail-f-is-evil t
+      message-sendmail-extra-arguments '("--read-envelope-from")
+      message-send-mail-function #'message-send-mail-with-sendmail)
