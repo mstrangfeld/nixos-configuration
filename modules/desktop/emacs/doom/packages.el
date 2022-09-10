@@ -55,3 +55,4 @@
 (package! ox-jira)
 (package! go-translate)
 (package! powerthesaurus)
+(package! org-caldav)

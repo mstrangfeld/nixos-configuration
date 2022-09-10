@@ -33,13 +33,40 @@ in {
           msmtp.enable = true;
           mbsync = {
             enable = true;
+            patterns =
+              [ "INBOX" "Sent" "Trash" "Drafts" "Junk" "Archive" "Archive/*" ];
+            create = "both";
+            expunge = "both";
+            extraConfig.channel = { CopyArrivalDate = "yes"; };
+          };
+          mu.enable = true;
+        };
+        rwth = {
+          address = "marvin.strangfeld@rwth-aachen.de";
+          primary = false;
+          realName = name;
+          userName = "io782677@rwth-aachen.de";
+          passwordCommand = "secret-tool lookup password mail.rwth-aachen.de";
+          imap = {
+            host = "mail.rwth-aachen.de";
+            port = 993;
+            tls.enable = true;
+          };
+          smtp = {
+            host = "mail.rwth-aachen.de";
+            port = 587;
+            tls.enable = true;
+            tls.useStartTls = true;
+          };
+          msmtp.enable = true;
+          mbsync = {
+            enable = true;
             patterns = [
               "INBOX"
-              "INBOX/*"
-              "Sent"
-              "Trash"
+              "Sent Items"
+              "Deleted Items"
               "Drafts"
-              "Junk"
+              "Junk Email"
               "Archive"
               "Archive/*"
             ];

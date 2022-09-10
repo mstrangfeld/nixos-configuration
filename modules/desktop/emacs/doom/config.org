@@ -1,3 +1,7 @@
+#+title: Config
+
+* Basic Doom setup
+#+begin_src emacs-lisp
 (setq user-full-name "Marvin Strangfeld"
       user-mail-address "marvin@strangfeld.io")
 
@@ -9,14 +13,28 @@
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
+#+end_src
 
+* Git
+** Forge
+#+begin_src emacs-lisp
 (use-package! forge
   :config
   (add-to-list 'forge-alist '("gitlab.open-xchange.com" "gitlab.open-xchange.com/api/v4" "gitlab.open-xchange.com" forge-gitlab-repository)))
+#+end_src
 
+* Spell checking
+- Set the default dictionary to english
+- Disable spell check by default (Enable with SPC t s)
+
+#+begin_src emacs-lisp
 (setq ispell-dictionary "en")
 (remove-hook! 'text-mode-hook #'spell-fu-mode)
+#+end_src
 
+* Org
+** Task Management
+#+begin_src emacs-lisp
 (setq org-directory "~/org/")
 (setq org-agenda-files (list "inbox.org" "projects.org" "ping.org"))
 (setq org-capture-templates
@@ -40,7 +58,10 @@
 (setq org-refile-targets '(("projects.org" :maxlevel . 3)
                            ("ping.org" :maxlevel . 2)
                            ("someday.org" :level . 1)))
+#+end_src
 
+** LaTeX Export
+#+begin_src emacs-lisp
 (setq org-latex-pdf-process '("latexmk -shell-escape -pdf -bibtex -f %f"))
 
 (use-package! ox-extra
@@ -59,7 +80,10 @@
                  ("\\paragraph{%s}" . "\\paragraph*{%s}")
                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
   )
+#+end_src
 
+** Org-ref
+#+begin_src emacs-lisp
 (after! org
   (require 'org-ref))
 
@@ -100,7 +124,9 @@
    org-ref-notes-function 'orb-edit-notes
    )
   (add-hook 'org-export-before-parsing-hook #'org-ref-glossary-before-parsing))
-
+#+end_src
+* E-Mail
+#+begin_src emacs-lisp
 (use-package! mu4e
   :config
   ;; Avoid deleting the message and move to the trash folder instead
@@ -147,5 +173,9 @@
         message-sendmail-extra-arguments '("--read-envelope-from")
         message-send-mail-function #'message-send-mail-with-sendmail)
   )
+#+end_src
 
+* RSS
+#+begin_src emacs-lisp
 (add-hook! 'elfeed-search-mode-hook #'elfeed-update)
+#+end_src
