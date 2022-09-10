@@ -41,7 +41,6 @@ in {
 
         # Files
         pcloud # Secure and simple to use cloud storage for your files; pCloud Drive, Electron Edition
-        nextcloud-client # Nextcloud themed desktop client
 
         # Video
         vulkan-tools
@@ -49,6 +48,8 @@ in {
         # Emacs
         sqlite
         myAspell
+
+        rustdesk
       ];
     };
 
@@ -71,6 +72,11 @@ in {
       services.kdeconnect = {
         enable = true;
         indicator = true;
+      };
+
+      services.nextcloud-client = {
+        enable = true;
+        startInBackground = true;
       };
 
       xdg = {
