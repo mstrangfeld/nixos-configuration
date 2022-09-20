@@ -68,6 +68,20 @@ in {
           version = "3.4.0";
           sha256 = "sha256-G/9eLZsNpfIs59c/eiDV9/ybkwO11p3jzxWdLd7Q9AE=";
         };
+        bookmarks = pkgs.fetchNextcloudApp rec {
+          name = "Bookmarks";
+          url =
+            "https://github.com/nextcloud/bookmarks/releases/download/v${version}/bookmarks-${version}.tar.gz";
+          version = "11.0.1";
+          sha256 = "sha256-O2cEDdtg0Z8+Npgj6K508wQXApsSX3hDgvso+QNI/kI=";
+        };
+        mail = pkgs.fetchNextcloudApp rec {
+          name = "Mail";
+          url =
+            "https://github.com/nextcloud-releases/mail/releases/download/v${version}/mail-v${version}.tar.gz";
+          version = "1.13.8";
+          sha256 = lib.fakeSha256;
+        };
       };
     };
 
