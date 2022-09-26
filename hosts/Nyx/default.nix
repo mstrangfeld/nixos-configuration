@@ -68,6 +68,11 @@ in {
     tod.driver = pkgs.libfprint-2-tod1-vfs0090;
   };
 
+  nix.sshServe = {
+    enable = true;
+    keys = config.secrets.userKeys;
+  };
+
   modules = {
     desktop = {
       enable = true;
@@ -77,6 +82,9 @@ in {
         brave.enable = true;
         firefox.enable = true;
       };
+      creative.graphics.enable = true;
+      creative.music.enable = true;
+      email.enable = true;
       games.enable = true;
       gnome.enable = true;
       yubikey.enable = true;

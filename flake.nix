@@ -66,6 +66,8 @@
 
       hostDefaults = {
         modules = [
+          ./modules
+          ./secrets/keys
           home-manager.nixosModules.home-manager
           agenix.nixosModules.age
           {
@@ -79,10 +81,10 @@
       };
 
       hosts = {
-        Kronos = { modules = [ ./hosts/Kronos ./modules ]; };
-        Eos = { modules = [ ./hosts/Eos ./modules ./secrets/keys ]; };
-        Nyx = { modules = [ ./hosts/Nyx ./modules ]; };
-        Apollo = { modules = [ ./hosts/Apollo ./modules ]; };
+        Kronos = { modules = [ ./hosts/Kronos ]; };
+        Eos = { modules = [ ./hosts/Eos ]; };
+        Nyx = { modules = [ ./hosts/Nyx ]; };
+        Apollo = { modules = [ ./hosts/Apollo ]; };
       };
 
       deploy.nodes = {
