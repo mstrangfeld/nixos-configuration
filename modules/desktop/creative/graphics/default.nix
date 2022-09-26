@@ -14,9 +14,16 @@ in {
       # inkscape # Vector graphics editor
       # krita # A free and open source painting application
       # natron # Node-graph based, open-source compositing software
-      obs-studio # Free and open source software for video recording and live streaming
       rawtherapee # RAW converter and digital photo processing software
       # shotcut # A free, open source, cross-platform video editor
     ];
+
+    home-manager.users.marvin = { pkgs, ... }: {
+      # Free and open source software for video recording and live streaming
+      programs.obs-studio = {
+        enable = true;
+        plugins = [ pkgs.obs-studio-plugins.obs-backgroundremoval ];
+      };
+    };
   };
 }

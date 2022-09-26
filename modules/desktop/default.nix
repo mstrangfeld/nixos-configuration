@@ -50,8 +50,24 @@ in {
         myAspell
 
         rustdesk
+
+        uxplay # Airplay mirror
       ];
     };
+
+    services.avahi = {
+      enable = true; # For UxPlay
+      nssmdns = true;
+      publish = {
+        enable = true;
+        addresses = true;
+        workstation = true;
+        userServices = true;
+      };
+    };
+
+    networking.firewall.allowedUDPPorts = [ 6000 6001 7011 ];
+    networking.firewall.allowedTCPPorts = [ 7100 7000 7001 ];
 
     programs.adb.enable = true;
 
