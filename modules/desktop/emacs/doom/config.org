@@ -5,8 +5,13 @@
 (setq user-full-name "Marvin Strangfeld"
       user-mail-address "marvin@strangfeld.io")
 
-(setq doom-font (font-spec :family "FiraCode Nerd Font" :size 26 :slant 'normal :weight 'normal)
-      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 26))
+(setq doom-font
+      (let ((fontsize (pcase system-name
+                        ("Nyx" 16)
+                        ("Kronos" 26)
+                        (_ 26))))
+        (font-spec :family "FiraCode Nerd Font" :size fontsize :slant 'normal :weight 'normal)
+        doom-variable-pitch-font (font-spec :family "Fira Sans" :size fontsize)))
 
 (setq doom-theme 'doom-material-dark)
 
