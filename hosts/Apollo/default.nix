@@ -29,14 +29,12 @@
     desktopManager.gnome.enable = true;
 
     layout = "de";
-    xkbVariant = "eurosign:e";
+    xkbOptions = "eurosign:e";
 
     libinput = { enable = true; };
   };
 
   programs.xwayland.enable = true;
-
-  console.keyMap = "de";
 
   modules = {
     desktop = {
