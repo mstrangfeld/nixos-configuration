@@ -82,6 +82,7 @@
         Kronos = { modules = [ ./hosts/Kronos ./modules ]; };
         Eos = { modules = [ ./hosts/Eos ./modules ./secrets/keys ]; };
         Nyx = { modules = [ ./hosts/Nyx ./modules ]; };
+        Apollo = { modules = [ ./hosts/Apollo ./modules ]; };
       };
 
       deploy.nodes = {
@@ -99,6 +100,7 @@
       };
 
       outputsBuilder = channels: {
+        packages = { };
         devShell = import ./devshell.nix { pkgs = channels.nixpkgs; };
       };
     };
