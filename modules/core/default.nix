@@ -31,6 +31,7 @@
       nix-index # A files database for nixpkgs
       nmap # A free and open source utility for network discovery and security auditing
       p7zip # A new p7zip fork with additional codecs and improvements (forked from https://sourceforge.net/projects/p7zip/)
+      psmisc # A set of small useful utilities that use the proc filesystem (such as fuser, killall and pstree)
       ripgrep # A utility that combines the usability of The Silver Searcher with the raw speed of grep
       sanoid # A policy-driven snapshot management tool for ZFS filesystems
       unzip # An extraction utility for archives compressed in .zip format
