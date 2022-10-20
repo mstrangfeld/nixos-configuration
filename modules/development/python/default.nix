@@ -10,6 +10,9 @@ in {
       environment.systemPackages = with pkgs; [
         python3 # A high-level dynamically-typed programming language
         python-language-server # Microsoft Language Server for Python
+        black # The uncompromising Python code formatter
+        python310Packages.pyflakes # A simple program which checks Python source files for errors
+        isort # A Python utility / library to sort Python imports
       ];
     }
 

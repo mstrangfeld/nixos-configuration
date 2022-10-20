@@ -184,3 +184,12 @@
 #+begin_src emacs-lisp
 (add-hook! 'elfeed-search-mode-hook #'elfeed-update)
 #+end_src
+
+* LSP
+** Python
+Required for NixOS
+#+begin_src emacs-lisp
+(after! lsp-python-ms
+  (setq lsp-python-ms-executable (executable-find "python-language-server"))
+  (set-lsp-priority! 'mspyls 1))
+#+end_src

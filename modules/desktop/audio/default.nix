@@ -21,8 +21,8 @@ in {
 
     environment = {
       systemPackages = with pkgs; [
-        alsaUtils # ALSA, the Advanced Linux Sound Architecture utils
-        alsaTools # ALSA, the Advanced Linux Sound Architecture tools
+        alsa-utils # ALSA, the Advanced Linux Sound Architecture utils
+        alsa-tools # ALSA, the Advanced Linux Sound Architecture tools
         cadence # Collection of tools useful for audio production
         helvum # A GTK patchbay for pipewire
         patchage # Modular patch bay for Jack and ALSA systems

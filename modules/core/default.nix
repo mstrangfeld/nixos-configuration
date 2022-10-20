@@ -36,7 +36,7 @@
       sanoid # A policy-driven snapshot management tool for ZFS filesystems
       unzip # An extraction utility for archives compressed in .zip format
       usbutils # Tools for working with USB devices, such as lsusb
-      utillinux # A set of system utilities for Linux
+      util-linux # A set of system utilities for Linux
       vim # The most popular clone of the VI editor
       wget # Tool for retrieving files using HTTP, HTTPS, and FTP
       whois # Intelligent WHOIS client from Debian
