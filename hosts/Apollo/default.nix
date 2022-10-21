@@ -23,10 +23,26 @@
 
   time.timeZone = "Europe/Berlin";
 
+  hardware.nvidia.modesetting.enable = true;
+  hardware.nvidia.prime = {
+    offload.enable = true;
+
+    # Bus ID of the Intel GPU. You can find it using lspci, either under 3D or VGA
+    intelBusId = "PCI:0:2:0";
+
+    # Bus ID of the NVIDIA GPU. You can find it using lspci, either under 3D or VGA
+    nvidiaBusId = "PCI:1:0:0";
+  };
+
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
+
   services.xserver = {
     enable = true;
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
+    videoDrivers = [ "nvidia" ];
 
     layout = "de";
     xkbOptions = "eurosign:e";
@@ -34,7 +50,17 @@
     libinput = { enable = true; };
   };
 
-  programs.xwayland.enable = true;
+  security.pam.services.lightdm.enableGnomeKeyring = true;
+
+  # Can't get Rocket.Chat to work as Nix derivation
+  services.flatpak.enable = true;
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
+
+  # A toolkit for defining and handling the policy that allows unprivileged processes to speak to privileged processes
+  security.polkit.enable = true;
 
   modules = {
     desktop = {
@@ -46,7 +72,8 @@
         firefox.enable = true;
       };
       email.enable = true;
-      gnome.enable = true;
+      gnome.enable = false;
+      wm.xmonad.enable = true;
       yubikey.enable = true;
     };
     development = {
@@ -65,6 +92,7 @@
     network.enable = true;
     shell.enable = true;
     theme.enable = true;
+    work = { open-xchange = true; };
   };
 
 }

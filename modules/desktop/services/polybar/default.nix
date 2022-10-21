@@ -19,7 +19,6 @@ in {
     config = ./config.ini;
     extraConfig = colors + xmonad;
     script = ''
-      export MONITOR=DP-3
       polybar nixos & disown
     '';
   };
