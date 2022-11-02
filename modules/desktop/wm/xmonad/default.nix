@@ -63,13 +63,14 @@ in {
 
     home-manager.users.marvin = { pkgs, ... }: {
 
+      programs.rofi.enable = true;
+
       imports = [
         ../../services/autorandr.nix
         ../../services/dunst.nix
         ../../services/networkmanager.nix
         ../../services/picom.nix
         ../../services/polybar
-        ../../services/rofi
         ../../services/screenlocker.nix
         ../../services/udiskie.nix
       ];

@@ -40,20 +40,11 @@ in {
         fira-code # Monospace font with programming ligatures
         fira-code-symbols # FiraCode unicode ligature glyphs in private use area
         fira-mono # Monospace font for Firefox OS
-        # hack-font # A typeface designed for source code
         powerline-fonts
         powerline-symbols
-        # roboto # The Roboto family of fonts
-        # roboto-mono # Google Roboto Mono fonts
-        # source-code-pro # A set of monospaced OpenType fonts designed for coding environments
+        source-code-pro # A set of monospaced OpenType fonts designed for coding environments
         (nerdfonts.override {
-          fonts = [
-            "FiraCode"
-            # "FiraMono"
-            # "Hack"
-            # "RobotoMono"
-            # "SourceCodePro"
-          ];
+          fonts = [ "FiraCode" "FiraMono" "SourceCodePro" ];
         }) # Iconic font aggregator, collection, & patcher. 3,600+ icons, 50+ patched fonts
       ];
       fontconfig.defaultFonts = {
@@ -62,7 +53,7 @@ in {
       };
     };
 
-    home-manager.users.marvin = { pkgs, ... }: {
+    home-manager.users.marvin = { pkgs, config, ... }: {
       gtk = {
         enable = true;
         font = {
@@ -116,6 +107,118 @@ in {
         "*color20" = hex base04;
         "*color21" = hex base06;
       };
+
+      programs.rofi = {
+        terminal = "${pkgs.alacritty}/bin/alacritty";
+        font = "FiraCode Nerd Font 20";
+        location = "center";
+        theme = with cfg.colors;
+          let
+            inherit (config.lib.formats.rasi) mkLiteral;
+            red = mkLiteral (hex base08);
+            blue = mkLiteral (hex base0D);
+            lightfg = mkLiteral (hex base06);
+            lightbg = mkLiteral (hex base01);
+            foreground = mkLiteral (hex base05);
+            background = mkLiteral (hex base00);
+            mkElementConfig = bg: fg: {
+              background-color = bg;
+              text-color = fg;
+            };
+          in with cfg.colors; rec {
+            "*" = {
+              background-color = background;
+              border-color = foreground;
+            };
+            window = {
+              background-color = background;
+              border = 1;
+              padding = 5;
+            };
+            mainbox = {
+              border = 0;
+              padding = 0;
+            };
+            message = {
+              border = mkLiteral "1px dash 0px 0px";
+              border-color = foreground;
+              padding = mkLiteral "1px";
+            };
+            textbox = { text-color = foreground; };
+            listview = {
+              fixed-height = 0;
+              border = mkLiteral "2px dash 0px 0px";
+              boder-color = foreground;
+              spacing = mkLiteral "2px";
+              scrollbar = true;
+              padding = mkLiteral "2px 0px 0px";
+            };
+            "element-text, element-icon" = {
+              background-color = mkLiteral "inherit";
+              text-color = mkLiteral "inherit";
+            };
+            element = {
+              border = 0;
+              padding = mkLiteral "1px";
+            };
+
+            "element normal.normal" = mkElementConfig background foreground;
+            "element normal.urgent" = mkElementConfig background red;
+            "element normal.active" = mkElementConfig background blue;
+            "element alternate.normal" = mkElementConfig background foreground;
+            "element alternate.urgent" = mkElementConfig background red;
+            "element alternate.active" = mkElementConfig background blue;
+            "element selected.normal" = mkElementConfig lightbg lightfg;
+            "element selected.urgent" = mkElementConfig red background;
+            "element selected.active" = mkElementConfig blue background;
+
+            scrollbar = {
+              width = mkLiteral "4px";
+              border = 0;
+              handle-color = foreground;
+              handle-width = mkLiteral "8px";
+              padding = 0;
+            };
+            sidebar = {
+              border = mkLiteral "2px dash 0px 0px";
+              boder-color = foreground;
+            };
+            button = {
+              spacing = 0;
+              text-color = foreground;
+            };
+            "button selected" = {
+              background-color = lightfg;
+              text-color = lightbg;
+            };
+            inputbar = {
+              spacing = mkLiteral "0px";
+              text-color = foreground;
+              padding = mkLiteral "1px";
+              children = mkLiteral
+                "[ prompt,textbox-prompt-colon,entry,case-indicator ]";
+            };
+            case-indicator = {
+              spacing = 0;
+              text-color = foreground;
+            };
+            entry = {
+              spacing = 0;
+              text-color = foreground;
+            };
+            prompt = {
+              spacing = 0;
+              text-color = foreground;
+            };
+            textbox-prompt-colon = {
+              expand = false;
+              str = ":";
+              margin = mkLiteral "0px 0.3000em 0.000em 0.000em";
+              text-color = mkLiteral "inherit";
+            };
+          };
+      };
+
       programs.alacritty.settings = {
         font = {
           normal = {
