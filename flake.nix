@@ -103,7 +103,11 @@
 
       outputsBuilder = channels: {
         packages = { };
-        devShell = import ./devshell.nix { pkgs = channels.nixpkgs; };
+        devShells = {
+          default = import ./devshell.nix { pkgs = channels.nixpkgs; };
+          xmonad = let pkgs = channels.nixpkgs;
+          in pkgs.haskellPackages.shellFor { packages = p: [ p.xmonad ]; };
+        };
       };
     };
 }
