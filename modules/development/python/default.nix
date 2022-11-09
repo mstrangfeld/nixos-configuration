@@ -13,6 +13,7 @@ in {
         black # The uncompromising Python code formatter
         python310Packages.pyflakes # A simple program which checks Python source files for errors
         isort # A Python utility / library to sort Python imports
+        poetry # Python dependency management and packaging made easy
       ];
     }
 
