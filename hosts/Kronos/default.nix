@@ -1,89 +1,85 @@
-{ config, pkgs, ... }: {
-  system.stateVersion = "21.05";
-  home-manager.users.marvin.home.stateVersion = "21.05";
+{ config, pkgs, lib, ... }:
 
-  imports = [ ./zfs.nix ];
+{
+  system.stateVersion = "22.11"; # Did you read the comment?
+  home-manager.users.marvin.home.stateVersion = "22.11";
+
+  imports = [ ./hardware-configuration.nix ];
+
+  boot.kernelPackages = pkgs.linuxPackages_6_0;
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 50;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  time.timeZone = "Europe/Berlin";
+  boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.initrd.postDeviceCommands = lib.mkAfter ''
+    zfs rollback -r tank/local/root@blank
+  '';
 
   boot.kernel.sysctl = {
     "kernel.dmesg_restrict" = 0;
     "kernel.perf_event_paranoid" = 1;
+    "fs.inotify.max_queued_events" = 524288;
+    "fs.inotify.max_user_instances" = 524288;
     "fs.inotify.max_user_watches" = 524288;
     "vm.swappiness" = 10;
   };
 
-  networking.hostId = "64ada341";
+  time.timeZone = "Europe/Berlin";
+
+  networking.hostId = "4742ed61";
   networking.firewall = {
     trustedInterfaces = [
-      "enp0s20u6u3" # GoPro Hero 9 for Wecam mode
+      "enp19s0f4u1u4u3" # GoPro Hero 9 for Wecam mode
     ];
     allowedUDPPortRanges = [{
       from = 1714;
       to = 1764;
     } # KDEConnect
-      ];
+    ];
     allowedTCPPortRanges = [{
       from = 1714;
       to = 1764;
     } # KDEConnect
-      ];
-  };
-
-  # VIDEO AND X-SERVER
-
-  hardware.nvidia.modesetting.enable = true;
-  hardware.nvidia.package =
-    config.boot.kernelPackages.nvidiaPackages.legacy_470;
-
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
+    ];
   };
 
   services.xserver = {
     enable = true;
-    videoDrivers = [ "nvidia" ];
+    videoDrivers = [ "amdgpu" ];
 
+    # Enable the Plasma 5 Desktop Environment.
+    displayManager.sddm.enable = true;
+    desktopManager.plasma5.enable = true;
+
+    # Configure keymap in X11
     layout = "de";
     xkbOptions = "eurosign:e";
-
-    displayManager = {
-      # Since we are on an encrypted zfs...
-      autoLogin = {
-        enable = false;
-        user = "marvin";
-      };
-    };
-
-    libinput = {
-      enable = true;
-      mouse = {
-        accelProfile = "adaptive";
-        accelSpeed = "1";
-      };
-    };
-
   };
 
-  security.pam.services.lightdm.enableGnomeKeyring = true;
-
-  # services.usbmuxd.enable = true;
-
-  # Can't get Rocket.Chat to work as Nix derivation
-  services.flatpak.enable = true;
-  xdg.portal = {
+  # AMD GPU
+  hardware.opengl = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    driSupport = true;
+    driSupport32Bit = true;
+    extraPackages = with pkgs; [ amdvlk rocm-opencl-icd rocm-opencl-runtime ];
+    extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
   };
 
-  # A toolkit for defining and handling the policy that allows unprivileged processes to speak to privileged processes
-  security.polkit.enable = true;
+  # Force radv
+  environment.variables.AMD_VULKAN_ICD = "RADV";
+
+  systemd.tmpfiles.rules =
+    [ "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.hip}" ];
+
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.marvin = { password = "secret"; };
+
+  users.users.root.password = "secret";
+
+  environment.etc."nixos" = { source = "/persist/etc/nixos/"; };
+  environment.etc."NetworkManager/system-connections" = { source = "/persist/etc/NetworkManager/system-connections"; };
 
   modules = {
     desktop = {
@@ -100,43 +96,18 @@
       };
       email.enable = true;
       games.enable = true;
-      gnome.enable = false;
-      wm.xmonad.enable = true;
       v4l2loopback.enable = true;
       yubikey.enable = true;
     };
     development = {
       enable = true;
-      arduino.enable = true;
-      go.enable = true;
-      haskell.enable = true;
-      java.enable = true;
-      javascript.enable = true;
-      julia.enable = true;
-      kubernetes.enable = true;
-      markup.enable = true;
-      python.enable = true;
       rust.enable = true;
-      sql.enable = true;
-      virtualisation = {
-        enable = true;
-        enableNvidia = true;
-      };
     };
-    network = {
-      enable = true;
-      syncthing = {
-        enable = true;
-        additionalConfig = {
-          user = "marvin";
-          dataDir = "/home/marvin";
-          configDir = "/home/marvin/.config/syncthing";
-        };
-      };
-      tailscale.enable = true;
-    };
+    development.virtualisation.enable = true;
+    network.enable = true;
     shell.enable = true;
     theme.enable = true;
-    work = { open-xchange = true; };
+    work.open-xchange = true;
   };
 }
+

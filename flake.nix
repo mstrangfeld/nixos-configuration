@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url =
-      "github:nixos/nixpkgs/nixos-unstable"; # Nix Packages collection
+      "github:nixos/nixpkgs/nixos-22.11"; # Nix Packages collection
     unstable.url = "github:nixos/nixpkgs";
     nur.url =
       "github:nix-community/NUR"; # Nix User Repository: User contributed nix packages
@@ -34,8 +34,17 @@
       "github:numtide/devshell?ref=fff3dc6e4538f6df85ee3027f13cc7730b23f61d"; # Per project developer environments
   };
 
-  outputs = inputs@{ self, nur, utils, home-manager, nixos-hardware
-    , emacs-overlay, agenix, deploy-rs, ... }:
+  outputs =
+    inputs@{ self
+    , nur
+    , utils
+    , home-manager
+    , nixos-hardware
+    , emacs-overlay
+    , agenix
+    , deploy-rs
+    , ...
+    }:
     let userModules = utils.lib.exportModules [ ./modules ];
     in utils.lib.mkFlake {
       inherit self inputs;
@@ -48,8 +57,7 @@
           # Use packages from the unstable channel
           (final: prev: {
             inherit (channels.unstable)
-              cachix discord starship
-              remarshal; # https://github.com/NixOS/nixpkgs/pull/159074
+              cachix discord starship;
           })
         ];
 
@@ -105,8 +113,9 @@
         packages = { };
         devShells = {
           default = import ./devshell.nix { pkgs = channels.nixpkgs; };
-          xmonad = let pkgs = channels.nixpkgs;
-          in pkgs.haskellPackages.shellFor { packages = p: [ p.xmonad ]; };
+          xmonad =
+            let pkgs = channels.nixpkgs;
+            in pkgs.haskellPackages.shellFor { packages = p: [ p.xmonad ]; };
         };
       };
     };

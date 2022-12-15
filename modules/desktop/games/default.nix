@@ -1,8 +1,10 @@
 { config, lib, pkgs, ... }:
 
 with lib;
-let cfg = config.modules.desktop.games;
-in {
+let
+  cfg = config.modules.desktop.games;
+in
+{
   options.modules.desktop.games.enable = mkEnableOption "Games";
 
   config = mkIf cfg.enable {
@@ -11,6 +13,7 @@ in {
 
     environment = {
       systemPackages = with pkgs; [
+        lutris # Open Source gaming platform for GNU/Linux
         minecraft # Official launcher for Minecraft, a sandbox-building game
         minetest # Infinite-world block sandbox game
         ttyper # Terminal-based typing test
