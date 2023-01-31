@@ -12,11 +12,6 @@
   boot.loader.systemd-boot.configurationLimit = 50;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.initrd.kernelModules = [ "amdgpu" ];
-  boot.initrd.postDeviceCommands = lib.mkAfter ''
-    zfs rollback -r tank/local/root@blank
-  '';
-
   boot.kernel.sysctl = {
     "kernel.dmesg_restrict" = 0;
     "kernel.perf_event_paranoid" = 1;
@@ -30,9 +25,6 @@
 
   networking.hostId = "4742ed61";
   networking.firewall = {
-    trustedInterfaces = [
-      "enp19s0f4u1u4u3" # GoPro Hero 9 for Wecam mode
-    ];
     allowedUDPPortRanges = [{
       from = 1714;
       to = 1764;
@@ -47,7 +39,6 @@
 
   services.xserver = {
     enable = true;
-    videoDrivers = [ "amdgpu" ];
 
     # Enable the Plasma 5 Desktop Environment.
     displayManager.sddm.enable = true;
@@ -63,15 +54,7 @@
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
-    extraPackages = with pkgs; [ amdvlk rocm-opencl-icd rocm-opencl-runtime ];
-    extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
   };
-
-  # Force radv
-  environment.variables.AMD_VULKAN_ICD = "RADV";
-
-  systemd.tmpfiles.rules =
-    [ "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.hip}" ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.marvin = { password = "secret"; };
@@ -107,7 +90,5 @@
     network.enable = true;
     shell.enable = true;
     theme.enable = true;
-    work.open-xchange = true;
   };
 }
-

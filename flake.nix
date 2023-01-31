@@ -26,6 +26,8 @@
     deploy-rs.url =
       "github:serokell/deploy-rs"; # A simple multi-profile Nix-flake deploy tool.
     deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
     flake-compat = {
       url = "github:edolstra/flake-compat";
       flake = false;
@@ -43,6 +45,7 @@
     , emacs-overlay
     , agenix
     , deploy-rs
+    , disko
     , ...
     }:
     let userModules = utils.lib.exportModules [ ./modules ];
@@ -66,7 +69,7 @@
         nur.overlay
         emacs-overlay.overlay
         deploy-rs.overlay
-        agenix.overlay
+        agenix.overlays.default
         inputs.devshell.overlay
       ];
 
@@ -78,6 +81,7 @@
           ./secrets/keys
           home-manager.nixosModules.home-manager
           agenix.nixosModules.age
+          disko.nixosModules.disko
           {
             home-manager = {
               extraSpecialArgs = { inherit inputs self; };
@@ -93,6 +97,7 @@
         Eos = { modules = [ ./hosts/Eos ]; };
         Nyx = { modules = [ ./hosts/Nyx ]; };
         Apollo = { modules = [ ./hosts/Apollo ]; };
+        Hermes = { modules = [ ./hosts/Hermes ]; };
       };
 
       deploy.nodes = {
