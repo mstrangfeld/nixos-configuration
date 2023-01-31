@@ -23,7 +23,7 @@
 
   time.timeZone = "Europe/Berlin";
 
-  networking.hostId = "4742ed61";
+  networking.hostId = "d927effc";
   networking.firewall = {
     allowedUDPPortRanges = [{
       from = 1714;
@@ -49,7 +49,6 @@
     xkbOptions = "eurosign:e";
   };
 
-  # AMD GPU
   hardware.opengl = {
     enable = true;
     driSupport = true;
@@ -61,9 +60,6 @@
 
   users.users.root.password = "secret";
 
-  environment.etc."nixos" = { source = "/persist/etc/nixos/"; };
-  environment.etc."NetworkManager/system-connections" = { source = "/persist/etc/NetworkManager/system-connections"; };
-
   modules = {
     desktop = {
       enable = true;
@@ -73,20 +69,12 @@
         brave.enable = true;
         firefox.enable = true;
       };
-      creative = {
-        graphics.enable = true;
-        music.enable = true;
-      };
       email.enable = true;
-      games.enable = true;
-      v4l2loopback.enable = true;
       yubikey.enable = true;
     };
     development = {
       enable = true;
-      rust.enable = true;
     };
-    development.virtualisation.enable = true;
     network.enable = true;
     shell.enable = true;
     theme.enable = true;
