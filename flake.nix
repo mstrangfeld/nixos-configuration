@@ -99,7 +99,12 @@
         Nyx = { modules = [ ./hosts/Nyx ]; };
         Apollo = { modules = [ ./hosts/Apollo ]; };
         Hermes = { modules = [ ./hosts/Hermes ]; };
-        Theia = { modules = [ ./hosts/Theia ]; };
+        Theia = {
+          modules = [
+            ./hosts/Theia
+            nixos-hardware.nixosModules.lenovo-thinkpad-t14
+          ];
+        };
       };
 
       deploy.nodes = {

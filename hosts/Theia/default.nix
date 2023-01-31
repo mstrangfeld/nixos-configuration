@@ -37,8 +37,20 @@
     ];
   };
 
+  hardware.nvidia.modesetting.enable = true;
+  hardware.nvidia.prime = {
+    offload.enable = true;
+
+    # Bus ID of the Intel GPU. You can find it using lspci, either under 3D or VGA
+    intelBusId = "PCI:0:2:0";
+
+    # Bus ID of the NVIDIA GPU. You can find it using lspci, either under 3D or VGA
+    nvidiaBusId = "PCI:3:0:0";
+  };
   services.xserver = {
     enable = true;
+
+    videoDrivers = [ "nvidia" ];
 
     # Enable the Plasma 5 Desktop Environment.
     displayManager.sddm.enable = true;
@@ -47,6 +59,8 @@
     # Configure keymap in X11
     layout = "de";
     xkbOptions = "eurosign:e";
+
+    libinput = { enable = true; };
   };
 
   programs.dconf.enable = true;

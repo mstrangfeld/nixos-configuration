@@ -44,13 +44,13 @@
         altroot = "/mnt";
       };
       rootFsOptions = {
-        acltype="posixacl";
+        acltype = "posixacl";
         canmount = "off";
         compression = "lz4";
         dnodesize = "auto";
-        normalization= "formD";
-        relatime="on";
-        xattr= "sa";
+        normalization = "formD";
+        relatime = "on";
+        xattr = "sa";
         mountpoint = "none";
 
         encryption = "aes-256-gcm";
