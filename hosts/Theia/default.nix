@@ -49,6 +49,8 @@
     xkbOptions = "eurosign:e";
   };
 
+  programs.dconf.enable = true;
+
   hardware.opengl = {
     enable = true;
     driSupport = true;
