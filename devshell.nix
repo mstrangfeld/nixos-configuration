@@ -8,6 +8,7 @@ pkgs.devshell.mkShell {
     deploy-rs.deploy-rs
     agenix
     rage
+    disko.disko
   ];
   commands = [
     {

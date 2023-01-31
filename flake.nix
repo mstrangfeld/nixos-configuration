@@ -61,6 +61,7 @@
           (final: prev: {
             inherit (channels.unstable)
               cachix discord starship;
+            disko = disko.packages.${channels.unstable.system};
           })
         ];
 
