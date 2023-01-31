@@ -99,6 +99,7 @@
         Nyx = { modules = [ ./hosts/Nyx ]; };
         Apollo = { modules = [ ./hosts/Apollo ]; };
         Hermes = { modules = [ ./hosts/Hermes ]; };
+        Theia = { modules = [ ./hosts/Theia ]; };
       };
 
       deploy.nodes = {
