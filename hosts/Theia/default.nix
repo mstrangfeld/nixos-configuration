@@ -7,6 +7,7 @@
   imports = [ ./hardware-configuration.nix ];
 
   boot.kernelPackages = pkgs.linuxPackages_6_1;
+  boot.initrd.kernelModules = [ "nvidia" ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 50;
