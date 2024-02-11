@@ -5,7 +5,8 @@ let
   cfg = config.modules.desktop.email;
   name = "Marvin Strangfeld";
   maildir = "/home/marvin/.mail";
-in {
+in
+{
   options.modules.desktop.email = { enable = mkEnableOption "E-Mail"; };
 
   config = mkIf cfg.enable {

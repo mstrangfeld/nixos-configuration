@@ -4,7 +4,8 @@ with lib;
 let
   cfg = config.modules.theme;
   hexColor = code: "#" + code;
-in {
+in
+{
   options.modules.theme = {
     enable = mkEnableOption "Theme";
     colors = {
@@ -125,7 +126,8 @@ in {
               background-color = bg;
               text-color = fg;
             };
-          in with cfg.colors; rec {
+          in
+          with cfg.colors; rec {
             "*" = {
               background-color = background;
               border-color = foreground;

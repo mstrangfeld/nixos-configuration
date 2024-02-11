@@ -15,7 +15,7 @@ in {
         profiles = {
           marvin = { settings = { "general.smoothScroll" = false; }; };
         };
-        extensions = with pkgs.nur.repos.rycee.firefox-addons; [ bitwarden ];
+        # extensions = with pkgs.nur.repos.rycee.firefox-addons; [ bitwarden ];
       };
     };
   };

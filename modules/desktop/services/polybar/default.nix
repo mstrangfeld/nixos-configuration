@@ -7,7 +7,8 @@ let
     exec = ${pkgs.xmonad-log}/bin/xmonad-log
     tail = true
   '';
-in {
+in
+{
   # A fast and easy-to-use tool for creating status bars
   services.polybar = {
     enable = true;

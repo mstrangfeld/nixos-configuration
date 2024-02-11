@@ -26,12 +26,12 @@
       from = 1714;
       to = 1764;
     } # KDEConnect
-      ];
+    ];
     allowedTCPPortRanges = [{
       from = 1714;
       to = 1764;
     } # KDEConnect
-      ];
+    ];
   };
 
   # VIDEO AND X-SERVER

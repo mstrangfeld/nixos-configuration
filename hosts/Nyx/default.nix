@@ -7,7 +7,8 @@ let
     export __VK_LAYER_NV_optimus=NVIDIA_only
     exec "$@"
   '';
-in {
+in
+{
   system.stateVersion = "22.05";
   home-manager.users.marvin.home.stateVersion = "22.05";
 

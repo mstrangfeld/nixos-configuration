@@ -19,7 +19,7 @@ in {
       eq10q # LV2 EQ plugins and more, with 64 bit processing
       faust # A functional programming language for realtime audio signal processing
       geonkick # A free software percussion synthesizer
-      guitarix # A virtual guitar amplifier for Linux running with JACK
+      # guitarix # A virtual guitar amplifier for Linux running with JACK
       haskellPackages.tidal # Pattern language for improvised music
       helm # A free, cross-platform, polyphonic synthesizer
       lsp-plugins # Collection of open-source audio plugins
@@ -33,7 +33,7 @@ in {
       puredata # A real-time graphical programming environment for audio, video, and graphical processing
       reaper # Digital audio workstation
       samplv1 # An old-school all-digital polyphonic sampler synthesizer with stereo fx
-      setbfree # A DSP tonewheel organ emulator
+      # setbfree # A DSP tonewheel organ emulator
       sonic-pi # Free live coding synth for everyone originally designed to support computing and music lessons within schools
       sonic-visualiser # View and analyse contents of music audio files
       sooperlooper # A live looping sampler capable of immediate loop recording, overdubbing, multiplying, reversing and more

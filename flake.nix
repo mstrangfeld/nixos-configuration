@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url =
-      "github:nixos/nixpkgs/nixos-22.11"; # Nix Packages collection
+      "github:nixos/nixpkgs/nixos-unstable"; # Nix Packages collection
     unstable.url = "github:nixos/nixpkgs";
     nur.url =
       "github:nix-community/NUR"; # Nix User Repository: User contributed nix packages

@@ -8,4 +8,5 @@ let
   ghc = haskellPackages.ghcWithPackages haskellDeps;
 
   nixPackages = [ ghc pkgs.gdb haskellPackages.cabal-install ];
-in pkgs.mkShell { nativeBuildInputs = nixPackages; }
+in
+pkgs.mkShell { nativeBuildInputs = nixPackages; }

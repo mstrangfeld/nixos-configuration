@@ -9,7 +9,8 @@ let
     version = "dev";
     src = ./tmux-status;
   };
-in {
+in
+{
   options.modules.shell = {
     enable = mkEnableOption "Shell";
     tmux = {
@@ -22,12 +23,12 @@ in {
     environment.systemPackages = with pkgs; [
       bat # A cat(1) clone with wings
       cht-sh # CLI for cheat.sh
-      exa # Replacement for ls written in Rust
+      eza # Replacement for ls written in Rust
       fd # Simple, fast alternative to find
       fselect # Find files with SQL-like queries
       gh # GitHub CLI tool
       gotop # A terminal based graphical activity monitor
-      python39Packages.howdoi # Instant coding answers via the command line
+      # python39Packages.howdoi # Instant coding answers via the command line
       htop # An interactive process viewer for Linux
       httpie # A command line HTTP client
       jq # A lightweight and flexible command-line JSON processor
@@ -73,9 +74,9 @@ in {
           lg = "lazygit";
           tmp = "cd $(mktemp -d)";
 
-          ls = "exa --color=auto --group-directories-first --icons";
-          la = "exa -aF --color=auto --group-directories-first --icons";
-          ll = "exa -alF --color=auto --group-directories-first --icons";
+          ls = "eza --color=auto --group-directories-first --icons";
+          la = "eza -aF --color=auto --group-directories-first --icons";
+          ll = "eza -alF --color=auto --group-directories-first --icons";
 
           zz = "z -I -t .";
           zb = "z -I -b .";

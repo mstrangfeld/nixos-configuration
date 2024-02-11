@@ -3,7 +3,8 @@ with lib;
 let
   userKeys = map (name: builtins.readFile ./user/${name})
     (builtins.attrNames (builtins.readDir ./user));
-in {
+in
+{
   options.secrets = {
     userKeys = mkOption {
       type = types.listOf types.str;

@@ -71,7 +71,7 @@
   environment.variables.AMD_VULKAN_ICD = "RADV";
 
   systemd.tmpfiles.rules =
-    [ "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.hip}" ];
+    [ "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}" ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.marvin = { password = "secret"; };
@@ -107,7 +107,7 @@
     network.enable = true;
     shell.enable = true;
     theme.enable = true;
-    work.open-xchange = true;
+    work.open-xchange = false;
   };
 }
 

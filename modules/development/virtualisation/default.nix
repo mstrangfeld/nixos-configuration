@@ -17,7 +17,7 @@ in {
         virt-manager # Desktop user interface for managing virtual machines
         qemu
         qemu-utils
-        win-qemu
+        virtio-win
       ];
     };
 
@@ -42,14 +42,6 @@ in {
 
       libvirtd = {
         enable = true;
-        qemu = {
-          swtpm.enable = true;
-          ovmf = {
-            enable = true;
-            packages =
-              [ pkgs.OVMFFull.fd pkgs.pkgsCross.aarch64-multiplatform.OVMF.fd ];
-          };
-        };
       };
     };
   };

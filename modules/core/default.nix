@@ -1,8 +1,6 @@
 { config, lib, pkgs, inputs, ... }: {
   imports = [ ./cache.nix ./users.nix ];
 
-  nixpkgs.config.allowUnfree = true;
-
   i18n.defaultLocale = "de_DE.UTF-8";
   console = {
     font = "Lat2-Terminus16";

@@ -36,25 +36,27 @@ let
     };
   };
   cfg = config.modules.network.syncthing;
-in {
+in
+{
   options.modules.network.syncthing = {
     enable = mkEnableOption "Syncthing";
     additionalConfig = mkOption { default = { }; };
   };
 
   config = mkIf cfg.enable {
-    services.syncthing = let hostName = config.networking.hostName;
-    in {
-      enable = true;
-      openDefaultPorts = true;
-      overrideDevices = true;
-      overrideFolders = true;
-      devices = builtins.mapAttrs
-        (name: value: (attrsets.filterAttrs (n: v: n != "folders") value))
-        devices;
-      folders = builtins.mapAttrs
-        (name: value: folders.${name} // devices.${hostName}.folders.${name})
-        devices.${hostName}.folders;
-    } // cfg.additionalConfig;
+    services.syncthing =
+      let hostName = config.networking.hostName;
+      in {
+        enable = true;
+        openDefaultPorts = true;
+        overrideDevices = true;
+        overrideFolders = true;
+        devices = builtins.mapAttrs
+          (name: value: (attrsets.filterAttrs (n: v: n != "folders") value))
+          devices;
+        folders = builtins.mapAttrs
+          (name: value: folders.${name} // devices.${hostName}.folders.${name})
+          devices.${hostName}.folders;
+      } // cfg.additionalConfig;
   };
 }

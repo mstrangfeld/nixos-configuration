@@ -6,7 +6,8 @@ let
   spotify-4k = pkgs.spotify.override { deviceScaleFactor = 1.5; };
   myAspell =
     (pkgs.aspellWithDicts (ds: with ds; [ de en en-computers en-science ]));
-in {
+in
+{
   imports = [
     ./audio
     ./browser

@@ -14,7 +14,8 @@ let
   tm = pkgs.writeScriptBin "tm" (builtins.readFile ./tm);
   uptimetmux =
     pkgs.writeScriptBin "uptimetmux" (builtins.readFile ./uptimetmux);
-in {
+in
+{
   home.packages = [
     fancywatsonstatus
     fkill
